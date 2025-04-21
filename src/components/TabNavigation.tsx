@@ -8,6 +8,7 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
+import { Autocomplete } from "./shared/Autocomplete";
 
 const tabs = [
   { name: "Ledger", href: "/", icon: DocumentTextIcon },
@@ -17,11 +18,16 @@ const tabs = [
   { name: "AuthZ Server", href: "/authz-server", icon: ServerIcon },
 ];
 
+const HARDCODED_OPTIONS = [
+  { label: "SimpleTodo", value: "simple-todo" },
+  { label: "SecureDocs", value: "secure-docs" },
+];
+
 export function TabNavigation() {
   const router = useRouter();
 
   return (
-    <div className="border-b border-zinc-300 flex justify-between gap-6 overflow-x-auto no-scrollbar">
+    <div className="flex justify-between gap-6 overflow-x-auto overflow-y-visible items-center no-scrollbar">
       <nav aria-label="Tabs" className="-mb-px flex space-x-8">
         {tabs.map((tab) => (
           <a
@@ -30,9 +36,9 @@ export function TabNavigation() {
             aria-current={router.asPath === tab.href ? "page" : undefined}
             className={classNames(
               router.asPath === tab.href
-                ? "border-fuchsia-500 text-fuchsia-600"
-                : "border-transparent text-white/75 hover:border-white/80 hover:text-white/90",
-              "group inline-flex items-center border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap z-30"
+                ? "text-fuchsia-600"
+                : "text-white/75 hover:text-white/90",
+              "group inline-flex items-center px-1 py-4 text-sm font-medium whitespace-nowrap z-30"
             )}
           >
             <tab.icon
@@ -49,9 +55,17 @@ export function TabNavigation() {
         ))}
       </nav>
 
+      <div className="sm:ml-auto">
+        <Autocomplete
+          value={HARDCODED_OPTIONS[0].value}
+          options={HARDCODED_OPTIONS}
+          onChange={() => {}}
+        />
+      </div>
+
       <button
         type="button"
-        className="w-full flex items-center mt-auto mb-3 sm:w-auto sm:ml-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
+        className="w-full flex items-center sm:w-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
       >
         <ArrowPathIcon
           fontSize={24}
