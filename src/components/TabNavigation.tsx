@@ -1,0 +1,67 @@
+import { classNames } from "@/utils/classNames";
+import {
+  DocumentTextIcon,
+  ShieldCheckIcon,
+  UsersIcon,
+  LockClosedIcon,
+  ServerIcon,
+  ArrowPathIcon,
+} from "@heroicons/react/20/solid";
+import { useRouter } from "next/router";
+
+const tabs = [
+  { name: "Ledger", href: "/", icon: DocumentTextIcon },
+  { name: "Policies", href: "/policies", icon: ShieldCheckIcon },
+  { name: "Entities", href: "/entities", icon: UsersIcon },
+  { name: "AuthZ Checks", href: "/authz-checks", icon: LockClosedIcon },
+  { name: "AuthZ Server", href: "/authz-server", icon: ServerIcon },
+];
+
+export function TabNavigation() {
+  const router = useRouter();
+
+  return (
+    <div className="my-10">
+      <div className="border-b border-zinc-300 flex justify-between gap-6 overflow-x-auto no-scrollbar">
+        <nav aria-label="Tabs" className="-mb-px flex space-x-8">
+          {tabs.map((tab) => (
+            <a
+              key={tab.name}
+              href={tab.href}
+              aria-current={router.asPath === tab.href ? "page" : undefined}
+              className={classNames(
+                router.asPath === tab.href
+                  ? "border-fuchsia-500 text-fuchsia-600"
+                  : "border-transparent text-white/75 hover:border-white/80 hover:text-white/90",
+                "group inline-flex items-center border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap"
+              )}
+            >
+              <tab.icon
+                aria-hidden="true"
+                className={classNames(
+                  router.asPath === tab.href
+                    ? "text-fuchsia-500"
+                    : "text-zinc-400 group-hover:text-white/75",
+                  "-ml-0.5 mr-2 size-5"
+                )}
+              />
+              <span>{tab.name}</span>
+            </a>
+          ))}
+        </nav>
+
+        <button
+          type="button"
+          className="w-full flex items-center mt-auto mb-3 sm:w-auto sm:ml-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
+        >
+          <ArrowPathIcon
+            fontSize={24}
+            fill="#FFF"
+            className="min-w-5 mr-2 -ml-3"
+          />
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+  );
+}
