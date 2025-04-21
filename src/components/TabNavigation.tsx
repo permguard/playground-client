@@ -27,8 +27,11 @@ export function TabNavigation() {
   const router = useRouter();
 
   return (
-    <div className="flex justify-between gap-6 overflow-x-auto overflow-y-visible items-center no-scrollbar">
-      <nav aria-label="Tabs" className="-mb-px flex space-x-8">
+    <div className="flex flex-col-reverse items-start xl:flex-row justify-between gap-6 xl:items-center overflow-hidden">
+      <nav
+        aria-label="Tabs"
+        className="-mb-px flex space-x-8 overflow-x-auto no-scrollbar w-full xl:w-auto"
+      >
         {tabs.map((tab) => (
           <a
             key={tab.name}
@@ -55,25 +58,24 @@ export function TabNavigation() {
         ))}
       </nav>
 
-      <div className="sm:ml-auto relative">
+      <div className="relative flex gap-6 items-center justify-start overflow-x-auto no-scrollbar w-full xl:w-auto">
         <Autocomplete
           value={HARDCODED_OPTIONS[0].value}
           options={HARDCODED_OPTIONS}
           onChange={() => {}}
         />
+        <button
+          type="button"
+          className="flex items-center sm:w-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
+        >
+          <ArrowPathIcon
+            fontSize={24}
+            fill="#FFF"
+            className="min-w-5 mr-2 -ml-3"
+          />
+          <span>Reset</span>
+        </button>
       </div>
-
-      <button
-        type="button"
-        className="w-full flex items-center sm:w-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
-      >
-        <ArrowPathIcon
-          fontSize={24}
-          fill="#FFF"
-          className="min-w-5 mr-2 -ml-3"
-        />
-        <span>Reset</span>
-      </button>
     </div>
   );
 }

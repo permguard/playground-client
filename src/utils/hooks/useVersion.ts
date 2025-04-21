@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 
-export const VERSIONS = ["v1.0", "v2.0", "v3.0"];
+export const VERSIONS = ["0.0.x"];
 export const LATEST_VERSION = VERSIONS[VERSIONS.length - 1];
 
 // Define types
