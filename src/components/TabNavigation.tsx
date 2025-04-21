@@ -55,7 +55,7 @@ export function TabNavigation() {
         ))}
       </nav>
 
-      <div className="sm:ml-auto">
+      <div className="sm:ml-auto relative">
         <Autocomplete
           value={HARDCODED_OPTIONS[0].value}
           options={HARDCODED_OPTIONS}
