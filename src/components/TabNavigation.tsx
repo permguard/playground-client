@@ -21,7 +21,7 @@ export function TabNavigation() {
   const router = useRouter();
 
   return (
-    <div className="my-10">
+    <div className="mt-10">
       <div className="border-b border-zinc-300 flex justify-between gap-6 overflow-x-auto no-scrollbar">
         <nav aria-label="Tabs" className="-mb-px flex space-x-8">
           {tabs.map((tab) => (
@@ -33,7 +33,7 @@ export function TabNavigation() {
                 router.asPath === tab.href
                   ? "border-fuchsia-500 text-fuchsia-600"
                   : "border-transparent text-white/75 hover:border-white/80 hover:text-white/90",
-                "group inline-flex items-center border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap"
+                "group inline-flex items-center border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap z-30"
               )}
             >
               <tab.icon
