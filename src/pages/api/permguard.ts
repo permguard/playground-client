@@ -1,0 +1,103 @@
+// Copyright 2024 Nitro Agility S.r.l.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// SPDX-License-Identifier: Apache-2.0
+
+import type { NextApiRequest, NextApiResponse } from "next";
+import { AZClient, withEndpoint } from "permguard";
+
+/**
+ * API handler for Permguard authorization checks.
+ * @param req - The incoming Next.js API request.
+ * @param res - The Next.js API response object.
+ */
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  // Only allow POST requests
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  try {
+    // Parse the JSON payload from the request
+    const jsonRequest = req.body;
+
+    // Validate that the payload is a valid object
+    if (!jsonRequest || typeof jsonRequest !== "object") {
+      return res.status(400).json({ error: "Invalid JSON payload" });
+    }
+
+    // Extract serverUrl and serverPort from the request, default to localhost:9094
+    const serverUrl =
+      jsonRequest.serverUrl && typeof jsonRequest.serverUrl === "string"
+        ? jsonRequest.serverUrl
+        : "localhost";
+    const serverPort =
+      jsonRequest.serverPort && typeof jsonRequest.serverPort === "number"
+        ? jsonRequest.serverPort
+        : 9094;
+
+    // Create a new Permguard client with the specified or default endpoint
+    const azClient = new AZClient(withEndpoint(serverUrl, serverPort));
+
+    // Remove serverUrl and serverPort from the payload to avoid sending them to Permguard
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { serverUrl: _, serverPort: __, ...permguardPayload } = jsonRequest;
+
+    // Check the authorization using the Permguard client
+    const { decision, response } = await azClient.check(permguardPayload);
+
+    // Prepare the response object
+    const result: {
+      decision: boolean;
+      permitted: boolean;
+      details?: {
+        reasonAdmin?: string;
+        reasonUser?: string;
+        evaluations?: Array<{
+          reasonAdmin?: string;
+          reasonUser?: string;
+        }>;
+      };
+    } = {
+      decision,
+      permitted: decision,
+    };
+
+    // Include detailed reasons if authorization is denied
+    if (!decision && response) {
+      result.details = {};
+      if (response.Context?.ReasonAdmin) {
+        result.details.reasonAdmin = response.Context.ReasonAdmin.Message;
+      }
+      if (response.Context?.ReasonUser) {
+        result.details.reasonUser = response.Context.ReasonUser.Message;
+      }
+      if (response.Evaluations && response.Evaluations.length > 0) {
+        result.details.evaluations = response.Evaluations.map((evaluation) => ({
+          reasonAdmin: evaluation.Context?.ReasonAdmin?.Message,
+          reasonUser: evaluation.Context?.ReasonUser?.Message,
+        })).filter((reasons) => reasons.reasonAdmin || reasons.reasonUser);
+      }
+    }
+
+    // Return the authorization result
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("Error processing Permguard request:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
