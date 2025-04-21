@@ -23,7 +23,7 @@ export const Header = () => {
         <img
           className="h-auto z-150"
           src="/images/header_logo.svg"
-          alt="Permguard Enterprise"
+          alt="Permguard Playground"
         />
       </Link>
 
