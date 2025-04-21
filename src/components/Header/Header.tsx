@@ -29,11 +29,14 @@ export const Header = () => {
 
       {/* <Navigation /> */}
 
-      <MobileMenu />
-
-      <div className="relative hidden basis-0 items-center justify-end gap-6 md:gap-5 lg:gap-6 md:flex">
-        <VersionSelector />
-        <SocialLinks />
+      <div className="flex flex-row gap-4 justify-between items-center">
+        <div className="relative basis-0 items-center justify-end gap-4 min-[390px]:gap-6 sm:gap-8 lg:flex-grow flex">
+          <VersionSelector />
+          <div className="hidden md:flex relative basis-0 items-center justify-end gap-6 md:gap-5 lg:gap-6">
+            <SocialLinks />
+          </div>
+        </div>
+        <MobileMenu />
       </div>
     </header>
   );

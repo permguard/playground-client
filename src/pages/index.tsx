@@ -1,11 +1,13 @@
 import Head from "next/head";
 
-export default function Home() {
+const LedgersPage = () => {
   return (
     <>
       <Head>
-        <title>Permguard Playground</title>
+        <title>Permguard Playground | Ledgers</title>
       </Head>
     </>
   );
-}
+};
+
+export default LedgersPage;
