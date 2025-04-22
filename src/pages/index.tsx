@@ -1,5 +1,6 @@
-import { LedgerForm } from "@/components/pages/ledger/SchemaForm/LedgerForm";
+import "@/utils/hooks/monaco";
 import Head from "next/head";
+import { LedgerForm } from "@/components/pages/ledger/SchemaForm/LedgerForm";
 
 const LedgersPage = () => {
   return (

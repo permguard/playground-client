@@ -58,7 +58,7 @@ export function TabNavigation() {
         ))}
       </nav>
 
-      <div className="relative flex gap-6 items-center justify-start overflow-x-auto no-scrollbar w-full xl:w-auto">
+      <div className="flex gap-6 items-center justify-start overflow-x-auto no-scrollbar w-full xl:w-auto">
         <Autocomplete
           value={HARDCODED_OPTIONS[0].value}
           options={HARDCODED_OPTIONS}

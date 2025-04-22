@@ -42,10 +42,10 @@ export const RHFCode = <T extends FieldValues>({
         render={({ field: { value, onChange } }) => (
           <div className={`w-full border border-transparent overflow-hidden`}>
             <Editor
-              className="z-0 rounded-md"
               theme={"vs-dark"}
               height={height}
               defaultLanguage={language}
+              language={language}
               value={value}
               onChange={onChange}
               options={{

@@ -13,7 +13,7 @@ export const getLedgerFormDefinition = (): IFormDefinition<
       name: "code",
       id: "code",
       height: "500px",
-      language: "cedar",
+      language: "cedar-schema",
       visible: true,
       className: "col-span-12",
     },
