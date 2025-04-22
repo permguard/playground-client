@@ -11,13 +11,19 @@ import { initLedgerState } from "@/store/ledger/middleware/initLedgerState";
 export const LedgerForm = () => {
   const dispatch = useAppDispatch();
 
+  const selectedTab = useSelector(
+    (state: RootState) => state.ledger.selectedTab
+  );
+
+  const selectedLedgerCode = useSelector((state: RootState) =>
+    state.ledger.selectedTab === "cedar"
+      ? state.ledger.cedarCode
+      : state.ledger.jsonCode
+  );
+
   useEffect(() => {
     dispatch(initLedgerState());
   }, [dispatch]);
-
-  const selectedLedgerCode = useSelector(
-    (state: RootState) => state.ledger.cedarCode
-  );
 
   const {
     control,
@@ -35,6 +41,12 @@ export const LedgerForm = () => {
     }
   }, [isDirty, selectedLedgerCode, setValue]);
 
+  useEffect(() => {
+    if (selectedLedgerCode) {
+      setValue("code", selectedLedgerCode, { shouldDirty: true });
+    }
+  }, [selectedTab, setValue]);
+
   const handleConfirm = useCallback(async () => {}, []);
 
   useEffect(() => {
@@ -46,7 +58,9 @@ export const LedgerForm = () => {
     <div>
       <RHFFormBuilder
         handleSubmit={handleSubmit(handleConfirm)}
-        formControls={getLedgerFormDefinition()}
+        formControls={getLedgerFormDefinition({
+          language: selectedTab === "cedar" ? "cedar-schema" : "json",
+        })}
         control={control}
         errors={errors}
         submitButton={<></>}

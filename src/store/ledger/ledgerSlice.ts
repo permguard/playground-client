@@ -1,7 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { ILedgerState } from "./types/ILedgerState";
 import { initLedgerState } from "./middleware/initLedgerState";
 import { updateLedgerState } from "./middleware/updateLedgerState";
+import { switchMode } from "./middleware/switchMode";
 
 const initialState: ILedgerState = {
   cedarCode: null,
@@ -12,11 +13,7 @@ const initialState: ILedgerState = {
 const ledgerSlice = createSlice({
   name: "ledger",
   initialState,
-  reducers: {
-    setSelectedTab: (state, action: PayloadAction<"cedar" | "json">) => {
-      state.selectedTab = action.payload;
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder.addCase(initLedgerState.fulfilled, (state, action) => {
@@ -29,6 +26,18 @@ const ledgerSlice = createSlice({
         state.jsonCode = action.meta.arg;
       } else {
         state.cedarCode = action.meta.arg;
+      }
+    });
+
+    builder.addCase(switchMode.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.selectedTab = action.payload.tab as "cedar" | "json";
+
+        if (state.selectedTab === "json") {
+          state.jsonCode = action.payload.code;
+        } else {
+          state.cedarCode = action.payload.code;
+        }
       }
     });
   },

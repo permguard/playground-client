@@ -1,18 +1,22 @@
 import "@/utils/hooks/monaco";
 import Head from "next/head";
 import { LedgerForm } from "@/components/pages/ledger/SchemaForm/LedgerForm";
-import { RootState } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import { useSelector } from "react-redux";
 import { classNames } from "@/utils/classNames";
-
-import("@cedar-policy/cedar-wasm").then((mod) => {
-  console.log(mod.schemaToJson(``));
-});
+import { useCallback } from "react";
+import { switchMode } from "@/store/ledger/middleware/switchMode";
 
 const LedgersPage = () => {
+  const dispatch = useAppDispatch();
+
   const selectedTab = useSelector(
     (state: RootState) => state.ledger.selectedTab
   );
+
+  const handleSwitchTab = useCallback(() => {
+    dispatch(switchMode());
+  }, [dispatch]);
 
   return (
     <>
@@ -31,6 +35,7 @@ const LedgersPage = () => {
         </p>
         <div className="flex gap-1 rounded-full bg-black/25 p-1 backdrop-blur-sm">
           <button
+            onClick={handleSwitchTab}
             className={classNames(
               "rounded-full py-1 px-2 text-sm font-medium text-white hover:bg-white/5",
               selectedTab === "cedar" ? "bg-white/10" : null
@@ -39,6 +44,7 @@ const LedgersPage = () => {
             Cedar
           </button>
           <button
+            onClick={handleSwitchTab}
             className={classNames(
               "rounded-full py-1 px-2 text-sm font-medium text-white hover:bg-white/5",
               selectedTab === "json" ? "bg-white/10" : null
