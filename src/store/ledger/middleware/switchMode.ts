@@ -1,5 +1,4 @@
 import { RootState } from "@/store";
-import { SchemaToJsonAnswer } from "@cedar-policy/cedar-wasm";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const switchMode = createAsyncThunk(
@@ -10,14 +9,23 @@ export const switchMode = createAsyncThunk(
     const state = thunkApi.getState() as RootState;
 
     const cedarCode = state.ledger.cedarCode;
-
-    let result: SchemaToJsonAnswer;
+    const jsonCode = state.ledger.jsonCode;
 
     if (state.ledger.selectedTab === "json") {
-    } else {
-      result = cedar.schemaToJson(cedarCode!);
-
+      const result = cedar.schemaToText(JSON.parse(jsonCode!));
       console.log(result);
+
+      if (result.type === "failure") {
+        thunkApi.rejectWithValue(result.errors);
+        return null;
+      }
+
+      const tab = "cedar";
+      const code = result.text;
+
+      return { tab, code };
+    } else {
+      const result = cedar.schemaToJson(cedarCode!);
 
       if (result.type === "failure") {
         thunkApi.rejectWithValue(result.errors);
