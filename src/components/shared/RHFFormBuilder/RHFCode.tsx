@@ -27,10 +27,8 @@ export const RHFCode = <T extends FieldValues>({
   name,
   language,
   rules,
-  fullWidth = true,
   control,
   errors,
-  disabled,
   height = "500px",
 }: IRHFCodeProps<T>) => {
   const error = getFormErrorByPath(errors, name);
@@ -42,12 +40,10 @@ export const RHFCode = <T extends FieldValues>({
         control={control as Control<FieldValues>}
         rules={rules}
         render={({ field: { value, onChange } }) => (
-          <div
-            className={`w-full border border-transparent rounded-md shadow-sm overflow-hidden`}
-          >
+          <div className={`w-full border border-transparent overflow-hidden`}>
             <Editor
               className="z-0 rounded-md"
-              theme={"cedar-dark"}
+              theme={"vs-dark"}
               height={height}
               defaultLanguage={language}
               value={value}
