@@ -27,7 +27,7 @@ export function TabNavigation() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col-reverse items-start xl:flex-row justify-between gap-6 xl:items-center overflow-hidden">
+    <div className="flex flex-col-reverse items-start xl:flex-row justify-between gap-6 xl:items-center overflow-hidden mb-6">
       <nav
         aria-label="Tabs"
         className="-mb-px flex space-x-8 overflow-x-auto no-scrollbar w-full xl:w-auto"

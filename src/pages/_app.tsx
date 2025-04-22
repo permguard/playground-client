@@ -6,6 +6,8 @@ import { classNames } from "@/utils/classNames";
 import "@/styles/globals.css";
 import { TabNavigation } from "@/components/TabNavigation";
 import { Card } from "@/components/shared/Card";
+import { Provider } from "react-redux";
+import { store } from "@/store";
 
 const interSans = Inter({
   variable: "--font-inter-sans",
@@ -14,23 +16,25 @@ const interSans = Inter({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className="wrapper">
-      <div
-        className={classNames(
-          "max-w-[1440px] relative mx-auto",
-          interSans.className
-        )}
-      >
-        <Header />
-        <main className="w-full mx-auto px-6 sm:px-10 md:px-14 mt-6 mb-12 lg:mt-12 lg:mb-24">
-          <Card className={"mt-6 lg:mt-12"}>
-            <TabNavigation />
-            <Component {...pageProps} />
-          </Card>
-        </main>
+    <Provider store={store}>
+      <div className="wrapper">
+        <div
+          className={classNames(
+            "max-w-[1440px] relative mx-auto",
+            interSans.className
+          )}
+        >
+          <Header />
+          <main className="w-full mx-auto px-6 sm:px-10 md:px-14 mt-6 mb-12 lg:mt-12 lg:mb-24">
+            <Card className={"mt-6 lg:mt-12"}>
+              <TabNavigation />
+              <Component {...pageProps} />
+            </Card>
+          </main>
 
-        <Footer />
+          <Footer />
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 }

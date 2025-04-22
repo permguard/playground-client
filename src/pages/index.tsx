@@ -1,3 +1,4 @@
+import { LedgerForm } from "@/components/pages/ledger/SchemaForm/LedgerForm";
 import Head from "next/head";
 
 const LedgersPage = () => {
@@ -6,6 +7,7 @@ const LedgersPage = () => {
       <Head>
         <title>Permguard Playground | Ledgers</title>
       </Head>
+      <LedgerForm />
     </>
   );
 };
