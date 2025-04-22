@@ -10,10 +10,11 @@
     "postinstall": "flowbite-react patch"
   },
   "dependencies": {
+    "@cedar-policy/cedar-wasm": "^4.3.3",
     "@headlessui/react": "^2.2.2",
     "@heroicons/react": "^2.2.0",
-    "@iconify/react": "^4.1.1",
     "@hookform/resolvers": "^3.3.4",
+    "@iconify/react": "^4.1.1",
     "@monaco-editor/react": "^4.6.0",
     "@reduxjs/toolkit": "^2.7.0",
     "axios": "^1.8.4",

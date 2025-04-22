@@ -27,8 +27,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <Header />
           <main className="w-full mx-auto px-6 sm:px-10 md:px-14 mt-6 mb-12 lg:mt-12 lg:mb-24">
             <Card className={"mt-6 lg:mt-12"}>
-              <TabNavigation />
-              <Component {...pageProps} />
+              <div className="overflow-hidden">
+                <TabNavigation />
+                <Component {...pageProps} />
+              </div>
             </Card>
           </main>
 

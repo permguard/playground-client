@@ -27,10 +27,10 @@ export function TabNavigation() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col-reverse items-start xl:flex-row justify-between gap-6 xl:items-center overflow-hidden mb-6">
+    <div className="flex flex-col-reverse items-start xl:flex-row justify-between xl:items-center mb-3 gap-3 sm:mb-6 sm:gap-6">
       <nav
         aria-label="Tabs"
-        className="-mb-px flex space-x-8 overflow-x-auto no-scrollbar w-full xl:w-auto"
+        className="-mb-px flex space-x-8 w-full xl:w-auto overflow-x-auto no-scrollbar"
       >
         {tabs.map((tab) => (
           <a
@@ -58,7 +58,7 @@ export function TabNavigation() {
         ))}
       </nav>
 
-      <div className="flex gap-6 items-center justify-start overflow-x-auto no-scrollbar w-full xl:w-auto">
+      <div className="flex gap-6 flex-wrap-reverse items-center justify-start w-full xl:w-auto">
         <Autocomplete
           value={HARDCODED_OPTIONS[0].value}
           options={HARDCODED_OPTIONS}
