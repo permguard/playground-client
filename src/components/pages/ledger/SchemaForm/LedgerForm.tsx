@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RHFFormBuilder } from "@/components/shared/RHFFormBuilder/RHFFormBuilder";
@@ -19,36 +19,27 @@ export const LedgerForm = () => {
     (state: RootState) => state.ledger.cedarCode
   );
 
-  const defaultValues: { code?: string } = useMemo(
-    () =>
-      selectedLedgerCode
-        ? ({
-            code: selectedLedgerCode,
-          } as LedgerFormPayload)
-        : {},
-    [selectedLedgerCode]
-  );
-
   const {
     control,
     handleSubmit,
-    formState: { errors },
-    reset,
+    formState: { errors, isDirty },
     watch,
-  } = useForm<LedgerFormPayload>({
-    defaultValues,
-  });
+    setValue,
+  } = useForm<LedgerFormPayload>({});
 
   const ledgerCodeValue = watch("code");
 
   useEffect(() => {
-    reset(defaultValues);
-  }, [reset, defaultValues]);
+    if (!isDirty && selectedLedgerCode) {
+      setValue("code", selectedLedgerCode, { shouldDirty: true });
+    }
+  }, [isDirty, selectedLedgerCode, setValue]);
 
   const handleConfirm = useCallback(async () => {}, []);
 
   useEffect(() => {
-    dispatch(updateLedgerState(ledgerCodeValue));
+    if (ledgerCodeValue !== undefined)
+      dispatch(updateLedgerState(ledgerCodeValue));
   }, [dispatch, ledgerCodeValue]);
 
   return (
