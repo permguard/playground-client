@@ -11,6 +11,6 @@ export const updateLedgerState = createAsyncThunk(
         ? "ledger:json_code"
         : "ledger:cedar_code";
 
-    localStorage.setItem(storageKey, arg);
+    localStorage.setItem(storageKey, arg ?? null);
   }
 );
