@@ -14,7 +14,7 @@ export const getLedgerFormDefinition = ({
       type: "code",
       name: "code",
       id: "code",
-      height: "500px",
+      height: "400px",
       language: language,
       visible: true,
       className: "col-span-12",
