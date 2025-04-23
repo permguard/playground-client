@@ -188,6 +188,11 @@ export const RHFFormBuilder = <
                       />
                     </div>
                   ) : null}
+                  {item.type === "typography" ? (
+                    <span className={`${item.inputProps?.className}`}>
+                      {item.label}
+                    </span>
+                  ) : null}
                 </>
               ) : null}
 

@@ -2,6 +2,7 @@ import "@/utils/hooks/monaco";
 import Head from "next/head";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import { LedgerJSONEditorForm } from "@/components/pages/ledger/LedgerJSONEditorForm/LedgerJSONEditorForm";
+import { LedgerForm } from "@/components/pages/ledger/LedgerForm/LedgerForm";
 
 const LedgersPage = () => {
   return (
@@ -26,7 +27,9 @@ const LedgersPage = () => {
           </Tab>
         </TabList>
         <TabPanels className="mt-3">
-          <TabPanel key={"form"}></TabPanel>
+          <TabPanel key={"form"}>
+            <LedgerForm />
+          </TabPanel>
           <TabPanel key={"json"}>
             <LedgerJSONEditorForm />
           </TabPanel>
