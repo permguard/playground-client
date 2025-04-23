@@ -10,7 +10,10 @@ import { updateLedgerState } from "@/store/ledger/middleware/updateLedgerState";
 export const LedgerForm = () => {
   const dispatch = useAppDispatch();
 
-  const [jsonIsBroken, setJsonIsBroken] = useState(false);
+  const [jsonProcessedState, setJsonProcessedState] = useState({
+    processed: false,
+    valid: true,
+  });
 
   const jsonCode = useSelector((state: RootState) => state.ledger.jsonCode);
 
@@ -21,7 +24,8 @@ export const LedgerForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    getValues,
+    watch,
+    setValue,
   } = useForm<LedgerFormPayload>({
     defaultValues: {
       policy_store_kind: "",
@@ -35,41 +39,59 @@ export const LedgerForm = () => {
 
       const defaultValues: LedgerFormPayload = {
         zone_id: parsedJSON.zone_id,
-        policy_store_kind: parsedJSON.policy_store.kind,
-        policy_store_id: parsedJSON.policy_store.id,
+        policy_store_kind: parsedJSON.policy_store?.kind,
+        policy_store_id: parsedJSON.policy_store?.id,
       };
 
       reset(defaultValues);
+      setJsonProcessedState({ processed: true, valid: true });
     } catch {
-      setJsonIsBroken(true);
+      setJsonProcessedState({ processed: true, valid: false });
     }
   }, [jsonCode, reset]);
 
-  const formValues = getValues();
+  const formValues = watch();
 
   useEffect(() => {
-    const jsonPayload = {
-      zone_id: formValues.zone_id,
-      policy_store: {
-        kind: formValues.policy_store_kind,
-        id: formValues.policy_store_id,
-      },
-    };
-    const updatedJsonCode = JSON.stringify(jsonPayload, null, 2);
+    if (jsonProcessedState.processed && jsonProcessedState.valid) {
+      let zoneId = formValues.zone_id;
 
-    dispatch(updateLedgerState(updatedJsonCode));
-  }, [dispatch, formValues]);
+      if (zoneId > 999999999999999) {
+        zoneId = 999999999999999;
+        setValue("zone_id", zoneId);
+      }
+
+      const jsonPayload = {
+        zone_id: zoneId,
+        policy_store: {
+          kind: formValues.policy_store_kind,
+          id: formValues.policy_store_id,
+        },
+      };
+      const updatedJsonCode = JSON.stringify(jsonPayload, null, 2);
+
+      dispatch(updateLedgerState(updatedJsonCode));
+    }
+  }, [
+    dispatch,
+    formValues,
+    jsonProcessedState.processed,
+    jsonProcessedState.valid,
+    setValue,
+  ]);
 
   return (
     <>
-      {jsonIsBroken ? (
+      {jsonProcessedState.processed && !jsonProcessedState.valid ? (
         <p className="text-red-500 text-sm mb-4">
           Invalid JSON detected. Please fix the errors to proceed.
         </p>
       ) : null}
       <RHFFormBuilder
         handleSubmit={handleSubmit(handleConfirm)}
-        formControls={getLedgerFormDefinition()}
+        formControls={getLedgerFormDefinition({
+          disabled: !jsonProcessedState.processed || !jsonProcessedState.valid,
+        })}
         control={control}
         errors={errors}
         submitButton={<></>}

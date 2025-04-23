@@ -6,7 +6,6 @@ import { getLedgerJSONEditorFormDefinition } from "./ledgerJSONEditorFormDefinit
 import { LedgerJSONEditorFormPayload } from "./LedgerJSONEditorFormPayload";
 import { useAppDispatch, RootState } from "@/store";
 import { updateLedgerState } from "@/store/ledger/middleware/updateLedgerState";
-import { initLedgerState } from "@/store/ledger/middleware/initLedgerState";
 
 export const LedgerJSONEditorForm = () => {
   const dispatch = useAppDispatch();
@@ -14,10 +13,6 @@ export const LedgerJSONEditorForm = () => {
   const selectedLedgerCode = useSelector(
     (state: RootState) => state.ledger.jsonCode
   );
-
-  useEffect(() => {
-    dispatch(initLedgerState());
-  }, [dispatch]);
 
   const {
     control,

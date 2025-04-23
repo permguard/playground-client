@@ -90,6 +90,7 @@ export const RHFFormBuilder = <
                         requiredFieldSymbol={item.requiredFieldSymbol}
                         inputProps={item.inputProps}
                         copy={item.copy}
+                        numericProps={item.numericProps}
                       />
                     </div>
                   ) : null}

@@ -53,6 +53,11 @@ export interface IFormControl<InputNames extends string> {
   height?: string;
   language?: string;
   copy?: boolean;
+  numericProps?: {
+    min?: string;
+    max?: string;
+    step?: string;
+  };
 }
 
 export type IFormDefinition<InputNames extends string> =

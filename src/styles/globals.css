@@ -59,16 +59,18 @@ button {
   cursor: pointer;
 }
 
-img-comparison-slider {
-  --divider-color: linear-gradient(to bottom, #f05c80, #cc34df);
-  --divider-width: 8px;
-  width: 100%;
-}
-
-.DocSearch-Commands-Key {
-  color: rgba(255, 255, 255, 0.9);
-}
-
 pre code.hljs {
   overflow: visible !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

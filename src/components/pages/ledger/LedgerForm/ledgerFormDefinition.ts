@@ -4,9 +4,11 @@ import {
 } from "@/components/shared/RHFFormBuilder/types";
 import { LedgerFormPayload } from "./LedgerFormPayload";
 
-export const getLedgerFormDefinition = (): IFormDefinition<
-  FlattenKeys<LedgerFormPayload>
-> => {
+export const getLedgerFormDefinition = ({
+  disabled,
+}: {
+  disabled: boolean;
+}): IFormDefinition<FlattenKeys<LedgerFormPayload>> => {
   const baseDefinition = [
     {
       type: "typography",
@@ -27,6 +29,11 @@ export const getLedgerFormDefinition = (): IFormDefinition<
       label: "Zone ID",
       labelId: "zone_id",
       visible: true,
+      inputType: "number",
+      disabled,
+      numericProps: {
+        max: 999999999999999,
+      },
     },
     {
       type: "typography",
@@ -42,21 +49,23 @@ export const getLedgerFormDefinition = (): IFormDefinition<
       type: "textfield",
       icon: "icon-park-outline:edit-name",
       requiredFieldSymbol: true,
-      name: "kind",
-      id: "kind",
+      name: "policy_store_kind",
+      id: "policy_store_kind",
       label: "Kind",
-      labelId: "kind",
+      labelId: "policy_store_kind",
       visible: true,
+      disabled,
     },
     {
       type: "textfield",
       icon: "icon-park-outline:edit-name",
       requiredFieldSymbol: true,
-      name: "id",
-      id: "id",
+      name: "policy_store_id",
+      id: "policy_store_id",
       label: "ID",
-      labelId: "id",
+      labelId: "policy_store_id",
       visible: true,
+      disabled,
     },
   ].filter(Boolean) as IFormDefinition<FlattenKeys<LedgerFormPayload>>;
 

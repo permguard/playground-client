@@ -3,8 +3,17 @@ import Head from "next/head";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import { LedgerJSONEditorForm } from "@/components/pages/ledger/LedgerJSONEditorForm/LedgerJSONEditorForm";
 import { LedgerForm } from "@/components/pages/ledger/LedgerForm/LedgerForm";
+import { useAppDispatch } from "@/store";
+import { initLedgerState } from "@/store/ledger/middleware/initLedgerState";
+import { useEffect } from "react";
 
 const LedgersPage = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(initLedgerState());
+  }, [dispatch]);
+
   return (
     <>
       <Head>

@@ -34,6 +34,11 @@ interface IRHFInputProps<T extends FieldValues> {
   inputVariant?: "standart" | "expanded";
   // Available only in the expanded variant
   suffixText?: string;
+  numericProps?: {
+    min?: string;
+    max?: string;
+    step?: string;
+  };
 }
 
 export const RHFInput = <T extends FieldValues>({
@@ -55,6 +60,7 @@ export const RHFInput = <T extends FieldValues>({
   copy,
   inputVariant = "standart",
   suffixText,
+  numericProps,
 }: IRHFInputProps<T>) => {
   const error = getFormErrorByPath(errors, name);
 
@@ -140,6 +146,9 @@ export const RHFInput = <T extends FieldValues>({
                     inputProps?.className
                   )}
                   placeholder={labelPlaceholder}
+                  min={numericProps ? numericProps.min : undefined}
+                  max={numericProps ? numericProps.max : undefined}
+                  step={numericProps ? numericProps.step : undefined}
                 />
                 {suffixText ? (
                   <p className="text-black/50 text-[14px] sm:text-lg mr-6 sm:mr-4">
