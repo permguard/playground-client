@@ -9,6 +9,11 @@ import {
 } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import { Autocomplete } from "./shared/Autocomplete";
+import { EXAMPLES } from "@/utils/examples/examples";
+import { RootState, useAppDispatch } from "@/store";
+import { useCallback } from "react";
+import { reset } from "@/store/ledger/middleware/reset";
+import { useSelector } from "react-redux";
 
 const tabs = [
   { name: "Ledger", href: "/", icon: DocumentTextIcon },
@@ -18,13 +23,17 @@ const tabs = [
   { name: "AuthZ Server", href: "/authz-server", icon: ServerIcon },
 ];
 
-const HARDCODED_OPTIONS = [
-  { label: "SimpleTodo", value: "simple-todo" },
-  { label: "SecureDocs", value: "secure-docs" },
-];
-
 export function TabNavigation() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const handleReset = useCallback(() => {
+    dispatch(reset());
+  }, [dispatch]);
+
+  const selectedExample = useSelector(
+    (state: RootState) => state.ledger.selectedExample
+  );
 
   return (
     <div className="flex flex-col-reverse items-start xl:flex-row justify-between xl:items-center mb-3 gap-3 sm:mb-6 sm:gap-6">
@@ -60,11 +69,12 @@ export function TabNavigation() {
 
       <div className="flex gap-6 flex-wrap-reverse items-center justify-start w-full xl:w-auto">
         <Autocomplete
-          value={HARDCODED_OPTIONS[0].value}
-          options={HARDCODED_OPTIONS}
+          value={selectedExample}
+          options={EXAMPLES.map((el) => ({ label: el.name, value: el.name }))}
           onChange={() => {}}
         />
         <button
+          onClick={handleReset}
           type="button"
           className="flex items-center sm:w-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
         >
