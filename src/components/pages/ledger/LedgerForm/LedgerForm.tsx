@@ -46,7 +46,9 @@ export const LedgerForm = () => {
       reset(defaultValues);
       setJsonProcessedState({ processed: true, valid: true });
     } catch {
-      setJsonProcessedState({ processed: true, valid: false });
+      if (jsonCode !== null) {
+        setJsonProcessedState({ processed: true, valid: false });
+      }
     }
   }, [jsonCode, reset]);
 
@@ -56,8 +58,8 @@ export const LedgerForm = () => {
     if (jsonProcessedState.processed && jsonProcessedState.valid) {
       let zoneId = formValues.zone_id;
 
-      if (zoneId > 999999999999999) {
-        zoneId = 999999999999999;
+      if (zoneId > 99999999999999) {
+        zoneId = Number(BigInt(zoneId) / 10n);
         setValue("zone_id", zoneId);
       }
 
@@ -74,7 +76,9 @@ export const LedgerForm = () => {
     }
   }, [
     dispatch,
-    formValues,
+    formValues.zone_id,
+    formValues.policy_store_kind,
+    formValues.policy_store_id,
     jsonProcessedState.processed,
     jsonProcessedState.valid,
     setValue,
