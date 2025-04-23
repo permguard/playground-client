@@ -6,16 +6,36 @@ import { useSelector } from "react-redux";
 import { classNames } from "@/utils/classNames";
 import { useCallback } from "react";
 import { switchMode } from "@/store/ledger/middleware/switchMode";
+import { useMonaco } from "@monaco-editor/react";
+import { DetailedError } from "@cedar-policy/cedar-wasm";
 
 const LedgersPage = () => {
+  const monaco = useMonaco();
   const dispatch = useAppDispatch();
 
   const selectedTab = useSelector(
     (state: RootState) => state.ledger.selectedTab
   );
 
-  const handleSwitchTab = useCallback(() => {
-    dispatch(switchMode());
+  const handleSwitchTab = useCallback(async () => {
+    const result = await dispatch(switchMode());
+
+    const markers = [];
+
+    if (result.type === "ledger/switchModeStatus/rejected") {
+      (result.payload as DetailedError[])?.forEach((error) => {
+        markers.push({
+          severity: monaco?.MarkerSeverity.Error,
+          message: error.message,
+          start: error.sourceLocations![0]!.start,
+          end: error.sourceLocations![0]!.end,
+        });
+      });
+
+      const model = monaco?.editor.getModel();
+
+      monaco?.editor.setModelMarkers(model, "owner", markers);
+    }
   }, [dispatch]);
 
   return (

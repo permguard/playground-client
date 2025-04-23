@@ -13,11 +13,9 @@ export const switchMode = createAsyncThunk(
 
     if (state.ledger.selectedTab === "json") {
       const result = cedar.schemaToText(JSON.parse(jsonCode!));
-      console.log(result);
 
       if (result.type === "failure") {
-        thunkApi.rejectWithValue(result.errors);
-        return null;
+        return thunkApi.rejectWithValue(result.errors);
       }
 
       const tab = "cedar";
@@ -27,9 +25,11 @@ export const switchMode = createAsyncThunk(
     } else {
       const result = cedar.schemaToJson(cedarCode!);
 
+      console.log(result);
+
       if (result.type === "failure") {
-        thunkApi.rejectWithValue(result.errors);
-        return null;
+        console.log("FAILURE");
+        return thunkApi.rejectWithValue(result.errors);
       }
 
       const tab = "json";
