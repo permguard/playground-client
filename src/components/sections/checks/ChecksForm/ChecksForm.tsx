@@ -27,6 +27,7 @@ export const ChecksForm = () => {
     reset,
     watch,
     setValue,
+    getValues,
   } = useForm<ChecksFormPayload>({
     defaultValues: {},
   });
@@ -48,27 +49,56 @@ export const ChecksForm = () => {
   }, [jsonCode, reset]);
 
   const formValues = watch();
+  const evaluations = formValues.evaluations;
 
-  useEffect(() => {
-    if (jsonProcessedState.processed && jsonProcessedState.valid) {
-      const jsonPayload = {
-        url: formValues.url,
-        port: formValues.port,
-      };
-      const updatedJsonCode = JSON.stringify(formValues, null, 2);
+  // useEffect(() => {
+  //   if (jsonProcessedState.processed && jsonProcessedState.valid) {
+  //     const jsonPayload = {
+  //       url: formValues.url,
+  //       port: formValues.port,
+  //     };
+  //     const updatedJsonCode = JSON.stringify(formValues, null, 2);
 
-      dispatch(updateChecksState(updatedJsonCode));
-    }
-  }, [
-    dispatch,
-    formValues.url,
-    formValues.port,
-    jsonProcessedState.processed,
-    jsonProcessedState.valid,
-    setValue,
-  ]);
+  //     dispatch(updateChecksState(updatedJsonCode));
+  //   }
+  // }, [
+  //   dispatch,
+  //   formValues.url,
+  //   formValues.port,
+  //   jsonProcessedState.processed,
+  //   jsonProcessedState.valid,
+  //   setValue,
+  // ]);
 
-  const handleAddEvaluation = useCallback(() => {}, []);
+  const handleAddEvaluation = useCallback(() => {
+    const values = getValues();
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    setValue(`evaluations[${values.evaluations.length}]`, {
+      request_id: "",
+      resource: {
+        type: "",
+        id: "",
+        properties: "",
+      },
+      action: {
+        name: "",
+        properties: "",
+      },
+    });
+  }, [getValues, setValue]);
+
+  const handleRemoveEvaluation = useCallback(
+    (index: number) => {
+      const values = getValues();
+
+      values.evaluations.splice(index, 1);
+
+      setValue(`evaluations`, values.evaluations);
+    },
+    [getValues, setValue]
+  );
 
   const addEvaluationBtn = (
     <button
@@ -77,6 +107,15 @@ export const ChecksForm = () => {
     >
       <Icon icon={"material-symbols:add-rounded"} />
       <span>Add evaluation</span>
+    </button>
+  );
+
+  const removeEvaluationBtn = (index: number) => (
+    <button
+      className="text-red-500 top-4 right-4 absolute"
+      onClick={() => handleRemoveEvaluation(index)}
+    >
+      <Icon icon={"tabler:trash"} fontSize={24} />
     </button>
   );
 
@@ -89,7 +128,11 @@ export const ChecksForm = () => {
       ) : null}
       <RHFFormBuilder
         handleSubmit={handleSubmit(handleConfirm)}
-        formControls={getChecksFormDefinition({ addEvaluationBtn })}
+        formControls={getChecksFormDefinition({
+          addEvaluationBtn,
+          removeEvaluationBtn,
+          evaluationsCount: evaluations?.length ?? 1,
+        })}
         control={control}
         errors={errors}
         submitButton={<></>}

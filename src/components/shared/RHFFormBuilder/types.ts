@@ -59,6 +59,10 @@ export interface IFormControl<InputNames extends string> {
     step?: string;
   };
   additionalContent?: React.ReactNode;
+  group?: string;
+  groupClassName?: string;
+  parentGroup?: string;
+  parentGroupClassName?: string;
 }
 
 export type IFormDefinition<InputNames extends string> =

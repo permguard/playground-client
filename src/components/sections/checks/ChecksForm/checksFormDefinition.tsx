@@ -6,8 +6,12 @@ import { ChecksFormPayload } from "./ChecksFormPayload";
 
 export const getChecksFormDefinition = ({
   addEvaluationBtn,
+  removeEvaluationBtn,
+  evaluationsCount,
 }: {
   addEvaluationBtn: React.ReactNode;
+  removeEvaluationBtn: (index: number) => React.ReactNode;
+  evaluationsCount: number;
 }): IFormDefinition<FlattenKeys<ChecksFormPayload>> => {
   const baseDefinition = [
     {
@@ -49,6 +53,10 @@ export const getChecksFormDefinition = ({
       label: "Type",
       labelId: "subject.type",
       visible: true,
+      group: "subject_left_column",
+      groupClassName: "col-span-12 sm:col-span-6 flex flex-col gap-4",
+      parentGroup: "subject",
+      parentGroupClassName: "col-span-12 grid grid-cols-12 gap-4",
     },
     {
       type: "textfield",
@@ -59,6 +67,8 @@ export const getChecksFormDefinition = ({
       label: "ID",
       labelId: "subject.id",
       visible: true,
+      group: "subject_left_column",
+      parentGroup: "subject",
     },
     {
       type: "textfield",
@@ -69,6 +79,8 @@ export const getChecksFormDefinition = ({
       label: "Source",
       labelId: "subject.source",
       visible: true,
+      group: "subject_left_column",
+      parentGroup: "subject",
     },
     {
       type: "code",
@@ -80,7 +92,9 @@ export const getChecksFormDefinition = ({
       height: "200px",
       language: "json",
       visible: true,
-      className: "col-span-12",
+      groupClassName: "col-span-12 sm:col-span-6",
+      group: "subject_right_column",
+      parentGroup: "subject",
     },
     {
       type: "typography",
@@ -101,6 +115,8 @@ export const getChecksFormDefinition = ({
       label: "Time",
       labelId: "context.time",
       visible: true,
+      parentGroup: "context",
+      parentGroupClassName: "col-span-12 grid grid-cols-12 gap-4",
     },
     {
       type: "checkbox",
@@ -112,6 +128,7 @@ export const getChecksFormDefinition = ({
       visible: true,
       className:
         "col-span-12 sm:col-span-6 flex items-end pb-2 sm:pl-10 select-none",
+      parentGroup: "context",
     },
     {
       type: "typography",
@@ -124,89 +141,119 @@ export const getChecksFormDefinition = ({
       visible: true,
       additionalContent: addEvaluationBtn,
     },
-    {
-      type: "textfield",
-      icon: "icon-park-outline:edit-name",
-      requiredFieldSymbol: true,
-      name: "evaluations[0].request_id",
-      id: "evaluations[0].request_id",
-      label: "Request ID",
-      labelId: "evaluations[0].request_id",
-      visible: true,
-    },
-    {
-      type: "typography",
-      label: "Resource",
-      id: "resource",
-      className: "col-span-12 mt-4",
-      inputProps: {
-        className: "text-md font-medium text-white",
-      },
-      visible: true,
-    },
-    {
-      type: "textfield",
-      icon: "icon-park-outline:edit-name",
-      requiredFieldSymbol: true,
-      name: "evaluations[0].resource.type",
-      id: "evaluations[0].resource.type",
-      label: "Type",
-      labelId: "evaluations[0].resource.type",
-      visible: true,
-    },
-    {
-      type: "textfield",
-      icon: "icon-park-outline:edit-name",
-      requiredFieldSymbol: true,
-      name: "evaluations[0].resource.id",
-      id: "evaluations[0].resource.id",
-      label: "ID",
-      labelId: "evaluations[0].resource.id",
-      visible: true,
-    },
-    {
-      type: "code",
-      name: "evaluations[0].resource.properties",
-      id: "evaluations[0].resource.properties",
-      requiredFieldSymbol: true,
-      label: "Properties",
-      labelId: "evaluations[0].resource.properties",
-      height: "200px",
-      language: "json",
-      visible: true,
-      className: "col-span-12",
-    },
-    {
-      type: "typography",
-      label: "Action",
-      id: "action",
-      className: "col-span-12 mt-4",
-      inputProps: {
-        className: "text-md font-medium text-white",
-      },
-      visible: true,
-    },
-    {
-      type: "textfield",
-      icon: "icon-park-outline:edit-name",
-      requiredFieldSymbol: true,
-      name: "evaluations[0].action.name",
-      id: "evaluations[0].action.name",
-      label: "Name",
-      labelId: "evaluations[0].action.name",
-      visible: true,
-    },
-    {
-      type: "code",
-      name: "evaluations[0].action.properties",
-      id: "evaluations[0].action.properties",
-      requiredFieldSymbol: true,
-      label: "Properties",
-      labelId: "evaluations[0].action.properties",
-      height: "200px",
-      language: "json",
-      visible: true,
-    },
+
+    ...Array.from({ length: evaluationsCount })
+      .map((_, index) => [
+        {
+          type: "textfield",
+          icon: "icon-park-outline:edit-name",
+          requiredFieldSymbol: true,
+          name: `evaluations[${index}].request_id`,
+          id: `evaluations[${index}].request_id`,
+          label: "Request ID",
+          labelId: `evaluations[${index}].request_id`,
+          visible: true,
+          parentGroup: `evaluations[${index}]`,
+          parentGroupClassName:
+            "p-4 border border-white/10 rounded-md grid grid-cols-12 gap-4 col-span-12 relative",
+          group: `evaluations[${index}].request_id`,
+          groupClassName: "col-span-12 grid grid-cols-12 gap-4",
+          additionalContent: removeEvaluationBtn(index),
+          className: "col-span-12 sm:col-span-6 flex flex-col-reverse",
+        },
+        {
+          type: "typography",
+          label: "Resource",
+          id: `evaluations[${index}].resource`,
+          className: "col-span-12 mt-4",
+          inputProps: {
+            className: "text-md font-medium text-white",
+          },
+          visible: true,
+          parentGroup: `evaluations[${index}]`,
+          group: `evaluations[${index}].resource`,
+          groupClassName:
+            "col-span-12 sm:col-span-6 flex flex-col gap-4 sm:mr-3",
+        },
+        {
+          type: "textfield",
+          icon: "icon-park-outline:edit-name",
+          requiredFieldSymbol: true,
+          name: `evaluations[${index}].resource.type`,
+          id: `evaluations[${index}].resource.type`,
+          label: "Type",
+          labelId: `evaluations[${index}].resource.type`,
+          visible: true,
+          group: `evaluations[${index}].resource`,
+          parentGroup: `evaluations[${index}]`,
+        },
+        {
+          type: "textfield",
+          icon: "icon-park-outline:edit-name",
+          requiredFieldSymbol: true,
+          name: `evaluations[${index}].resource.id`,
+          id: `evaluations[${index}].resource.id`,
+          label: "ID",
+          labelId: `evaluations[${index}].resource.id`,
+          visible: true,
+          group: `evaluations[${index}].resource`,
+          parentGroup: `evaluations[${index}]`,
+        },
+        {
+          type: "code",
+          name: `evaluations[${index}].resource.properties`,
+          id: `evaluations[${index}].resource.properties`,
+          requiredFieldSymbol: true,
+          label: "Properties",
+          labelId: `evaluations[${index}].resource.properties`,
+          height: "200px",
+          language: "json",
+          visible: true,
+          group: `evaluations[${index}].resource`,
+          parentGroup: `evaluations[${index}]`,
+        },
+        {
+          type: "typography",
+          label: "Action",
+          id: "action",
+          className: "col-span-12 mt-4",
+          inputProps: {
+            className: "text-md font-medium text-white",
+          },
+          visible: true,
+          parentGroup: `evaluations[${index}]`,
+          group: `evaluations[${index}].action`,
+          groupClassName:
+            "col-span-12 sm:col-span-6 flex flex-col gap-4 sm:ml-3",
+        },
+        {
+          type: "textfield",
+          icon: "icon-park-outline:edit-name",
+          requiredFieldSymbol: true,
+          name: `evaluations[${index}].action.name`,
+          id: `evaluations[${index}].action.name`,
+          label: "Name",
+          labelId: `evaluations[${index}].action.name`,
+          visible: true,
+          parentGroup: `evaluations[${index}]`,
+          group: `evaluations[${index}].action`,
+        },
+        {
+          type: "code",
+          name: `evaluations[${index}].action.properties`,
+          id: `evaluations[${index}].action.properties`,
+          requiredFieldSymbol: true,
+          label: "Properties",
+          labelId: `evaluations[${index}].action.properties`,
+          height: "200px",
+          language: "json",
+          visible: true,
+          parentGroup: `evaluations[${index}]`,
+          group: `evaluations[${index}].action`,
+          className: "col-span-12 mt-auto",
+        },
+      ])
+      .flat(2),
   ].filter(Boolean) as IFormDefinition<FlattenKeys<ChecksFormPayload>>;
 
   return baseDefinition;
