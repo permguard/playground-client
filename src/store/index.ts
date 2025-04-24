@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
 import ledgerSlice from "./ledger/ledgerSlice";
+import principalSlice from "./principal/principalSlice";
 
 export const store = configureStore({
   reducer: {
     ledger: ledgerSlice,
+    principal: principalSlice,
   },
 });
 

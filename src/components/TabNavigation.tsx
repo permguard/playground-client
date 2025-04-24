@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 
 const tabs = [
   { name: "Ledger", href: "/", icon: DocumentTextIcon },
-  { name: "Policies", href: "/policies", icon: ShieldCheckIcon },
+  { name: "Principal", href: "/principal", icon: ShieldCheckIcon },
   { name: "Entities", href: "/entities", icon: UsersIcon },
   { name: "AuthZ Checks", href: "/authz-checks", icon: LockClosedIcon },
   { name: "AuthZ Server", href: "/authz-server", icon: ServerIcon },

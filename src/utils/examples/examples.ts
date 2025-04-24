@@ -8,5 +8,10 @@ export const EXAMPLES = [
     "id": "89be7cf6c29142dba6a301cf47b98d1c"
   }
 }`,
+    principal: `{
+  "type": "user",
+  "id": "amy.smith@acmecorp.com",
+  "source": "keycloak"
+}`,
   },
 ];
