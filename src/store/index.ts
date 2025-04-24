@@ -5,6 +5,7 @@ import ledgerSlice from "./ledger/ledgerSlice";
 import principalSlice from "./principal/principalSlice";
 import serverSlice from "./server/serverSlice";
 import entitiesSlice from "./entities/entitiesSlice";
+import checksSlice from "./checks/checksSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     principal: principalSlice,
     server: serverSlice,
     entities: entitiesSlice,
+    checks: checksSlice,
   },
 });
 
