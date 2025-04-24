@@ -26,7 +26,7 @@ export const getServerFormDefinition = ({
       requiredFieldSymbol: true,
       name: "url",
       id: "url",
-      label: "URL",
+      label: "Host",
       labelId: "url",
       visible: true,
       disabled,

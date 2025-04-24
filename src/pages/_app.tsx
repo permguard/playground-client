@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="wrapper">
         <div
           className={classNames(
-            "max-w-[1440px] relative mx-auto",
+            "max-w-[1440px] relative mx-auto min-h-screen flex flex-col",
             interSans.className
           )}
         >
@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </Card>
           </main>
 
-          <Footer />
+          <Footer small />
         </div>
       </div>
     </Provider>
