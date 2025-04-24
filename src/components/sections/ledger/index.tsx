@@ -1,23 +1,23 @@
 import "@/utils/hooks/monaco";
 import Head from "next/head";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
-import { PrincipalJSONEditorForm } from "@/components/pages/principal/PrincipalJSONEditorForm/PrincipalJSONEditorForm";
-import { PrincipalForm } from "@/components/pages/principal/PrincipalForm/PrincipalForm";
+import { LedgerJSONEditorForm } from "@/components/sections/ledger/LedgerJSONEditorForm/LedgerJSONEditorForm";
+import { LedgerForm } from "@/components/sections/ledger/LedgerForm/LedgerForm";
 import { useAppDispatch } from "@/store";
-import { initPrincipalState } from "@/store/principal/middleware/initPrincipalState";
+import { initLedgerState } from "@/store/ledger/middleware/initLedgerState";
 import { useEffect } from "react";
 
-const PrincipalPage = () => {
+export const LedgersPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(initPrincipalState());
+    dispatch(initLedgerState());
   }, [dispatch]);
 
   return (
     <>
       <Head>
-        <title>Permguard Playground | Principals</title>
+        <title>Permguard Playground | Ledgers</title>
       </Head>
 
       <TabGroup className={"flex flex-col"}>
@@ -37,15 +37,13 @@ const PrincipalPage = () => {
         </TabList>
         <TabPanels className="mt-3">
           <TabPanel key={"form"}>
-            <PrincipalForm />
+            <LedgerForm />
           </TabPanel>
           <TabPanel key={"json"}>
-            <PrincipalJSONEditorForm />
+            <LedgerJSONEditorForm />
           </TabPanel>
         </TabPanels>
       </TabGroup>
     </>
   );
 };
-
-export default PrincipalPage;

@@ -1,11 +1,11 @@
 import "@/utils/hooks/monaco";
 import Head from "next/head";
-import { EntitiesJSONEditorForm } from "@/components/pages/entities/EntitiesJSONEditorForm/EntitiesJSONEditorForm";
+import { EntitiesJSONEditorForm } from "@/components/sections/entities/EntitiesJSONEditorForm/EntitiesJSONEditorForm";
 import { useAppDispatch } from "@/store";
 import { initEntitiesState } from "@/store/entities/middleware/initEntitiesState";
 import { useEffect } from "react";
 
-const EntitiesPage = () => {
+export const EntitiesPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -26,5 +26,3 @@ const EntitiesPage = () => {
     </>
   );
 };
-
-export default EntitiesPage;

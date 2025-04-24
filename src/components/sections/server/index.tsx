@@ -1,28 +1,26 @@
 import "@/utils/hooks/monaco";
 import Head from "next/head";
-import { ChecksForm } from "@/components/pages/checks/ChecksForm/ChecksForm";
+import { ServerForm } from "@/components/sections/server/ServerForm/ServerForm";
 import { useAppDispatch } from "@/store";
-import { initChecksState } from "@/store/checks/middleware/initChecksState";
+import { initServerState } from "@/store/server/middleware/initServerState";
 import { useEffect } from "react";
 
-const ChecksPage = () => {
+export const ServerPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(initChecksState());
+    dispatch(initServerState());
   }, [dispatch]);
 
   return (
     <>
       <Head>
-        <title>Permguard Playground | Checkss</title>
+        <title>Permguard Playground | Servers</title>
       </Head>
 
       <div className="flex flex-col mt-15 sm:mt-19">
-        <ChecksForm />
+        <ServerForm />
       </div>
     </>
   );
 };
-
-export default ChecksPage;
