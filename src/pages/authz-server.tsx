@@ -18,10 +18,8 @@ const ServerPage = () => {
         <title>Permguard Playground | Servers</title>
       </Head>
 
-      <div className="flex flex-col my-20">
-        <div className="max-w-[500px] mx-auto">
-          <ServerForm />
-        </div>
+      <div className="flex flex-col mt-15 sm:mt-19">
+        <ServerForm />
       </div>
     </>
   );

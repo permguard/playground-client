@@ -11,6 +11,16 @@ export const getServerFormDefinition = ({
 }): IFormDefinition<FlattenKeys<ServerFormPayload>> => {
   const baseDefinition = [
     {
+      type: "typography",
+      label: "Server",
+      id: "server",
+      className: "col-span-12",
+      inputProps: {
+        className: "text-md font-medium text-white",
+      },
+      visible: true,
+    },
+    {
       type: "textfield",
       icon: "icon-park-outline:edit-name",
       requiredFieldSymbol: true,
@@ -20,7 +30,6 @@ export const getServerFormDefinition = ({
       labelId: "url",
       visible: true,
       disabled,
-      className: "col-span-8",
     },
     {
       type: "textfield",
@@ -32,7 +41,6 @@ export const getServerFormDefinition = ({
       labelId: "port",
       visible: true,
       disabled,
-      className: "col-span-4",
     },
   ].filter(Boolean) as IFormDefinition<FlattenKeys<ServerFormPayload>>;
 
