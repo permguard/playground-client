@@ -6,6 +6,7 @@ import { getChecksFormDefinition } from "./checksFormDefinition";
 import { RHFFormBuilder } from "@/components/shared/RHFFormBuilder/RHFFormBuilder";
 import { RootState, useAppDispatch } from "@/store";
 import { updateChecksState } from "@/store/checks/middleware/updateChecksState";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export const ChecksForm = () => {
   const dispatch = useAppDispatch();
@@ -27,19 +28,15 @@ export const ChecksForm = () => {
     watch,
     setValue,
   } = useForm<ChecksFormPayload>({
-    defaultValues: {
-      url: "",
-    },
+    defaultValues: {},
   });
 
   useEffect(() => {
     try {
       const parsedJSON = JSON.parse(jsonCode!);
+      console.log("parsedJSON", parsedJSON);
 
-      const defaultValues: ChecksFormPayload = {
-        url: parsedJSON.url,
-        port: parsedJSON.port,
-      };
+      const defaultValues = parsedJSON as ChecksFormPayload;
 
       reset(defaultValues);
       setJsonProcessedState({ processed: true, valid: true });
@@ -58,7 +55,7 @@ export const ChecksForm = () => {
         url: formValues.url,
         port: formValues.port,
       };
-      const updatedJsonCode = JSON.stringify(jsonPayload, null, 2);
+      const updatedJsonCode = JSON.stringify(formValues, null, 2);
 
       dispatch(updateChecksState(updatedJsonCode));
     }
@@ -71,6 +68,18 @@ export const ChecksForm = () => {
     setValue,
   ]);
 
+  const handleAddEvaluation = useCallback(() => {}, []);
+
+  const addEvaluationBtn = (
+    <button
+      className="flex gap-1 items-center text-sm borser border-white/10 rounded-md px-2 py-1 bg-white/10 hover:bg-white/20 transition-all duration-200"
+      onClick={handleAddEvaluation}
+    >
+      <Icon icon={"material-symbols:add-rounded"} />
+      <span>Add evaluation</span>
+    </button>
+  );
+
   return (
     <>
       {jsonProcessedState.processed && !jsonProcessedState.valid ? (
@@ -80,9 +89,7 @@ export const ChecksForm = () => {
       ) : null}
       <RHFFormBuilder
         handleSubmit={handleSubmit(handleConfirm)}
-        formControls={getChecksFormDefinition({
-          disabled: !jsonProcessedState.processed || !jsonProcessedState.valid,
-        })}
+        formControls={getChecksFormDefinition({ addEvaluationBtn })}
         control={control}
         errors={errors}
         submitButton={<></>}

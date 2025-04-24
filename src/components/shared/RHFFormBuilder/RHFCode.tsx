@@ -21,6 +21,8 @@ interface IRHFCodeProps<T extends FieldValues> {
   disabled?: boolean;
   language: string;
   height?: string;
+  label?: React.ReactNode;
+  requiredFieldSymbol?: boolean | string;
 }
 
 export const RHFCode = <T extends FieldValues>({
@@ -30,8 +32,19 @@ export const RHFCode = <T extends FieldValues>({
   control,
   errors,
   height = "500px",
+  requiredFieldSymbol,
+  label,
 }: IRHFCodeProps<T>) => {
   const error = getFormErrorByPath(errors, name);
+
+  let labelSymbol: string;
+  if (requiredFieldSymbol) {
+    if (typeof requiredFieldSymbol === "string") {
+      labelSymbol = ` ${requiredFieldSymbol}`;
+    } else if (typeof requiredFieldSymbol === "boolean") {
+      labelSymbol = " *";
+    }
+  }
 
   return (
     <div>
@@ -41,6 +54,17 @@ export const RHFCode = <T extends FieldValues>({
         rules={rules}
         render={({ field: { value, onChange } }) => (
           <div className={`w-full border border-transparent overflow-hidden`}>
+            {label && (
+              <label
+                htmlFor={name}
+                className={
+                  "block font-medium text-white text-sm leading-6 mb-2"
+                }
+              >
+                {label}
+                {labelSymbol}
+              </label>
+            )}
             <Editor
               theme={"vs-dark"}
               height={height}

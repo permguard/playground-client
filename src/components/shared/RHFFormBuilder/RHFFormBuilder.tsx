@@ -154,6 +154,8 @@ export const RHFFormBuilder = <
                       errors={errors}
                       disabled={item.disabled}
                       language={item.language!}
+                      label={item.label}
+                      requiredFieldSymbol={item.requiredFieldSymbol}
                     />
                   ) : null}
                   {item.type === "autocomplete" ? (
@@ -194,6 +196,8 @@ export const RHFFormBuilder = <
                       {item.label}
                     </span>
                   ) : null}
+
+                  {item.additionalContent}
                 </>
               ) : null}
 

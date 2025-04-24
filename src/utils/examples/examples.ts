@@ -32,5 +32,44 @@ export const EXAMPLES = [
   "url": "localhost",
   "port": 9094
 }`,
+    checks: `{
+  "request_id": "abc1",
+  "subject": {
+    "type": "role-actor",
+    "id": "platform-creator",
+    "source": "keycloak",
+    "properties": "{\\n  \\"isSuperUser\\": true\\n}"
+  },
+  "context": {
+    "time": "2025-01-23T16:17:46+00:00",
+    "isSubscriptionActive": true
+  },
+  "evaluations": [
+    {
+      "request_id": "exz1",
+      "resource": {
+        "type": "MagicFarmacia::Platform::Subscription",
+        "id": "e3a786fd07e24bfa95ba4341d3695ae8",
+        "properties": "{\\n  \\"isEnabled\\": true\\n}"
+      },
+      "action": {
+        "name": "MagicFarmacia::Platform::Action::create",
+        "properties": "{\\n  \\"isEnabled\\": true\\n}"
+      }
+    },
+    {
+      "request_id": "exz2",
+      "resource": {
+        "type": "MagicFarmacia::Platform::Subscription",
+        "id": "e3a786fd07e24bfa95ba4341d3695ae8",
+        "properties": "{\\n  \\"isEnabled\\": true\\n}"
+      },
+      "action": {
+        "name": "MagicFarmacia::Platform::Action::create",
+        "properties": "{\\n  \\"isEnabled\\": false\\n}"
+      }
+    }
+  ]
+}`,
   },
 ];

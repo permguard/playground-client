@@ -58,6 +58,7 @@ export interface IFormControl<InputNames extends string> {
     max?: string;
     step?: string;
   };
+  additionalContent?: React.ReactNode;
 }
 
 export type IFormDefinition<InputNames extends string> =
