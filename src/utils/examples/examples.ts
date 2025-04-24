@@ -13,6 +13,21 @@ export const EXAMPLES = [
   "id": "amy.smith@acmecorp.com",
   "source": "keycloak"
 }`,
+    entities: `{
+  "schema": "cedar",
+  "items": [
+    {
+      "uid": {
+        "type": "MagicFarmacia::Platform::BranchInfo",
+        "id": "subscription"
+      },
+      "attrs": {
+        "active": true
+      },
+      "parents": []
+    }
+  ]
+}`,
     server: `{
   "url": "localhost",
   "port": 9094
