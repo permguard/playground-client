@@ -1,11 +1,11 @@
 import { classNames } from "@/utils/classNames";
 import {
   DocumentTextIcon,
-  ShieldCheckIcon,
-  UsersIcon,
   LockClosedIcon,
   ServerIcon,
   ArrowPathIcon,
+  IdentificationIcon,
+  DocumentDuplicateIcon,
 } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import { Autocomplete } from "./shared/Autocomplete";
@@ -17,8 +17,8 @@ import { useSelector } from "react-redux";
 
 const tabs = [
   { name: "Ledger", href: "/", icon: DocumentTextIcon },
-  { name: "Principal", href: "/principal", icon: ShieldCheckIcon },
-  { name: "Entities", href: "/entities", icon: UsersIcon },
+  { name: "Principal", href: "/principal", icon: IdentificationIcon },
+  { name: "Entities", href: "/entities", icon: DocumentDuplicateIcon },
   { name: "AuthZ Checks", href: "/authz-checks", icon: LockClosedIcon },
   { name: "AuthZ Server", href: "/authz-server", icon: ServerIcon },
 ];

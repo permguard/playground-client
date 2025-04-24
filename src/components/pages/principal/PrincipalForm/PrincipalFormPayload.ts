@@ -1,5 +1,5 @@
 export type PrincipalFormPayload = {
-  zone_id: number;
-  policy_store_kind: string;
-  policy_store_id: string;
+  type: string;
+  id: string;
+  source: string;
 };

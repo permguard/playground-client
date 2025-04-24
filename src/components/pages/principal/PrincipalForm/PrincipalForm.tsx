@@ -28,8 +28,9 @@ export const PrincipalForm = () => {
     setValue,
   } = useForm<PrincipalFormPayload>({
     defaultValues: {
-      policy_store_kind: "",
-      policy_store_id: "",
+      type: "",
+      id: "",
+      source: "",
     },
   });
 
@@ -38,9 +39,9 @@ export const PrincipalForm = () => {
       const parsedJSON = JSON.parse(jsonCode!);
 
       const defaultValues: PrincipalFormPayload = {
-        zone_id: parsedJSON.zone_id,
-        policy_store_kind: parsedJSON.policy_store?.kind,
-        policy_store_id: parsedJSON.policy_store?.id,
+        id: parsedJSON.id,
+        type: parsedJSON.type,
+        source: parsedJSON.source,
       };
 
       reset(defaultValues);
@@ -56,19 +57,10 @@ export const PrincipalForm = () => {
 
   useEffect(() => {
     if (jsonProcessedState.processed && jsonProcessedState.valid) {
-      let zoneId = formValues.zone_id;
-
-      if (zoneId > 99999999999999) {
-        zoneId = Number(BigInt(zoneId) / 10n);
-        setValue("zone_id", zoneId);
-      }
-
       const jsonPayload = {
-        zone_id: zoneId,
-        policy_store: {
-          kind: formValues.policy_store_kind,
-          id: formValues.policy_store_id,
-        },
+        source: formValues.source,
+        type: formValues.type,
+        id: formValues.id,
       };
       const updatedJsonCode = JSON.stringify(jsonPayload, null, 2);
 
@@ -76,9 +68,9 @@ export const PrincipalForm = () => {
     }
   }, [
     dispatch,
-    formValues.zone_id,
-    formValues.policy_store_kind,
-    formValues.policy_store_id,
+    formValues.type,
+    formValues.id,
+    formValues.source,
     jsonProcessedState.processed,
     jsonProcessedState.valid,
     setValue,
