@@ -13,5 +13,9 @@ export const EXAMPLES = [
   "id": "amy.smith@acmecorp.com",
   "source": "keycloak"
 }`,
+    server: `{
+  "url": "localhost",
+  "port": 9094
+}`,
   },
 ];
