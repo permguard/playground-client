@@ -1,11 +1,8 @@
 import { classNames } from "@/utils/classNames";
 import {
-  DocumentTextIcon,
   LockClosedIcon,
-  ServerIcon,
   ArrowPathIcon,
-  IdentificationIcon,
-  DocumentDuplicateIcon,
+  FingerPrintIcon,
 } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import { Autocomplete } from "./shared/Autocomplete";
@@ -14,13 +11,32 @@ import { RootState, useAppDispatch } from "@/store";
 import { useCallback } from "react";
 import { reset } from "@/store/ledger/middleware/reset";
 import { useSelector } from "react-redux";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const tabs = [
-  { name: "Ledger", href: "/", icon: DocumentTextIcon },
-  { name: "Principal", href: "/principal", icon: IdentificationIcon },
-  { name: "Entities", href: "/entities", icon: DocumentDuplicateIcon },
+  {
+    name: "Ledger",
+    href: "/",
+    icon: () => (
+      <Icon className="mr-2" icon={"hugeicons:ice-cubes"} fontSize={24} />
+    ),
+  },
+  { name: "Principal", href: "/principal", icon: FingerPrintIcon },
+  {
+    name: "Entities",
+    href: "/entities",
+    icon: () => (
+      <Icon className="mr-2" icon={"ic:baseline-data-object"} fontSize={24} />
+    ),
+  },
   { name: "AuthZ Checks", href: "/authz-checks", icon: LockClosedIcon },
-  { name: "AuthZ Server", href: "/authz-server", icon: ServerIcon },
+  {
+    name: "AuthZ Server",
+    href: "/authz-server",
+    icon: () => (
+      <Icon className="mr-2" icon={"hugeicons:auction"} fontSize={24} />
+    ),
+  },
 ];
 
 export function TabNavigation() {
