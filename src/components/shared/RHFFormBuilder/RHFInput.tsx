@@ -138,7 +138,7 @@ export const RHFInput = <T extends FieldValues>({
                       ? `block ${
                           fullWidth ? "w-full" : null
                         } rounded-md border-0 py-1.5 text-gray-900 ${
-                          icon ? "pl-10" : null
+                          icon ? "pl-10 pr-2" : null
                         } ${
                           error !== undefined ? "ring-red-500" : "ring-zinc-700"
                         } shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-fuchsia-500 sm:text-sm sm:leading-6 bg-[#424242]/50 placeholder-gray-400 text-white focus:border-blue-500`

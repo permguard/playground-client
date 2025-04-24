@@ -115,7 +115,7 @@ export const ChecksForm = () => {
       className="text-red-500 top-4 right-4 absolute"
       onClick={() => handleRemoveEvaluation(index)}
     >
-      <Icon icon={"tabler:trash"} fontSize={24} />
+      <Icon icon={"tabler:trash"} fontSize={24} className="h-5 sm:h-6" />
     </button>
   );
 
