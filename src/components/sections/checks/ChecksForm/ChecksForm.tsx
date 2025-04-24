@@ -50,25 +50,19 @@ export const ChecksForm = () => {
 
   const formValues = watch();
   const evaluations = formValues.evaluations;
+  const formValuesJSON = JSON.stringify(formValues, null, 2);
 
-  // useEffect(() => {
-  //   if (jsonProcessedState.processed && jsonProcessedState.valid) {
-  //     const jsonPayload = {
-  //       url: formValues.url,
-  //       port: formValues.port,
-  //     };
-  //     const updatedJsonCode = JSON.stringify(formValues, null, 2);
-
-  //     dispatch(updateChecksState(updatedJsonCode));
-  //   }
-  // }, [
-  //   dispatch,
-  //   formValues.url,
-  //   formValues.port,
-  //   jsonProcessedState.processed,
-  //   jsonProcessedState.valid,
-  //   setValue,
-  // ]);
+  useEffect(() => {
+    if (jsonProcessedState.processed && jsonProcessedState.valid) {
+      dispatch(updateChecksState(formValuesJSON));
+    }
+  }, [
+    dispatch,
+    formValuesJSON,
+    jsonProcessedState.processed,
+    jsonProcessedState.valid,
+    setValue,
+  ]);
 
   const handleAddEvaluation = useCallback(() => {
     const values = getValues();
