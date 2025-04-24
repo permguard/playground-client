@@ -11,7 +11,6 @@ import { Combobox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { classNames } from "@/utils/classNames";
-import { ILabelValue } from "@/utils/types";
 
 export interface AutocompleteOption {
   label: string;

@@ -1,6 +1,5 @@
 import "@/utils/hooks/monaco";
 import Head from "next/head";
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import { ServerForm } from "@/components/pages/server/ServerForm/ServerForm";
 import { useAppDispatch } from "@/store";
 import { initServerState } from "@/store/server/middleware/initServerState";
