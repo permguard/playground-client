@@ -1,8 +1,8 @@
 import { classNames } from "@/utils/classNames";
 import {
-  LockClosedIcon,
   ArrowPathIcon,
   FingerPrintIcon,
+  ServerIcon,
 } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import { Autocomplete } from "./shared/Autocomplete";
@@ -29,13 +29,17 @@ const tabs = [
       <Icon className="mr-2" icon={"ic:baseline-data-object"} fontSize={24} />
     ),
   },
-  { name: "AuthZ Checks", href: "/authz-checks", icon: LockClosedIcon },
   {
-    name: "AuthZ Server",
-    href: "/authz-server",
+    name: "AuthZ Checks",
+    href: "/authz-checks",
     icon: () => (
       <Icon className="mr-2" icon={"hugeicons:auction"} fontSize={24} />
     ),
+  },
+  {
+    name: "AuthZ Server",
+    href: "/authz-server",
+    icon: ServerIcon,
   },
 ];
 
