@@ -7,6 +7,7 @@ import "@/styles/globals.css";
 import { Card } from "@/components/shared/Card";
 import { Provider } from "react-redux";
 import { store } from "@/store";
+import { NotificationBar } from "@/components/shared/Notification";
 
 const interSans = Inter({
   variable: "--font-inter-sans",
@@ -16,6 +17,7 @@ const interSans = Inter({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
+      <NotificationBar />
       <div className="wrapper">
         <div
           className={classNames(

@@ -40,25 +40,33 @@ export default async function handler(
       return res.status(400).json({ error: "Invalid JSON payload" });
     }
 
-    // Extract serverUrl and serverPort from the request, default to localhost:9094
+    // Extract server url and server port from the request, default to localhost:9094
     const serverUrl =
-      jsonRequest.serverUrl && typeof jsonRequest.serverUrl === "string"
-        ? jsonRequest.serverUrl
+      jsonRequest.url && typeof jsonRequest.url === "string"
+        ? jsonRequest.url
         : "localhost";
     const serverPort =
-      jsonRequest.serverPort && typeof jsonRequest.serverPort === "number"
-        ? jsonRequest.serverPort
+      jsonRequest.port && typeof jsonRequest.port === "number"
+        ? jsonRequest.port
         : 9094;
 
     // Create a new Permguard client with the specified or default endpoint
-    const azClient = new AZClient(withEndpoint(serverUrl, serverPort));
+    c const azClient = new AZClient(withEndpoint("localhost", 9094));
 
-    // Remove serverUrl and serverPort from the payload to avoid sending them to Permguard
+    // Remove server url and server port from the payload to avoid sending them to Permguard
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { serverUrl: _, serverPort: __, ...permguardPayload } = jsonRequest;
+    const { url: _, port: __, ...permguardPayload } = jsonRequest;
 
     // Check the authorization using the Permguard client
     const { decision, response } = await azClient.check(permguardPayload);
+
+    console.log({ decision, response });
+
+    if (!response) {
+      return res
+        .status(503)
+        .json({ error: "Permguard server does not exist or is unreachable" });
+    }
 
     // Prepare the response object
     const result: {

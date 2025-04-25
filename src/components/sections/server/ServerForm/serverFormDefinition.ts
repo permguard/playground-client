@@ -41,6 +41,7 @@ export const getServerFormDefinition = ({
       labelId: "port",
       visible: true,
       disabled,
+      inputType: "number",
     },
   ].filter(Boolean) as IFormDefinition<FlattenKeys<ServerFormPayload>>;
 
