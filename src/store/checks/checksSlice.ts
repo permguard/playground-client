@@ -10,6 +10,7 @@ import { check } from "./middleware/check";
 const initialState: IChecksState = {
   selectedExample: EXAMPLES[0].name,
   isLoading: false,
+  isModalOpen: false,
 };
 
 const checksSlice = createSlice({
@@ -17,7 +18,7 @@ const checksSlice = createSlice({
   initialState,
   reducers: {
     closeModal: (state) => {
-      state.response = undefined;
+      state.isModalOpen = false;
     },
   },
 
@@ -46,6 +47,7 @@ const checksSlice = createSlice({
     builder.addCase(check.fulfilled, (state, action) => {
       state.isLoading = false;
       state.response = action.payload;
+      state.isModalOpen = true;
     });
 
     builder.addCase(check.rejected, (state) => {
@@ -53,5 +55,7 @@ const checksSlice = createSlice({
     });
   },
 });
+
+export const { closeModal } = checksSlice.actions;
 
 export default checksSlice.reducer;

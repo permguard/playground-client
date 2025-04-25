@@ -5,4 +5,5 @@ export interface IChecksState {
   selectedExample: string;
   isLoading: boolean;
   response?: ICheckResponse;
+  isModalOpen: boolean;
 }

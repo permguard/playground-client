@@ -7,6 +7,7 @@ import { useCallback } from "react";
 import { check } from "@/store/checks/middleware/check";
 import { FormBackdrop } from "@/components/shared/RHFFormBuilder/FormBackdrop";
 import { useSelector } from "react-redux";
+import CheckDialog from "./CheckDialog/CheckDialog";
 
 export const ChecksPage = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,7 @@ export const ChecksPage = () => {
       </Head>
 
       <FormBackdrop isLoading={isLoading} />
+      <CheckDialog />
 
       <div className="flex flex-col">
         <button
