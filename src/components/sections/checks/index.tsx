@@ -2,12 +2,16 @@ import "@/utils/hooks/monaco";
 import Head from "next/head";
 import { ChecksForm } from "@/components/sections/checks/ChecksForm/ChecksForm";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useAppDispatch } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import { useCallback } from "react";
 import { check } from "@/store/checks/middleware/check";
+import { FormBackdrop } from "@/components/shared/RHFFormBuilder/FormBackdrop";
+import { useSelector } from "react-redux";
 
 export const ChecksPage = () => {
   const dispatch = useAppDispatch();
+
+  const isLoading = useSelector((state: RootState) => state.checks.isLoading);
 
   const handleCheck = useCallback(async () => {
     dispatch(check());
@@ -18,6 +22,8 @@ export const ChecksPage = () => {
       <Head>
         <title>Permguard Playground | Checkss</title>
       </Head>
+
+      <FormBackdrop isLoading={isLoading} />
 
       <div className="flex flex-col">
         <button

@@ -71,7 +71,6 @@ export default async function handler(
     // Prepare the response object
     const result: {
       decision: boolean;
-      permitted: boolean;
       details?: {
         reasonAdmin?: string;
         reasonUser?: string;
@@ -82,7 +81,6 @@ export default async function handler(
       };
     } = {
       decision,
-      permitted: decision,
     };
 
     // Include detailed reasons if authorization is denied
