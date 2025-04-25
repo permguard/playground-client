@@ -1,4 +1,4 @@
 export interface ILedgerState {
-  jsonCode: string | null;
+  jsonCode?: string;
   selectedExample: string;
 }

@@ -7,7 +7,6 @@ import { setSelectedExample } from "./middleware/setSelectedExample";
 import { EXAMPLES } from "@/utils/examples/examples";
 
 const initialState: ILedgerState = {
-  jsonCode: null,
   selectedExample: EXAMPLES[0].name,
 };
 
@@ -26,7 +25,7 @@ const ledgerSlice = createSlice({
     });
 
     builder.addCase(reset.fulfilled, (state, action) => {
-      state.jsonCode = action.payload?.ledger ?? null;
+      state.jsonCode = action.payload?.ledger;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {

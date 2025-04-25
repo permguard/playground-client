@@ -52,7 +52,7 @@ export const EntitiesJSONEditorForm = () => {
 
       setJsonProcessedState({ processed: true, valid: true });
     } catch {
-      if (jsonCode !== null) {
+      if (jsonCode !== undefined) {
         setJsonProcessedState({ processed: true, valid: false });
       }
     }

@@ -1,4 +1,4 @@
 export interface IChecksState {
-  jsonCode: string | null;
+  jsonCode?: string;
   selectedExample: string;
 }

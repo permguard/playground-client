@@ -7,7 +7,6 @@ import { reset } from "../ledger/middleware/reset";
 import { setSelectedExample } from "../ledger/middleware/setSelectedExample";
 
 const initialState: IChecksState = {
-  jsonCode: null,
   selectedExample: EXAMPLES[0].name,
 };
 
@@ -26,7 +25,7 @@ const checksSlice = createSlice({
     });
 
     builder.addCase(reset.fulfilled, (state, action) => {
-      state.jsonCode = action.payload?.checks ?? null;
+      state.jsonCode = action.payload?.checks;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {

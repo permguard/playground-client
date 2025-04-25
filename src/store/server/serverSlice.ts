@@ -7,7 +7,6 @@ import { reset } from "../ledger/middleware/reset";
 import { setSelectedExample } from "../ledger/middleware/setSelectedExample";
 
 const initialState: IServerState = {
-  jsonCode: null,
   selectedExample: EXAMPLES[0].name,
 };
 
@@ -26,7 +25,7 @@ const serverSlice = createSlice({
     });
 
     builder.addCase(reset.fulfilled, (state, action) => {
-      state.jsonCode = action.payload?.server ?? null;
+      state.jsonCode = action.payload?.server;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {

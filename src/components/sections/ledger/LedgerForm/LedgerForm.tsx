@@ -46,7 +46,7 @@ export const LedgerForm = () => {
       reset(defaultValues);
       setJsonProcessedState({ processed: true, valid: true });
     } catch {
-      if (jsonCode !== null) {
+      if (jsonCode !== undefined) {
         setJsonProcessedState({ processed: true, valid: false });
       }
     }

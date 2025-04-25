@@ -35,14 +35,13 @@ export const ChecksForm = () => {
   useEffect(() => {
     try {
       const parsedJSON = JSON.parse(jsonCode!);
-      console.log("parsedJSON", parsedJSON);
 
       const defaultValues = parsedJSON as ChecksFormPayload;
 
       reset(defaultValues);
       setJsonProcessedState({ processed: true, valid: true });
     } catch {
-      if (jsonCode !== null) {
+      if (jsonCode !== undefined) {
         setJsonProcessedState({ processed: true, valid: false });
       }
     }

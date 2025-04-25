@@ -1,4 +1,4 @@
 export interface IPrincipalState {
-  jsonCode: string | null;
+  jsonCode?: string;
   selectedExample: string;
 }

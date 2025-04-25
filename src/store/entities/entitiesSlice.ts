@@ -7,7 +7,6 @@ import { reset } from "../ledger/middleware/reset";
 import { setSelectedExample } from "../ledger/middleware/setSelectedExample";
 
 const initialState: IEntitiesState = {
-  jsonCode: null,
   selectedExample: EXAMPLES[0].name,
 };
 
@@ -26,7 +25,7 @@ const entitieslice = createSlice({
     });
 
     builder.addCase(reset.fulfilled, (state, action) => {
-      state.jsonCode = action.payload?.entities ?? null;
+      state.jsonCode = action.payload?.entities;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {

@@ -1,4 +1,4 @@
 export interface IEntitiesState {
-  jsonCode: string | null;
+  jsonCode?: string;
   selectedExample: string;
 }
