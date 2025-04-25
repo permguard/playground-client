@@ -4,7 +4,6 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header/Header";
 import { classNames } from "@/utils/classNames";
 import "@/styles/globals.css";
-import { Card } from "@/components/shared/Card";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import { NotificationBar } from "@/components/shared/Notification";
@@ -26,13 +25,8 @@ export default function App({ Component, pageProps }: AppProps) {
           )}
         >
           <Header />
-          <main className="w-full mx-auto px-6 sm:px-10 md:px-14 mt-6 mb-12 lg:my-12">
-            <Card className={"mt-6 lg:mt-12"}>
-              <div className="overflow-hidden">
-                <Component {...pageProps} />
-              </div>
-            </Card>
-          </main>
+
+          <Component {...pageProps} />
 
           <Footer small />
         </div>
