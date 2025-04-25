@@ -51,7 +51,7 @@ export default async function handler(
         : 9094;
 
     // Create a new Permguard client with the specified or default endpoint
-    c const azClient = new AZClient(withEndpoint("localhost", 9094));
+    const azClient = new AZClient(withEndpoint(serverUrl, serverPort));
 
     // Remove server url and server port from the payload to avoid sending them to Permguard
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
