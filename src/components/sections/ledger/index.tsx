@@ -6,12 +6,20 @@ import { LedgerForm } from "@/components/sections/ledger/LedgerForm/LedgerForm";
 import { useAppDispatch } from "@/store";
 import { initLedgerState } from "@/store/ledger/middleware/initLedgerState";
 import { useEffect } from "react";
+import { initChecksState } from "@/store/checks/middleware/initChecksState";
+import { initEntitiesState } from "@/store/entities/middleware/initEntitiesState";
+import { initPrincipalState } from "@/store/principal/middleware/initPrincipalState";
+import { initServerState } from "@/store/server/middleware/initServerState";
 
 export const LedgersPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(initLedgerState());
+    dispatch(initChecksState());
+    dispatch(initEntitiesState());
+    dispatch(initPrincipalState());
+    dispatch(initServerState());
   }, [dispatch]);
 
   return (

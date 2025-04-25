@@ -1,17 +1,7 @@
 import "@/utils/hooks/monaco";
 import Head from "next/head";
 import { EntitiesJSONEditorForm } from "@/components/sections/entities/EntitiesJSONEditorForm/EntitiesJSONEditorForm";
-import { useAppDispatch } from "@/store";
-import { initEntitiesState } from "@/store/entities/middleware/initEntitiesState";
-import { useEffect } from "react";
-
 export const EntitiesPage = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(initEntitiesState());
-  }, [dispatch]);
-
   return (
     <>
       <Head>

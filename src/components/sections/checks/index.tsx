@@ -1,18 +1,9 @@
 import "@/utils/hooks/monaco";
 import Head from "next/head";
 import { ChecksForm } from "@/components/sections/checks/ChecksForm/ChecksForm";
-import { useAppDispatch } from "@/store";
-import { initChecksState } from "@/store/checks/middleware/initChecksState";
-import { useEffect } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export const ChecksPage = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(initChecksState());
-  }, [dispatch]);
-
   return (
     <>
       <Head>

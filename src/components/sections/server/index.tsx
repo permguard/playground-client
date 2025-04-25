@@ -1,17 +1,8 @@
 import "@/utils/hooks/monaco";
 import Head from "next/head";
 import { ServerForm } from "@/components/sections/server/ServerForm/ServerForm";
-import { useAppDispatch } from "@/store";
-import { initServerState } from "@/store/server/middleware/initServerState";
-import { useEffect } from "react";
 
 export const ServerPage = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(initServerState());
-  }, [dispatch]);
-
   return (
     <>
       <Head>
