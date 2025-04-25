@@ -54,7 +54,7 @@ export const getChecksFormDefinition = ({
       labelId: "subject.type",
       visible: true,
       group: "subject_left_column",
-      groupClassName: "col-span-12 sm:col-span-6 flex flex-col gap-4",
+      groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-4",
       parentGroup: "subject",
       parentGroupClassName: "col-span-12 grid grid-cols-12 gap-4",
     },
@@ -92,7 +92,7 @@ export const getChecksFormDefinition = ({
       height: "200px",
       language: "json",
       visible: true,
-      groupClassName: "col-span-12 sm:col-span-6",
+      groupClassName: "col-span-12 md:col-span-6",
       group: "subject_right_column",
       parentGroup: "subject",
     },
@@ -127,7 +127,7 @@ export const getChecksFormDefinition = ({
       labelId: "context.isSubscriptionActive",
       visible: true,
       className:
-        "col-span-12 sm:col-span-6 flex items-end pb-2 sm:pl-10 select-none",
+        "col-span-12 md:col-span-6 flex items-end pb-2 md:pl-10 select-none",
       parentGroup: "context",
     },
     {
@@ -159,7 +159,7 @@ export const getChecksFormDefinition = ({
           group: `evaluations[${index}].request_id`,
           groupClassName: "col-span-12 grid grid-cols-12 gap-4",
           additionalContent: removeEvaluationBtn(index),
-          className: "col-span-12 sm:col-span-6 flex flex-col-reverse",
+          className: "col-span-12 md:col-span-6 flex flex-col-reverse",
         },
         {
           type: "typography",
@@ -173,7 +173,7 @@ export const getChecksFormDefinition = ({
           parentGroup: `evaluations[${index}]`,
           group: `evaluations[${index}].resource`,
           groupClassName:
-            "col-span-12 sm:col-span-6 flex flex-col gap-4 sm:mr-3",
+            "col-span-12 md:col-span-6 flex flex-col gap-4 md:mr-3",
         },
         {
           type: "textfield",
@@ -224,7 +224,7 @@ export const getChecksFormDefinition = ({
           parentGroup: `evaluations[${index}]`,
           group: `evaluations[${index}].action`,
           groupClassName:
-            "col-span-12 sm:col-span-6 flex flex-col gap-4 sm:ml-3",
+            "col-span-12 md:col-span-6 flex flex-col gap-4 md:ml-3",
         },
         {
           type: "textfield",

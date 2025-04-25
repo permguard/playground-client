@@ -15,6 +15,17 @@ export const check = createAsyncThunk(
       const checks = JSON.parse(state.checks.jsonCode!);
       const server = JSON.parse(state.server.jsonCode!);
 
+      checks.subject.properties = JSON.parse(checks.subject.properties);
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      checks.evaluations.forEach((evaluation) => {
+        evaluation.resource.properties = JSON.parse(
+          evaluation.resource.properties
+        );
+        evaluation.action.properties = JSON.parse(evaluation.action.properties);
+      });
+
       const payload = {
         authorization_model: {
           ...authorizationModel,
