@@ -26,13 +26,14 @@ export const getChecksFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:identifier",
       requiredFieldSymbol: true,
       name: "request_id",
       id: "request_id",
       label: "Request ID",
       labelId: "request_id",
       visible: true,
+      className: "col-span-12 md:col-span-6 md:mr-3",
     },
     {
       type: "typography",
@@ -46,7 +47,7 @@ export const getChecksFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:format-list-bulleted-type",
       requiredFieldSymbol: true,
       name: "subject.type",
       id: "subject.type",
@@ -60,7 +61,7 @@ export const getChecksFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:identifier",
       requiredFieldSymbol: true,
       name: "subject.id",
       id: "subject.id",
@@ -72,7 +73,7 @@ export const getChecksFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:database-export",
       requiredFieldSymbol: true,
       name: "subject.source",
       id: "subject.source",
@@ -108,7 +109,7 @@ export const getChecksFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:clock-outline",
       requiredFieldSymbol: true,
       name: "context.time",
       id: "context.time",
@@ -146,7 +147,7 @@ export const getChecksFormDefinition = ({
       .map((_, index) => [
         {
           type: "textfield",
-          icon: "icon-park-outline:edit-name",
+          icon: "mdi:identifier",
           requiredFieldSymbol: true,
           name: `evaluations[${index}].request_id`,
           id: `evaluations[${index}].request_id`,
@@ -177,7 +178,7 @@ export const getChecksFormDefinition = ({
         },
         {
           type: "textfield",
-          icon: "icon-park-outline:edit-name",
+          icon: "mdi:format-list-bulleted-type",
           requiredFieldSymbol: true,
           name: `evaluations[${index}].resource.type`,
           id: `evaluations[${index}].resource.type`,
@@ -189,7 +190,7 @@ export const getChecksFormDefinition = ({
         },
         {
           type: "textfield",
-          icon: "icon-park-outline:edit-name",
+          icon: "mdi:identifier",
           requiredFieldSymbol: true,
           name: `evaluations[${index}].resource.id`,
           id: `evaluations[${index}].resource.id`,

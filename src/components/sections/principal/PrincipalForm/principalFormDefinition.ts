@@ -12,7 +12,7 @@ export const getPrincipalFormDefinition = ({
   const baseDefinition = [
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "material-symbols:category-outline",
       requiredFieldSymbol: true,
       name: "type",
       id: "type",
@@ -23,7 +23,7 @@ export const getPrincipalFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:identifier",
       requiredFieldSymbol: true,
       name: "id",
       id: "id",
@@ -34,7 +34,7 @@ export const getPrincipalFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:source-branch",
       requiredFieldSymbol: true,
       name: "source",
       id: "source",

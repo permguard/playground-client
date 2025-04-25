@@ -22,7 +22,7 @@ export const getServerFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:server-network",
       requiredFieldSymbol: true,
       name: "url",
       id: "url",
@@ -33,7 +33,7 @@ export const getServerFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "clarity:rack-server-solid",
       requiredFieldSymbol: true,
       name: "port",
       id: "port",

@@ -22,7 +22,7 @@ export const getLedgerFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:identifier",
       requiredFieldSymbol: true,
       name: "zone_id",
       id: "zone_id",
@@ -47,7 +47,7 @@ export const getLedgerFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:label-outline",
       requiredFieldSymbol: true,
       name: "policy_store_kind",
       id: "policy_store_kind",
@@ -58,7 +58,7 @@ export const getLedgerFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "icon-park-outline:edit-name",
+      icon: "mdi:identifier",
       requiredFieldSymbol: true,
       name: "policy_store_id",
       id: "policy_store_id",
