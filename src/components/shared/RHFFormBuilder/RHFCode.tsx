@@ -34,6 +34,7 @@ export const RHFCode = <T extends FieldValues>({
   height = "500px",
   requiredFieldSymbol,
   label,
+  disabled,
 }: IRHFCodeProps<T>) => {
   const error = getFormErrorByPath(errors, name);
 
@@ -76,6 +77,7 @@ export const RHFCode = <T extends FieldValues>({
                 minimap: {
                   enabled: false,
                 },
+                readOnly: disabled,
                 // editor: {
                 //   // Disable drop shadow
                 //   dropShadow: false,

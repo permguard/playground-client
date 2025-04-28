@@ -114,7 +114,7 @@ const Page = () => {
                   <button
                     onClick={handleReset}
                     type="button"
-                    className="flex items-center sm:w-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
+                    className="flex text-sm/6 items-center sm:w-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
                   >
                     <ArrowPathIcon
                       fontSize={24}

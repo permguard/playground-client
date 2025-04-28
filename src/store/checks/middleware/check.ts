@@ -37,8 +37,6 @@ export const check = createAsyncThunk(
         ...server,
       };
 
-      console.log("Payload to Permguard:", payload);
-
       const response = await axios.post<ICheckResponse>(
         "/api/permguard",
         payload
