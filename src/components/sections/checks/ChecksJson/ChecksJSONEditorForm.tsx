@@ -5,6 +5,7 @@ import { RHFFormBuilder } from "@/components/shared/RHFFormBuilder/RHFFormBuilde
 import { getChecksJSONEditorFormDefinition } from "./checksJSONEditorFormDefinition";
 import { ChecksJSONEditorFormPayload } from "./ChecksJSONEditorFormPayload";
 import { RootState, useAppDispatch } from "@/store";
+import { updateRequestJSONState } from "@/store/checks/middleware/updateRequestJSON";
 
 export const ChecksJSONEditorForm = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +40,10 @@ export const ChecksJSONEditorForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm<ChecksJSONEditorFormPayload>({});
+
+  const requestCode = watch("request");
 
   // Construct the request JSON object
   useEffect(() => {
@@ -90,6 +94,10 @@ export const ChecksJSONEditorForm = () => {
       setValue("response", responseJSON);
     }
   }, [responseCode, setValue]);
+
+  useEffect(() => {
+    dispatch(updateRequestJSONState(requestCode));
+  }, [requestCode, dispatch]);
 
   const handleConfirm = useCallback(async () => {}, []);
 
