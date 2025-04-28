@@ -51,7 +51,7 @@ const tabs = [
   },
   {
     name: "AuthZ Server",
-    icon: ServerIcon,
+    icon: () => <Icon className="mr-2" icon={"ri:server-fill"} fontSize={24} />,
     page: ServerPage,
   },
 ];
