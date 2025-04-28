@@ -33,7 +33,7 @@ export const getChecksFormDefinition = ({
       label: "Request ID",
       labelId: "request_id",
       visible: true,
-      className: "col-span-12 md:col-span-6 md:mr-3",
+      className: "col-span-12 md:col-span-6",
     },
     {
       type: "typography",
@@ -55,9 +55,9 @@ export const getChecksFormDefinition = ({
       labelId: "subject.type",
       visible: true,
       group: "subject_left_column",
-      groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-4",
+      groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-8",
       parentGroup: "subject",
-      parentGroupClassName: "col-span-12 grid grid-cols-12 gap-4",
+      parentGroupClassName: "col-span-12 grid grid-cols-12 gap-8",
       options: [
         { label: "user", value: "user" },
         { label: "role-agent", value: "role-agent" },
@@ -122,7 +122,7 @@ export const getChecksFormDefinition = ({
       labelId: "context.time",
       visible: true,
       parentGroup: "context",
-      parentGroupClassName: "col-span-12 grid grid-cols-12 gap-4",
+      parentGroupClassName: "col-span-12 grid grid-cols-12 gap-8",
     },
     {
       type: "checkbox",
@@ -161,9 +161,9 @@ export const getChecksFormDefinition = ({
           visible: true,
           parentGroup: `evaluations[${index}]`,
           parentGroupClassName:
-            "p-4 border border-white/10 rounded-md grid grid-cols-12 gap-4 col-span-12 relative",
+            "p-4 border border-white/10 rounded-md grid grid-cols-12 gap-8 col-span-12 relative",
           group: `evaluations[${index}].request_id`,
-          groupClassName: "col-span-12 grid grid-cols-12 gap-4",
+          groupClassName: "col-span-12 grid grid-cols-12 gap-8",
           additionalContent: removeEvaluationBtn(index),
           className: "col-span-12 md:col-span-6 flex flex-col-reverse",
         },
@@ -178,8 +178,7 @@ export const getChecksFormDefinition = ({
           visible: true,
           parentGroup: `evaluations[${index}]`,
           group: `evaluations[${index}].resource`,
-          groupClassName:
-            "col-span-12 md:col-span-6 flex flex-col gap-4 md:mr-3",
+          groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-8",
         },
         {
           type: "textfield",
@@ -229,8 +228,7 @@ export const getChecksFormDefinition = ({
           visible: true,
           parentGroup: `evaluations[${index}]`,
           group: `evaluations[${index}].action`,
-          groupClassName:
-            "col-span-12 md:col-span-6 flex flex-col gap-4 md:ml-3",
+          groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-8",
         },
         {
           type: "textfield",

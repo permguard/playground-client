@@ -28,7 +28,6 @@ interface IRHFFormBuilderProps<
   isLoading?: boolean;
   submitButton?: React.ReactNode;
   children?: React.ReactNode;
-  formSpacing?: number;
 }
 
 type Props<
@@ -52,7 +51,6 @@ export const RHFFormBuilder = <
   showUploadButton = false,
   children,
   isLoading,
-  formSpacing = 4,
 }: Props<T, InputNames>) => {
   // Function to render individual inputs
   const renderInput = (item: IFormControl<InputNames>) => {
@@ -128,6 +126,7 @@ export const RHFFormBuilder = <
                 options={item.options!}
                 labelId={item.labelId as string}
                 name={item.name}
+                requiredFieldSymbol={item.requiredFieldSymbol}
                 labelPlaceholder={item.labelPlaceholder}
               />
             ) : null}
@@ -310,7 +309,7 @@ export const RHFFormBuilder = <
 
   return control ? (
     <form autoComplete="off" onSubmit={handleSubmit}>
-      <div className={`grid grid-cols-12 gap-${formSpacing}`}>
+      <div className={`grid grid-cols-12 gap-8`}>
         {renderControls()}
         {children && <div className="grid grid-cols-12">{children}</div>}
         {hasRequiredFieldsLegend && (

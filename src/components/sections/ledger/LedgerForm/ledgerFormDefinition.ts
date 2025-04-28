@@ -39,7 +39,7 @@ export const getLedgerFormDefinition = ({
       type: "typography",
       label: "Policy store",
       id: "policy_store",
-      className: "col-span-12 mt-4",
+      className: "col-span-12",
       inputProps: {
         className: "text-md font-medium text-white",
       },

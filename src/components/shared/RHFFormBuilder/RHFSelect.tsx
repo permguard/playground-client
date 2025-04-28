@@ -21,6 +21,7 @@ interface IRHFSelectProps<T extends FieldValues> {
   options: SelectOptions;
   labelId: string;
   translateOptions?: boolean;
+  requiredFieldSymbol?: boolean | string;
   onCustomChange?: (data: {
     fieldName: string;
     value: string | string[];
@@ -36,11 +37,21 @@ export const RHFSelect = <T extends FieldValues>({
   labelId,
   labelPlaceholder,
   onCustomChange,
+  requiredFieldSymbol,
 }: IRHFSelectProps<T>) => {
   const error = getFormErrorByPath(errors, name);
 
+  let labelSymbol: string;
+  if (requiredFieldSymbol) {
+    if (typeof requiredFieldSymbol === "string") {
+      labelSymbol = ` ${requiredFieldSymbol}`;
+    } else if (typeof requiredFieldSymbol === "boolean") {
+      labelSymbol = " *";
+    }
+  }
+
   return (
-    <div>
+    <div className="flex gap-8 justify-between items-center">
       <Controller
         name={name}
         control={control as Control<FieldValues>}
@@ -60,12 +71,13 @@ export const RHFSelect = <T extends FieldValues>({
                 {({ open }) => (
                   <>
                     <Listbox.Label
-                      className="block text-sm font-medium leading-6 text-white"
+                      className="block text-sm font-medium leading-6 text-white min-w-[10%]"
                       id={labelId}
                     >
                       {label}
+                      {labelSymbol}
                     </Listbox.Label>
-                    <div className="relative mt-2">
+                    <div className="relative flex-1">
                       <Listbox.Button
                         className={`min-h-9 relative w-full cursor-default rounded-md py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-fuchsia-500 sm:text-sm sm:leading-6 bg-[#424242]/50 placeholder-gray-400 text-white ${
                           error !== undefined ? "ring-red-500" : "ring-zinc-700"
