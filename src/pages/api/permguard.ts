@@ -53,55 +53,22 @@ export default async function handler(
     // Create a new Permguard client with the specified or default endpoint
     const azClient = new AZClient(withEndpoint(serverUrl, serverPort));
 
+    console.log({ serverUrl, serverPort });
+
     // Remove server url and server port from the payload to avoid sending them to Permguard
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { url: _, port: __, ...permguardPayload } = jsonRequest;
 
     // Check the authorization using the Permguard client
-    const { decision, response } = await azClient.check(permguardPayload);
+    const response = await azClient.check(permguardPayload);
 
-    console.log({ decision, response });
-
-    if (!response) {
+    if (!response.response) {
       return res
         .status(503)
         .json({ error: "Permguard server does not exist or is unreachable" });
     }
 
-    // Prepare the response object
-    const result: {
-      decision: boolean;
-      details?: {
-        reasonAdmin?: string;
-        reasonUser?: string;
-        evaluations?: Array<{
-          reasonAdmin?: string;
-          reasonUser?: string;
-        }>;
-      };
-    } = {
-      decision,
-    };
-
-    // Include detailed reasons if authorization is denied
-    if (!decision && response) {
-      result.details = {};
-      if (response.Context?.ReasonAdmin) {
-        result.details.reasonAdmin = response.Context.ReasonAdmin.Message;
-      }
-      if (response.Context?.ReasonUser) {
-        result.details.reasonUser = response.Context.ReasonUser.Message;
-      }
-      if (response.Evaluations && response.Evaluations.length > 0) {
-        result.details.evaluations = response.Evaluations.map((evaluation) => ({
-          reasonAdmin: evaluation.Context?.ReasonAdmin?.Message,
-          reasonUser: evaluation.Context?.ReasonUser?.Message,
-        })).filter((reasons) => reasons.reasonAdmin || reasons.reasonUser);
-      }
-    }
-
-    // Return the authorization result
-    return res.status(200).json(result);
+    return res.status(200).json(response);
   } catch (error) {
     console.error("Error processing Permguard request:", error);
     return res.status(500).json({ error: "Internal server error" });

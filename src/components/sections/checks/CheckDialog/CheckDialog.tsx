@@ -63,13 +63,13 @@ export default function CheckDialog() {
                     <span className="font-bold text-gray-300">
                       Reason admin:
                     </span>{" "}
-                    {response?.details.reasonAdmin}
+                    {response?.response.Context?.ReasonAdmin?.Message}
                   </p>
                   <p className="text-sm text-gray-400">
                     <span className="font-bold text-gray-300">
                       Reason user:
                     </span>{" "}
-                    {response?.details.reasonUser}
+                    {response?.response.Context?.ReasonUser?.Message}
                   </p>
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function CheckDialog() {
               <button
                 type="button"
                 onClick={handleClose}
-                className="inline-flex w-full justify-center rounded-md bg-fuchsia-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-fuchsia-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-600"
+                className="inline-flex w-full justify-center rounded-md bg-fuchsia-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-fuchsia-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-600"
               >
                 Close
               </button>
