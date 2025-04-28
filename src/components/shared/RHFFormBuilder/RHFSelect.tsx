@@ -49,12 +49,12 @@ export const RHFSelect = <T extends FieldValues>({
           return (
             <>
               <Listbox
-                value={value ?? {}}
+                value={value}
                 onChange={
                   onCustomChange
-                    ? (elem) =>
-                        onCustomChange({ fieldName: name, value: elem.value })
-                    : (elem) => onChange(elem)
+                    ? (value: string) =>
+                        onCustomChange({ fieldName: name, value })
+                    : (value: string) => onChange(value)
                 }
               >
                 {({ open }) => (
@@ -67,7 +67,7 @@ export const RHFSelect = <T extends FieldValues>({
                     </Listbox.Label>
                     <div className="relative mt-2">
                       <Listbox.Button
-                        className={`relative w-full cursor-default rounded-md py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-fuchsia-500 sm:text-sm sm:leading-6 bg-[#424242]/50 placeholder-gray-400 text-white ${
+                        className={`min-h-9 relative w-full cursor-default rounded-md py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-fuchsia-500 sm:text-sm sm:leading-6 bg-[#424242]/50 placeholder-gray-400 text-white ${
                           error !== undefined ? "ring-red-500" : "ring-zinc-700"
                         }`}
                       >
@@ -76,7 +76,9 @@ export const RHFSelect = <T extends FieldValues>({
                             value ? "" : "text-gray-400"
                           }`}
                         >
-                          {value ? value.label : labelPlaceholder}
+                          {value
+                            ? options.find((el) => el.value === value)?.label
+                            : labelPlaceholder}
                         </span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                           <ChevronUpDownIcon
@@ -104,11 +106,11 @@ export const RHFSelect = <T extends FieldValues>({
                                   "relative cursor-default select-none py-2 pl-3 pr-9"
                                 )
                               }
-                              value={option}
+                              value={option.value}
                             >
                               {({ active }) => {
-                                const selected =
-                                  value && value.value == option.value;
+                                const selected = value === option.value;
+
                                 return (
                                   <>
                                     <span

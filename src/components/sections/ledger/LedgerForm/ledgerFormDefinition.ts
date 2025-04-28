@@ -46,7 +46,7 @@ export const getLedgerFormDefinition = ({
       visible: true,
     },
     {
-      type: "textfield",
+      type: "select",
       icon: "mdi:label-outline",
       requiredFieldSymbol: true,
       name: "policy_store_kind",
@@ -55,6 +55,7 @@ export const getLedgerFormDefinition = ({
       labelId: "policy_store_kind",
       visible: true,
       disabled,
+      options: [{ label: "ledger", value: "ledger" }],
     },
     {
       type: "textfield",

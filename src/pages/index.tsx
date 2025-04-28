@@ -78,7 +78,7 @@ const Page = () => {
       </Head>
       <main className="w-full mx-auto px-6 sm:px-10 md:px-14 mt-6 mb-12 lg:my-12">
         <Card className={"mt-6 lg:mt-12"}>
-          <div className="overflow-hidden">
+          <div className="">
             <TabGroup>
               <div
                 className={
