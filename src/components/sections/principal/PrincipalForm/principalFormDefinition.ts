@@ -20,11 +20,7 @@ export const getPrincipalFormDefinition = ({
       labelId: "type",
       visible: true,
       disabled,
-      options: [
-        { label: "user", value: "user" },
-        { label: "role-actor", value: "role-actor" },
-        { label: "twin-actor", value: "twin-actor" },
-      ],
+      options: [{ label: "user", value: "user" }],
     },
     {
       type: "textfield",

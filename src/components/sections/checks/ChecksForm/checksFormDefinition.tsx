@@ -46,7 +46,7 @@ export const getChecksFormDefinition = ({
       visible: true,
     },
     {
-      type: "textfield",
+      type: "select",
       icon: "mdi:format-list-bulleted-type",
       requiredFieldSymbol: true,
       name: "subject.type",
@@ -58,6 +58,11 @@ export const getChecksFormDefinition = ({
       groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-4",
       parentGroup: "subject",
       parentGroupClassName: "col-span-12 grid grid-cols-12 gap-4",
+      options: [
+        { label: "user", value: "user" },
+        { label: "role-agent", value: "role-agent" },
+        { label: "twin-agent", value: "twin-agent" },
+      ],
     },
     {
       type: "textfield",
