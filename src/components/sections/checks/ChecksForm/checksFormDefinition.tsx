@@ -57,11 +57,12 @@ export const getChecksFormDefinition = ({
       group: "subject_left_column",
       groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-8",
       parentGroup: "subject",
-      parentGroupClassName: "col-span-12 grid grid-cols-12 gap-8",
+      parentGroupClassName:
+        "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8",
       options: [
         { label: "user", value: "user" },
-        { label: "role-agent", value: "role-agent" },
-        { label: "twin-agent", value: "twin-agent" },
+        { label: "role-actor", value: "role-actor" },
+        { label: "twin-actor", value: "twin-actor" },
       ],
     },
     {
@@ -122,7 +123,8 @@ export const getChecksFormDefinition = ({
       labelId: "context.time",
       visible: true,
       parentGroup: "context",
-      parentGroupClassName: "col-span-12 grid grid-cols-12 gap-8",
+      parentGroupClassName:
+        "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8",
     },
     {
       type: "checkbox",
@@ -161,11 +163,13 @@ export const getChecksFormDefinition = ({
           visible: true,
           parentGroup: `evaluations[${index}]`,
           parentGroupClassName:
-            "p-4 border border-white/10 rounded-md grid grid-cols-12 gap-8 col-span-12 relative",
+            "p-4 border border-white/10 rounded-md grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8 col-span-12 relative",
           group: `evaluations[${index}].request_id`,
-          groupClassName: "col-span-12 grid grid-cols-12 gap-8",
+          groupClassName:
+            "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8",
           additionalContent: removeEvaluationBtn(index),
-          className: "col-span-12 md:col-span-6 flex flex-col-reverse",
+          className:
+            "col-span-12 md:col-span-6 flex flex-col-reverse mt-10 md:mt-0",
         },
         {
           type: "typography",

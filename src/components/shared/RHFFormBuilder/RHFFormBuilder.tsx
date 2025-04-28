@@ -60,7 +60,7 @@ export const RHFFormBuilder = <
     return (
       <div
         key={item.id}
-        className={item.className ?? "col-span-12 sm:col-span-6"}
+        className={item.className ?? "col-span-12 md:col-span-6"}
       >
         {item.visible ? (
           <>
@@ -309,7 +309,7 @@ export const RHFFormBuilder = <
 
   return control ? (
     <form autoComplete="off" onSubmit={handleSubmit}>
-      <div className={`grid grid-cols-12 gap-8`}>
+      <div className={`grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8`}>
         {renderControls()}
         {children && <div className="grid grid-cols-12">{children}</div>}
         {hasRequiredFieldsLegend && (
