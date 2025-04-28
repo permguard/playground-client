@@ -3,13 +3,14 @@ import Head from "next/head";
 import { ChecksForm } from "@/components/sections/checks/ChecksForm/ChecksForm";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { RootState, useAppDispatch } from "@/store";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { check } from "@/store/checks/middleware/check";
 import { FormBackdrop } from "@/components/shared/RHFFormBuilder/FormBackdrop";
 import { useSelector } from "react-redux";
 import CheckDialog from "./CheckDialog/CheckDialog";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { ChecksJSONEditorForm } from "./ChecksJson/ChecksJSONEditorForm";
+import { initChecksState } from "@/store/checks/middleware/initChecksState";
 
 export const ChecksPage = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,10 @@ export const ChecksPage = () => {
 
   const handleCheck = useCallback(async () => {
     dispatch(check());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(initChecksState());
   }, [dispatch]);
 
   return (

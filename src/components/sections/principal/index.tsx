@@ -3,8 +3,17 @@ import Head from "next/head";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import { PrincipalJSONEditorForm } from "@/components/sections/principal/PrincipalJSONEditorForm/PrincipalJSONEditorForm";
 import { PrincipalForm } from "@/components/sections/principal/PrincipalForm/PrincipalForm";
+import { initPrincipalState } from "@/store/principal/middleware/initPrincipalState";
+import { useEffect } from "react";
+import { useAppDispatch } from "@/store";
 
 export const PrincipalPage = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(initPrincipalState());
+  }, [dispatch]);
+
   return (
     <>
       <Head>

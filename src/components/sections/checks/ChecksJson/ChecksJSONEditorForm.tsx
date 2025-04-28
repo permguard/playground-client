@@ -1,14 +1,21 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RHFFormBuilder } from "@/components/shared/RHFFormBuilder/RHFFormBuilder";
 import { getChecksJSONEditorFormDefinition } from "./checksJSONEditorFormDefinition";
 import { ChecksJSONEditorFormPayload } from "./ChecksJSONEditorFormPayload";
-import { RootState } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 
 export const ChecksJSONEditorForm = () => {
+  const dispatch = useAppDispatch();
+
   // Response code is the state that is returned from the check API call
   const responseCode = useSelector((state: RootState) => state.checks.response);
+
+  const [jsonProcessedState, setJsonProcessedState] = useState({
+    processed: false,
+    valid: true,
+  });
 
   // Request JSON components
   const authorizationModelJSONCode = useSelector(
@@ -27,19 +34,20 @@ export const ChecksJSONEditorForm = () => {
     (state: RootState) => state.server.jsonCode
   );
 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<ChecksJSONEditorFormPayload>({});
+
   // Construct the request JSON object
-  const jsonRequest = useMemo(() => {
-    if (
-      authorizationModelJSONCode &&
-      principalJSONCode &&
-      entitiesJSONCode &&
-      checksJSONCode &&
-      serverJSONCode
-    ) {
-      const authorizationModel = JSON.parse(authorizationModelJSONCode);
-      const principal = JSON.parse(principalJSONCode);
-      const entities = JSON.parse(entitiesJSONCode);
-      const checks = JSON.parse(checksJSONCode);
+  useEffect(() => {
+    try {
+      const authorizationModel = JSON.parse(authorizationModelJSONCode!);
+      const principal = JSON.parse(principalJSONCode!);
+      const entities = JSON.parse(entitiesJSONCode!);
+      const checks = JSON.parse(checksJSONCode!);
 
       checks.subject.properties = JSON.parse(checks.subject.properties);
 
@@ -61,9 +69,11 @@ export const ChecksJSONEditorForm = () => {
         ...checks,
       };
 
-      return JSON.stringify(payload, null, 2);
-    } else {
-      return undefined;
+      const jsonRequest = JSON.stringify(payload, null, 2);
+      setValue("request", jsonRequest);
+      setJsonProcessedState({ valid: true, processed: true });
+    } catch {
+      setJsonProcessedState({ valid: false, processed: true });
     }
   }, [
     authorizationModelJSONCode,
@@ -71,14 +81,8 @@ export const ChecksJSONEditorForm = () => {
     entitiesJSONCode,
     principalJSONCode,
     serverJSONCode,
-  ]);
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
     setValue,
-  } = useForm<ChecksJSONEditorFormPayload>({});
+  ]);
 
   useEffect(() => {
     if (responseCode) {
@@ -87,16 +91,17 @@ export const ChecksJSONEditorForm = () => {
     }
   }, [responseCode, setValue]);
 
-  useEffect(() => {
-    if (jsonRequest) {
-      setValue("request", jsonRequest);
-    }
-  }, [jsonRequest, setValue]);
-
   const handleConfirm = useCallback(async () => {}, []);
 
   return (
-    <div>
+    <>
+      <div className="h-5 mb-4">
+        {jsonProcessedState.processed && !jsonProcessedState.valid ? (
+          <p className="text-red-500 text-sm">
+            Invalid JSON detected, please check the syntax.
+          </p>
+        ) : null}
+      </div>
       <RHFFormBuilder
         handleSubmit={handleSubmit(handleConfirm)}
         formControls={getChecksJSONEditorFormDefinition()}
@@ -104,6 +109,6 @@ export const ChecksJSONEditorForm = () => {
         errors={errors}
         submitButton={<></>}
       />
-    </div>
+    </>
   );
 };
