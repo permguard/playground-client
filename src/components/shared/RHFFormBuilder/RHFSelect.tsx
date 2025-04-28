@@ -71,7 +71,7 @@ export const RHFSelect = <T extends FieldValues>({
                 {({ open }) => (
                   <>
                     <Listbox.Label
-                      className="block text-sm font-medium leading-6 text-white min-w-[10%]"
+                      className="block text-sm font-medium leading-6 text-white min-w-[20%] lg:min-w-[15%]"
                       id={labelId}
                     >
                       {label}

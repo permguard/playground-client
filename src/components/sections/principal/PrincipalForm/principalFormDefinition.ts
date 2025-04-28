@@ -11,6 +11,16 @@ export const getPrincipalFormDefinition = ({
 }): IFormDefinition<FlattenKeys<PrincipalFormPayload>> => {
   const baseDefinition = [
     {
+      type: "typography",
+      label: "Principal",
+      id: "principal",
+      className: "col-span-12",
+      inputProps: {
+        className: "text-md font-medium text-white",
+      },
+      visible: true,
+    },
+    {
       type: "select",
       icon: "material-symbols:category-outline",
       requiredFieldSymbol: true,

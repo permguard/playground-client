@@ -4,11 +4,7 @@ import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import { RootState, useAppDispatch } from "@/store";
 import { initLedgerState } from "@/store/ledger/middleware/initLedgerState";
 import { useCallback, useEffect } from "react";
-import {
-  ArrowPathIcon,
-  FingerPrintIcon,
-  ServerIcon,
-} from "@heroicons/react/20/solid";
+import { ArrowPathIcon, FingerPrintIcon } from "@heroicons/react/20/solid";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { LedgersPage } from "@/components/sections/ledger";
 import { PrincipalPage } from "@/components/sections/principal";

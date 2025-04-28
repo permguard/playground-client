@@ -84,7 +84,7 @@ export const RHFInput = <T extends FieldValues>({
             <label
               htmlFor={name}
               className={classNames(
-                "block font-medium min-w-[10%]",
+                "block font-medium min-w-[20%] lg:min-w-[15%]",
                 inputVariant === "expanded"
                   ? "text-black text-[14px] sm:text-base"
                   : "text-white text-sm leading-6"
