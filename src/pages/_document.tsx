@@ -8,7 +8,7 @@ export default function Document() {
         {/* SEO */}
         <meta
           name="description"
-          content="Permguard is an Open Source Multi-Zone, Multi-Tenant, ZTAuth* Provider."
+          content="Permguard Playground: Build and Test AuthZ requests for access control. Secure authorization flows."
         ></meta>
         <meta name="theme-color" content="#17181c" />
         <meta name="msapplication-navbutton-color" content="#17181c" />
@@ -41,7 +41,7 @@ export default function Document() {
         <meta name="twitter:title" content="Permguard" />
         <meta
           name="twitter:description"
-          content="Permguard is an Open Source Multi-Zone, Multi-Tenant, ZTAuth* Provider."
+          content="Permguard Playground: Build and Test AuthZ requests for access control. Secure authorization flows."
         />
         <meta name="twitter:site" content="@permguard" />
 
