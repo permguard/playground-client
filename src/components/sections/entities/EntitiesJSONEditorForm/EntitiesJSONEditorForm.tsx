@@ -60,7 +60,7 @@ export const EntitiesJSONEditorForm = () => {
 
   return (
     <>
-      <div className="h-5 mb-4">
+      <div className="h-5 mb-2">
         {jsonProcessedState.processed && !jsonProcessedState.valid ? (
           <p className="text-red-500 text-sm">
             Invalid JSON detected, please check the syntax.

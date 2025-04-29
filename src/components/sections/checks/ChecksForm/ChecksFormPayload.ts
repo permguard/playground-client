@@ -9,9 +9,11 @@ export interface ISubject {
   type: string;
   id: string;
   source: string;
-  properties: {
-    isSuperUser: boolean;
-  };
+  properties:
+    | {
+        isSuperUser: boolean;
+      }
+    | string;
 }
 
 export interface IContext {
@@ -22,16 +24,20 @@ export interface IContext {
 export interface IResource {
   type: string;
   id: string;
-  properties: {
-    isEnabled: boolean;
-  };
+  properties:
+    | {
+        isEnabled: boolean;
+      }
+    | string;
 }
 
 export interface IAction {
   name: string;
-  properties: {
-    isEnabled: boolean;
-  };
+  properties:
+    | {
+        isEnabled: boolean;
+      }
+    | string;
 }
 
 export interface IEvaluation {
