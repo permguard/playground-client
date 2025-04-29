@@ -19,6 +19,7 @@ export const ChecksForm = () => {
   const [errorInput, setErrorInput] = useState(false);
 
   const jsonCode = useSelector((state: RootState) => state.checks.jsonCode);
+  const isInitial = useSelector((state: RootState) => state.checks.isInitial);
 
   const handleConfirm = useCallback(async () => {}, []);
 
@@ -42,7 +43,7 @@ export const ChecksForm = () => {
     },
   });
 
-  useEffect(() => {
+  const handlePrepareJSON = useCallback(() => {
     try {
       const parsedJSON = JSON.parse(jsonCode!);
 
@@ -75,6 +76,18 @@ export const ChecksForm = () => {
       }
     }
   }, [jsonCode, reset]);
+
+  useEffect(() => {
+    if (!jsonProcessedState.processed && jsonCode) {
+      handlePrepareJSON();
+    }
+  }, [jsonProcessedState.processed, handlePrepareJSON, jsonCode]);
+
+  useEffect(() => {
+    if (jsonCode && isInitial) {
+      handlePrepareJSON();
+    }
+  }, [jsonCode, handlePrepareJSON, isInitial]);
 
   const evaluations = watch("evaluations");
 
