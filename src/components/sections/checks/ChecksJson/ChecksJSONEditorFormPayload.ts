@@ -1,4 +1,4 @@
 export type ChecksJSONEditorFormPayload = {
-  request: string;
+  code: string;
   response: string;
 };

@@ -12,8 +12,8 @@ export const getChecksJSONEditorFormDefinition = (): IFormDefinition<
   > = [
     {
       type: "code",
-      name: "request",
-      id: "request",
+      name: "code",
+      id: "code",
       height: "400px",
       language: "json",
       label: "Request",
