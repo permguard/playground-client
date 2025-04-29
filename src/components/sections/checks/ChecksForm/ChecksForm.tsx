@@ -27,11 +27,19 @@ export const ChecksForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
     setValue,
     getValues,
+    watch,
   } = useForm<ChecksFormPayload>({
     defaultValues: {},
+    mode: "onChange",
+    resolver: (data) => {
+      setTimeout(() => {
+        handleFormChange(data);
+      }, 0);
+
+      return { values: data, errors: {} };
+    },
   });
 
   useEffect(() => {
@@ -68,10 +76,9 @@ export const ChecksForm = () => {
     }
   }, [jsonCode, reset]);
 
-  const formValues = watch();
-  const evaluations = formValues.evaluations;
+  const evaluations = watch("evaluations");
 
-  useEffect(() => {
+  const handleFormChange = (formValues: ChecksFormPayload) => {
     if (jsonProcessedState.processed && jsonProcessedState.valid) {
       try {
         const checks = _.cloneDeep(formValues);
@@ -99,13 +106,7 @@ export const ChecksForm = () => {
         setErrorInput(true);
       }
     }
-  }, [
-    dispatch,
-    formValues,
-    jsonProcessedState.processed,
-    jsonProcessedState.valid,
-    setValue,
-  ]);
+  };
 
   const handleAddEvaluation = useCallback(() => {
     const values = getValues();
@@ -117,11 +118,11 @@ export const ChecksForm = () => {
       resource: {
         type: "",
         id: "",
-        properties: "",
+        properties: "{}",
       },
       action: {
         name: "",
-        properties: "",
+        properties: "{}",
       },
     });
   }, [getValues, setValue]);
