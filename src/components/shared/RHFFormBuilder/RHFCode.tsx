@@ -73,6 +73,9 @@ export const RHFCode = <T extends FieldValues>({
               language={language}
               value={value}
               onChange={onChange}
+              loading={
+                <div className="w-full h-full bg-[##272626] animate-pulse"></div>
+              }
               options={{
                 minimap: {
                   enabled: false,
