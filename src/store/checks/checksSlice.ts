@@ -11,6 +11,7 @@ const initialState: IChecksState = {
   selectedExample: EXAMPLES[0].name,
   isLoading: false,
   isModalOpen: false,
+  isInitial: true,
 };
 
 const checksSlice = createSlice({
@@ -25,19 +26,23 @@ const checksSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(initChecksState.fulfilled, (state, action) => {
       state.jsonCode = action.payload.jsonCode;
+      state.isInitial = true;
     });
 
     builder.addCase(updateChecksState.fulfilled, (state, action) => {
       state.jsonCode = action.meta.arg;
+      state.isInitial = false;
     });
 
     builder.addCase(reset.fulfilled, (state, action) => {
       state.jsonCode = action.payload?.checks;
+      state.isInitial = true;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {
       state.jsonCode = action.payload?.checks;
       state.selectedExample = action.meta.arg.name;
+      state.isInitial = true;
     });
 
     builder.addCase(check.pending, (state) => {

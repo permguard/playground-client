@@ -4,11 +4,7 @@ import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import { RootState, useAppDispatch } from "@/store";
 import { initLedgerState } from "@/store/ledger/middleware/initLedgerState";
 import { useCallback, useEffect } from "react";
-import {
-  ArrowPathIcon,
-  FingerPrintIcon,
-  ServerIcon,
-} from "@heroicons/react/20/solid";
+import { ArrowPathIcon, FingerPrintIcon } from "@heroicons/react/20/solid";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { LedgersPage } from "@/components/sections/ledger";
 import { PrincipalPage } from "@/components/sections/principal";
@@ -51,7 +47,7 @@ const tabs = [
   },
   {
     name: "AuthZ Server",
-    icon: ServerIcon,
+    icon: () => <Icon className="mr-2" icon={"ri:server-fill"} fontSize={24} />,
     page: ServerPage,
   },
 ];
@@ -78,7 +74,7 @@ const Page = () => {
       </Head>
       <main className="w-full mx-auto px-6 sm:px-10 md:px-14 mt-6 mb-12 lg:my-12">
         <Card className={"mt-6 lg:mt-12"}>
-          <div className="overflow-hidden">
+          <div className="">
             <TabGroup>
               <div
                 className={
@@ -118,7 +114,7 @@ const Page = () => {
                   <button
                     onClick={handleReset}
                     type="button"
-                    className="flex items-center sm:w-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
+                    className="flex text-sm/6 items-center sm:w-auto xl:ml-0 whitespace-nowrap rounded-[22px] px-7 py-2.5 sm:py-2 bg-fuchsia-500 leading-none font-medium text-white shadow-sm hover:bg-fuchsia-400 disabled:bg-fuchsia-500/25 disabled:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500"
                   >
                     <ArrowPathIcon
                       fontSize={24}

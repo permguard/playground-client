@@ -39,14 +39,14 @@ export const getLedgerFormDefinition = ({
       type: "typography",
       label: "Policy store",
       id: "policy_store",
-      className: "col-span-12 mt-4",
+      className: "col-span-12",
       inputProps: {
         className: "text-md font-medium text-white",
       },
       visible: true,
     },
     {
-      type: "textfield",
+      type: "select",
       icon: "mdi:label-outline",
       requiredFieldSymbol: true,
       name: "policy_store_kind",
@@ -55,6 +55,7 @@ export const getLedgerFormDefinition = ({
       labelId: "policy_store_kind",
       visible: true,
       disabled,
+      options: [{ label: "ledger", value: "ledger" }],
     },
     {
       type: "textfield",

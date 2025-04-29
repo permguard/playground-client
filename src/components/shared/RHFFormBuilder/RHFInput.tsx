@@ -80,11 +80,11 @@ export const RHFInput = <T extends FieldValues>({
         control={control as Control<FieldValues>}
         rules={rules}
         render={({ field: { value, onChange } }) => (
-          <div>
+          <div className="flex gap-8 justify-between items-center">
             <label
               htmlFor={name}
               className={classNames(
-                "block font-medium",
+                "block font-medium min-w-[20%] lg:min-w-[15%]",
                 inputVariant === "expanded"
                   ? "text-black text-[14px] sm:text-base"
                   : "text-white text-sm leading-6"
@@ -97,7 +97,7 @@ export const RHFInput = <T extends FieldValues>({
               <div
                 className={classNames(
                   inputVariant === "expanded"
-                    ? `flex text-gray-900 items-center relative w-full ring-1 bg-[#8e8e9314] rounded-[12px] overflow-hidden focus-within:ring-2 focus-within:ring-fuchsia-500 mt-2 placeholder:text-black/25 ${
+                    ? `flex text-gray-900 items-center relative w-full ring-1 bg-[#8e8e9314] rounded-[12px] overflow-hidden focus-within:ring-2 focus-within:ring-fuchsia-500 placeholder:text-black/25 ${
                         error !== undefined
                           ? "ring-red-500"
                           : "ring-transparent"
@@ -106,7 +106,7 @@ export const RHFInput = <T extends FieldValues>({
                   inputVariant === "standart"
                     ? `${
                         icon ? "relative rounded-md shadow-sm" : null
-                      } mt-2 flex flex-row justify-between`
+                      } flex flex-1 flex-row justify-between`
                     : null
                 )}
               >

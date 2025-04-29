@@ -6,4 +6,5 @@ export interface IChecksState {
   isLoading: boolean;
   response?: ICheckResponse;
   isModalOpen: boolean;
+  isInitial: boolean;
 }

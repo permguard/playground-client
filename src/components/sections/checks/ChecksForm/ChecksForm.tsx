@@ -7,6 +7,7 @@ import { RHFFormBuilder } from "@/components/shared/RHFFormBuilder/RHFFormBuilde
 import { RootState, useAppDispatch } from "@/store";
 import { updateChecksState } from "@/store/checks/middleware/updateChecksState";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import * as _ from "lodash";
 
 export const ChecksForm = () => {
   const dispatch = useAppDispatch();
@@ -15,8 +16,10 @@ export const ChecksForm = () => {
     processed: false,
     valid: true,
   });
+  const [errorInput, setErrorInput] = useState(false);
 
   const jsonCode = useSelector((state: RootState) => state.checks.jsonCode);
+  const isInitial = useSelector((state: RootState) => state.checks.isInitial);
 
   const handleConfirm = useCallback(async () => {}, []);
 
@@ -25,20 +28,47 @@ export const ChecksForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
     setValue,
     getValues,
+    watch,
   } = useForm<ChecksFormPayload>({
     defaultValues: {},
+    mode: "onChange",
+    resolver: (data) => {
+      setTimeout(() => {
+        handleFormChange(data);
+      }, 0);
+
+      return { values: data, errors: {} };
+    },
   });
 
-  useEffect(() => {
+  const handlePrepareJSON = useCallback(() => {
     try {
       const parsedJSON = JSON.parse(jsonCode!);
 
-      const defaultValues = parsedJSON as ChecksFormPayload;
+      const checks = parsedJSON as ChecksFormPayload;
 
-      reset(defaultValues);
+      checks.subject.properties = JSON.stringify(
+        checks.subject.properties,
+        null,
+        2
+      );
+
+      checks.evaluations.forEach((evaluation) => {
+        evaluation.resource.properties = JSON.stringify(
+          evaluation.resource.properties,
+          null,
+          2
+        );
+        evaluation.action.properties = JSON.stringify(
+          evaluation.action.properties,
+          null,
+          2
+        );
+      });
+
+      reset(checks);
       setJsonProcessedState({ processed: true, valid: true });
     } catch {
       if (jsonCode !== undefined) {
@@ -47,21 +77,49 @@ export const ChecksForm = () => {
     }
   }, [jsonCode, reset]);
 
-  const formValues = watch();
-  const evaluations = formValues.evaluations;
-  const formValuesJSON = JSON.stringify(formValues, null, 2);
+  useEffect(() => {
+    if (!jsonProcessedState.processed && jsonCode) {
+      handlePrepareJSON();
+    }
+  }, [jsonProcessedState.processed, handlePrepareJSON, jsonCode]);
 
   useEffect(() => {
-    if (jsonProcessedState.processed && jsonProcessedState.valid) {
-      dispatch(updateChecksState(formValuesJSON));
+    if (jsonCode && isInitial) {
+      handlePrepareJSON();
     }
-  }, [
-    dispatch,
-    formValuesJSON,
-    jsonProcessedState.processed,
-    jsonProcessedState.valid,
-    setValue,
-  ]);
+  }, [jsonCode, handlePrepareJSON, isInitial]);
+
+  const evaluations = watch("evaluations");
+
+  const handleFormChange = (formValues: ChecksFormPayload) => {
+    if (jsonProcessedState.processed && jsonProcessedState.valid) {
+      try {
+        const checks = _.cloneDeep(formValues);
+
+        checks.subject.properties = JSON.parse(
+          checks.subject.properties as string
+        );
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        checks.evaluations.forEach((evaluation) => {
+          evaluation.resource.properties = JSON.parse(
+            evaluation.resource.properties as string
+          );
+          evaluation.action.properties = JSON.parse(
+            evaluation.action.properties as string
+          );
+        });
+
+        const formValuesJSON = JSON.stringify(checks, null, 2);
+
+        dispatch(updateChecksState(formValuesJSON));
+        setErrorInput(false);
+      } catch {
+        setErrorInput(true);
+      }
+    }
+  };
 
   const handleAddEvaluation = useCallback(() => {
     const values = getValues();
@@ -73,11 +131,11 @@ export const ChecksForm = () => {
       resource: {
         type: "",
         id: "",
-        properties: "",
+        properties: "{}",
       },
       action: {
         name: "",
-        properties: "",
+        properties: "{}",
       },
     });
   }, [getValues, setValue]);
@@ -114,11 +172,16 @@ export const ChecksForm = () => {
 
   return (
     <>
-      {jsonProcessedState.processed && !jsonProcessedState.valid ? (
-        <p className="text-red-500 text-sm mb-4">
-          Invalid JSON detected. Please fix the errors to proceed.
-        </p>
-      ) : null}
+      <div className="h-5 mb-2">
+        {(jsonProcessedState.processed && !jsonProcessedState.valid) ||
+        errorInput ? (
+          <p className="text-red-500 text-sm mb-4 ">
+            {errorInput
+              ? "Invalid JSON input detected. Changes won't be saved and applied. Please fix the errors to proceed."
+              : "Invalid JSON detected. Please fix the errors to proceed."}
+          </p>
+        ) : null}
+      </div>
       <RHFFormBuilder
         handleSubmit={handleSubmit(handleConfirm)}
         formControls={getChecksFormDefinition({

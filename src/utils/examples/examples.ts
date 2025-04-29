@@ -38,7 +38,9 @@ export const EXAMPLES = [
     "type": "role-actor",
     "id": "platform-creator",
     "source": "keycloak",
-    "properties": "{\\n  \\"isSuperUser\\": true\\n}"
+    "properties": {
+      "isSuperUser": true
+    }
   },
   "context": {
     "time": "2025-01-23T16:17:46+00:00",
@@ -50,11 +52,15 @@ export const EXAMPLES = [
       "resource": {
         "type": "MagicFarmacia::Platform::Subscription",
         "id": "e3a786fd07e24bfa95ba4341d3695ae8",
-        "properties": "{\\n  \\"isEnabled\\": true\\n}"
+        "properties": {
+          "isEnabled": true
+        }
       },
       "action": {
         "name": "MagicFarmacia::Platform::Action::create",
-        "properties": "{\\n  \\"isEnabled\\": true\\n}"
+        "properties": {
+          "isEnabled": true
+        }
       }
     },
     {
@@ -62,11 +68,15 @@ export const EXAMPLES = [
       "resource": {
         "type": "MagicFarmacia::Platform::Subscription",
         "id": "e3a786fd07e24bfa95ba4341d3695ae8",
-        "properties": "{\\n  \\"isEnabled\\": true\\n}"
+        "properties": {
+          "isEnabled": true
+        }
       },
       "action": {
         "name": "MagicFarmacia::Platform::Action::create",
-        "properties": "{\\n  \\"isEnabled\\": false\\n}"
+        "properties": {
+          "isEnabled": false
+        }
       }
     }
   ]
