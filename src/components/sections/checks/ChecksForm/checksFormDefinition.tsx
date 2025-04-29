@@ -163,7 +163,7 @@ export const getChecksFormDefinition = ({
           visible: true,
           parentGroup: `evaluations[${index}]`,
           parentGroupClassName:
-            "p-4 border border-white/10 rounded-md grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8 col-span-12 relative",
+            "p-4 border border-white/10 rounded-md grid grid-cols-12 gap-x-2 gap-y-8 gap-x-0 col-span-12 relative",
           group: `evaluations[${index}].request_id`,
           groupClassName:
             "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8",
@@ -182,7 +182,8 @@ export const getChecksFormDefinition = ({
           visible: true,
           parentGroup: `evaluations[${index}]`,
           group: `evaluations[${index}].resource`,
-          groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-8",
+          groupClassName:
+            "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 md:border-r border-white/10",
         },
         {
           type: "textfield",
@@ -232,7 +233,8 @@ export const getChecksFormDefinition = ({
           visible: true,
           parentGroup: `evaluations[${index}]`,
           group: `evaluations[${index}].action`,
-          groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-8",
+          groupClassName:
+            "col-span-12 md:col-span-6 flex flex-col gap-8 md:pl-4",
         },
         {
           type: "textfield",
