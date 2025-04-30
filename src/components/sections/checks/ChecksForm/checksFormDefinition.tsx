@@ -259,7 +259,7 @@ export const getChecksFormDefinition = ({
           type: "typography",
           label: "Resource",
           id: `evaluations[${index}].resource`,
-          className: "col-span-12 mt-4",
+          className: "col-span-12 md:mt-4",
           inputProps: {
             className: "text-md font-medium text-white",
           },
@@ -319,7 +319,7 @@ export const getChecksFormDefinition = ({
           parentGroup: `evaluations[${index}]`,
           group: `evaluations[${index}].action`,
           groupClassName:
-            "col-span-12 md:col-span-6 flex flex-col gap-8 md:pl-4",
+            "col-span-12 md:col-span-6 flex flex-col mt-4 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none",
         },
         {
           type: "textfield",
