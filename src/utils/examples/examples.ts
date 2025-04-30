@@ -43,12 +43,24 @@ export const EXAMPLES = [
     }
   },
   "context": {
-    "time": "2025-01-23T16:17:46+00:00",
-    "isSubscriptionActive": true
+    "ip": "192.168.1.100",
+    "location": "europe-west1"
   },
   "evaluations": [
     {
       "request_id": "exz1",
+      "subject": {
+        "type": "role-actor",
+        "id": "platform-creator",
+        "source": "keycloak",
+        "properties": {
+          "isSuperUser": true
+        }
+      },
+      "context": {
+        "time": "2025-01-23T16:17:46+00:00",
+        "isSubscriptionActive": true
+      },
       "resource": {
         "type": "MagicFarmacia::Platform::Subscription",
         "id": "e3a786fd07e24bfa95ba4341d3695ae8",
@@ -65,6 +77,17 @@ export const EXAMPLES = [
     },
     {
       "request_id": "exz2",
+      "subject": {
+        "type": "role-actor",
+        "id": "platform-creator",
+        "source": "keycloak",
+        "properties": {
+          "isSuperUser": true
+        }
+      },
+      "context": {
+        "time": "2025-01-23T16:17:46+00:00"
+      },
       "resource": {
         "type": "MagicFarmacia::Platform::Subscription",
         "id": "e3a786fd07e24bfa95ba4341d3695ae8",

@@ -53,6 +53,8 @@ export const ChecksForm = () => {
 
       const checks = parsedJSON as ChecksFormPayload;
 
+      checks.context = JSON.stringify(checks.context, null, 2);
+
       checks.subject.properties = JSON.stringify(
         checks.subject.properties,
         null,
@@ -70,7 +72,15 @@ export const ChecksForm = () => {
           null,
           2
         );
+        evaluation.subject.properties = JSON.stringify(
+          evaluation.subject.properties,
+          null,
+          2
+        );
+        evaluation.context = JSON.stringify(evaluation.context, null, 2);
       });
+
+      console.log("checks", checks);
 
       reset(checks);
       setJsonProcessedState({ processed: true, valid: true });
@@ -104,6 +114,8 @@ export const ChecksForm = () => {
           checks.subject.properties as string
         );
 
+        checks.context = JSON.parse(checks.context as string);
+
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         checks.evaluations.forEach((evaluation) => {
@@ -113,6 +125,10 @@ export const ChecksForm = () => {
           evaluation.action.properties = JSON.parse(
             evaluation.action.properties as string
           );
+          evaluation.subject.properties = JSON.parse(
+            evaluation.subject.properties as string
+          );
+          evaluation.context = JSON.parse(evaluation.context as string);
         });
 
         const formValuesJSON = JSON.stringify(checks, null, 2);
@@ -132,6 +148,13 @@ export const ChecksForm = () => {
     // @ts-ignore
     setValue(`evaluations[${values.evaluations.length}]`, {
       request_id: "",
+      subject: {
+        type: "",
+        id: "",
+        source: "",
+        properties: "{}",
+      },
+      context: "{}",
       resource: {
         type: "",
         id: "",
