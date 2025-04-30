@@ -51,9 +51,19 @@ export const getChecksFormDefinition = ({
     },
     {
       type: "typography",
+      label: "",
+      id: `separator_1`,
+      className: "col-span-12 border-t border-white/10",
+      inputProps: {
+        className: "text-md font-medium text-white",
+      },
+      visible: true,
+    },
+    {
+      type: "typography",
       label: "Subject",
       id: "subject",
-      className: "col-span-12 mt-4",
+      className: "col-span-12",
       inputProps: {
         className: "text-md font-medium text-white",
       },
@@ -119,6 +129,16 @@ export const getChecksFormDefinition = ({
     },
     {
       type: "typography",
+      label: "",
+      id: `separator_1`,
+      className: "col-span-12 border-t border-white/10",
+      inputProps: {
+        className: "text-md font-medium text-white",
+      },
+      visible: true,
+    },
+    {
+      type: "typography",
       label: "Resource",
       id: `resource`,
       className: "col-span-12 md:mt-4",
@@ -129,6 +149,9 @@ export const getChecksFormDefinition = ({
       group: `resource`,
       groupClassName:
         "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 md:border-r border-white/10",
+      parentGroup: "resource_action",
+      parentGroupClassName:
+        "grid grid-cols-12 gap-x-2 gap-y-4 gap-x-0 col-span-12",
     },
     {
       type: "textfield",
@@ -140,6 +163,7 @@ export const getChecksFormDefinition = ({
       labelId: `resource.type`,
       visible: true,
       group: `resource`,
+      parentGroup: "resource_action",
     },
     {
       type: "textfield",
@@ -151,6 +175,7 @@ export const getChecksFormDefinition = ({
       labelId: `resource.id`,
       visible: true,
       group: `resource`,
+      parentGroup: "resource_action",
     },
     {
       type: "code",
@@ -164,6 +189,7 @@ export const getChecksFormDefinition = ({
       visible: true,
       group: `resource`,
       className: "col-span-12 md:col-span-6 md:mt-auto",
+      parentGroup: "resource_action",
     },
     {
       type: "typography",
@@ -177,6 +203,7 @@ export const getChecksFormDefinition = ({
       group: `action`,
       groupClassName:
         "col-span-12 md:col-span-6 flex flex-col mt-4 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none",
+      parentGroup: "resource_action",
     },
     {
       type: "textfield",
@@ -188,6 +215,7 @@ export const getChecksFormDefinition = ({
       labelId: `action.name`,
       visible: true,
       group: `action`,
+      parentGroup: "resource_action",
     },
     {
       type: "code",
@@ -201,6 +229,17 @@ export const getChecksFormDefinition = ({
       visible: true,
       group: `action`,
       className: "col-span-12 mt-auto",
+      parentGroup: "resource_action",
+    },
+    {
+      type: "typography",
+      label: "",
+      id: `separator_1`,
+      className: "col-span-12 border-t border-white/10",
+      inputProps: {
+        className: "text-md font-medium text-white",
+      },
+      visible: true,
     },
     {
       type: "typography",
