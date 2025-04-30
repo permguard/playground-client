@@ -130,7 +130,7 @@ export const getChecksFormDefinition = ({
     {
       type: "typography",
       label: "",
-      id: `separator_1`,
+      id: `separator_2`,
       className: "col-span-12 border-t border-white/10",
       inputProps: {
         className: "text-md font-medium text-white",
@@ -234,7 +234,7 @@ export const getChecksFormDefinition = ({
     {
       type: "typography",
       label: "",
-      id: `separator_1`,
+      id: `separator_3`,
       className: "col-span-12 border-t border-white/10",
       inputProps: {
         className: "text-md font-medium text-white",
