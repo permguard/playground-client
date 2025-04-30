@@ -1,20 +1,15 @@
 import "@/utils/hooks/monaco";
 import { ChecksForm } from "@/components/sections/checks/ChecksForm/ChecksForm";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { RootState, useAppDispatch } from "@/store";
+import { useAppDispatch } from "@/store";
 import { useCallback, useEffect } from "react";
 import { check } from "@/store/checks/middleware/check";
-import { FormBackdrop } from "@/components/shared/RHFFormBuilder/FormBackdrop";
-import { useSelector } from "react-redux";
-import CheckDialog from "./CheckDialog/CheckDialog";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { ChecksJSONEditorForm } from "./ChecksJson/ChecksJSONEditorForm";
 import { initChecksState } from "@/store/checks/middleware/initChecksState";
 
 export const ChecksRequest = () => {
   const dispatch = useAppDispatch();
-
-  const isLoading = useSelector((state: RootState) => state.checks.isLoading);
 
   const handleCheck = useCallback(async () => {
     dispatch(check());
@@ -26,9 +21,6 @@ export const ChecksRequest = () => {
 
   return (
     <>
-      <FormBackdrop isLoading={isLoading} />
-      <CheckDialog />
-
       <TabGroup className={"flex flex-col sm:-mt-12"}>
         <TabList className="flex gap-4 justify-end items center">
           <div className="flex gap-4">

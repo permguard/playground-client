@@ -3,13 +3,22 @@ import Head from "next/head";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { ChecksRequest } from "./ChecksRequest";
 import { ChecksResponseEditorForm } from "./ChecksResponse/ChecksResponseEditorForm";
+import { FormBackdrop } from "@/components/shared/RHFFormBuilder/FormBackdrop";
+import { RootState } from "@/store";
+import { useSelector } from "react-redux";
+import CheckDialog from "./CheckDialog/CheckDialog";
 
 export const ChecksPage = () => {
+  const isLoading = useSelector((state: RootState) => state.checks.isLoading);
+
   return (
     <>
       <Head>
         <title>Permguard Playground | Checks</title>
       </Head>
+
+      <FormBackdrop isLoading={isLoading} />
+      <CheckDialog />
 
       <TabGroup className={"flex flex-col"}>
         <TabList className="inline-flex mr-auto z-10 gap-4 justify-between items center">
