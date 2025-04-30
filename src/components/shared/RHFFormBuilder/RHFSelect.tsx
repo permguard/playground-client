@@ -51,7 +51,7 @@ export const RHFSelect = <T extends FieldValues>({
   }
 
   return (
-    <div className="flex gap-8 justify-between items-center">
+    <div className="flex gap-2 sm:gap-8 justify-between items-center">
       <Controller
         name={name}
         control={control as Control<FieldValues>}
@@ -60,7 +60,7 @@ export const RHFSelect = <T extends FieldValues>({
           return (
             <>
               <Listbox
-                value={value}
+                value={value ?? null}
                 onChange={
                   onCustomChange
                     ? (value: string) =>

@@ -21,22 +21,20 @@ export const ChecksPage = () => {
       <CheckDialog />
 
       <TabGroup className={"flex flex-col"}>
-        <TabList className="inline-flex mr-auto z-10 gap-4 justify-between items center">
-          <div className="flex gap-4">
-            <div className="flex gap-1">
-              <Tab
-                key="request"
-                className="rounded-full px-3 py-1 text-sm/6 font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white  data-selected:text-fuchsia-500 "
-              >
-                Request
-              </Tab>
-              <Tab
-                key="response"
-                className="rounded-full px-3 py-1 text-sm/6 font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white  data-selected:text-fuchsia-500 "
-              >
-                Response
-              </Tab>
-            </div>
+        <TabList className="inline-flex ml-auto sm:ml-0 sm:mr-auto z-10 gap-4 justify-between items center">
+          <div className="flex gap-1">
+            <Tab
+              key="request"
+              className="rounded-full px-3 py-1 text-sm/6 font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white  data-selected:text-fuchsia-500 "
+            >
+              Request
+            </Tab>
+            <Tab
+              key="response"
+              className="rounded-full px-3 py-1 text-sm/6 font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white  data-selected:text-fuchsia-500 "
+            >
+              Response
+            </Tab>
           </div>
         </TabList>
         <TabPanels className="mt-3">
