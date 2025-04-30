@@ -19,6 +19,9 @@ export const getLedgerFormDefinition = ({
         className: "text-md font-medium text-white",
       },
       visible: true,
+      group: "zone",
+      groupClassName:
+        "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8 pb-8 border-b border-white/10",
     },
     {
       type: "textfield",
@@ -34,6 +37,7 @@ export const getLedgerFormDefinition = ({
       numericProps: {
         max: 999999999999999,
       },
+      group: "zone",
     },
     {
       type: "typography",
