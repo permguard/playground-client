@@ -4,13 +4,27 @@ import {
 } from "@/components/shared/RHFFormBuilder/types";
 import { ChecksFormPayload } from "./ChecksFormPayload";
 
+const borderClasses = [
+  "border-[#FFA07A]",
+  "border-[#87CEFA]",
+  "border-[#FDFBD4]",
+  "border-[#90EE90]",
+  "border-[#E9749F]",
+  "border-[#6D5ACF]",
+  "border-[#99F2C4]",
+  "border-[#F0E68C]",
+  "border-[#00CDDD]",
+  "border-[#D395FF]",
+];
 export const getChecksFormDefinition = ({
   addEvaluationBtn,
   removeEvaluationBtn,
   evaluationsCount,
+  expandedSectionIndex,
 }: {
   addEvaluationBtn: React.ReactNode;
   removeEvaluationBtn: (index: number) => React.ReactNode;
+  expandedSectionIndex: number | null;
   evaluationsCount: number;
 }): IFormDefinition<FlattenKeys<ChecksFormPayload>> => {
   const baseDefinition = [
@@ -162,14 +176,15 @@ export const getChecksFormDefinition = ({
           labelId: `evaluations[${index}].request_id`,
           visible: true,
           parentGroup: `evaluations[${index}]`,
-          parentGroupClassName:
-            "p-4 border border-white/10 rounded-md grid grid-cols-12 gap-x-2 gap-y-8 gap-x-0 col-span-12 relative",
+          parentGroupClassName: `p-4 border rounded-md grid transition-[height] duration-150 h-18 grid-cols-12 gap-x-2 gap-y-8 gap-x-0 col-span-12 relative relative overflow-hidden ${
+            borderClasses[index % 10]
+          } ${expandedSectionIndex === index ? "h-[950px] md:h-[544px]" : ""} `,
           group: `evaluations[${index}].request_id`,
           groupClassName:
             "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8",
           additionalContent: removeEvaluationBtn(index),
           className:
-            "col-span-12 md:col-span-6 flex flex-col-reverse mt-10 md:mt-0",
+            "col-span-12 md:col-span-6 flex flex-col-reverse max-w-[80%] md:max-w-[100%]",
         },
         {
           type: "typography",

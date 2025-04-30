@@ -8,6 +8,7 @@ import { RootState, useAppDispatch } from "@/store";
 import { updateChecksState } from "@/store/checks/middleware/updateChecksState";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import * as _ from "lodash";
+import { classNames } from "@/utils/classNames";
 
 export const ChecksForm = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,9 @@ export const ChecksForm = () => {
     valid: true,
   });
   const [errorInput, setErrorInput] = useState(false);
+  const [expandedSectionIndex, setExpandedSectionIndex] = useState<
+    number | null
+  >(null);
 
   const jsonCode = useSelector((state: RootState) => state.checks.jsonCode);
   const isInitial = useSelector((state: RootState) => state.checks.isInitial);
@@ -147,8 +151,23 @@ export const ChecksForm = () => {
       values.evaluations.splice(index, 1);
 
       setValue(`evaluations`, values.evaluations);
+
+      if (index === expandedSectionIndex) {
+        setExpandedSectionIndex(null);
+      } else if (index < (expandedSectionIndex ?? 0)) {
+        setExpandedSectionIndex((prevIndex) => prevIndex! - 1);
+      }
     },
-    [getValues, setValue]
+    [expandedSectionIndex, getValues, setValue]
+  );
+
+  const handleExpandSection = useCallback(
+    (index: number) => {
+      setExpandedSectionIndex((prevIndex) =>
+        prevIndex === index ? null : index
+      );
+    },
+    [setExpandedSectionIndex]
   );
 
   const addEvaluationBtn = (
@@ -162,12 +181,24 @@ export const ChecksForm = () => {
   );
 
   const removeEvaluationBtn = (index: number) => (
-    <button
-      className="text-red-500 top-4 right-4 absolute"
-      onClick={() => handleRemoveEvaluation(index)}
-    >
-      <Icon icon={"tabler:trash"} fontSize={24} className="h-5 sm:h-6" />
-    </button>
+    <div className="flex gap-2 sm:gap-4 md:gap-8 items-center top-6 right-4 sm:right-8 absolute">
+      <button
+        className="text-red-500"
+        onClick={() => handleRemoveEvaluation(index)}
+      >
+        <Icon icon={"tabler:trash"} fontSize={24} className="h-5 sm:h-6" />
+      </button>
+      <button className="text-white" onClick={() => handleExpandSection(index)}>
+        <Icon
+          icon={"weui:arrow-outlined"}
+          fontSize={24}
+          className={classNames(
+            "h-5 sm:h-6 transition-all duration-200",
+            index === expandedSectionIndex ? "rotate-90" : ""
+          )}
+        />
+      </button>
+    </div>
   );
 
   return (
@@ -188,6 +219,7 @@ export const ChecksForm = () => {
           addEvaluationBtn,
           removeEvaluationBtn,
           evaluationsCount: evaluations?.length ?? 1,
+          expandedSectionIndex,
         })}
         control={control}
         errors={errors}
