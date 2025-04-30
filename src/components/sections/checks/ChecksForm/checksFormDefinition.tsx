@@ -291,7 +291,7 @@ export const getChecksFormDefinition = ({
           parentGroupClassName: `p-4 border rounded-md grid transition-[height] duration-150 h-18 grid-cols-12 gap-x-2 gap-y-4 gap-x-0 col-span-12 relative relative overflow-hidden ${
             borderClasses[index % 10]
           } ${
-            expandedSectionIndex === index ? "h-[1702px] md:h-[1154px]" : ""
+            expandedSectionIndex === index ? "h-[1752px] md:h-[1184px]" : ""
           } `,
           group: `evaluations[${index}].request_id`,
           groupClassName:
