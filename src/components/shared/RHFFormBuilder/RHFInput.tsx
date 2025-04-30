@@ -80,7 +80,7 @@ export const RHFInput = <T extends FieldValues>({
         control={control as Control<FieldValues>}
         rules={rules}
         render={({ field: { value, onChange } }) => (
-          <div className="flex gap-8 justify-between items-center">
+          <div className="flex gap-2 sm:gap-8 justify-between items-center">
             <label
               htmlFor={name}
               className={classNames(
