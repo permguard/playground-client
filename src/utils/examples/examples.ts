@@ -42,6 +42,19 @@ export const EXAMPLES = [
       "isSuperUser": true
     }
   },
+  "resource": {
+    "type": "MagicFarmacia::Platform::Subscription",
+    "id": "e3a786fd07e24bfa95ba4341d3695ae8",
+    "properties": {
+      "isEnabled": true
+    }
+  },
+  "action": {
+    "name": "MagicFarmacia::Platform::Action::create",
+    "properties": {
+      "isEnabled": false
+    }
+  },
   "context": {
     "ip": "192.168.1.100",
     "location": "europe-west1"

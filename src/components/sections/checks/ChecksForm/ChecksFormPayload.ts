@@ -1,6 +1,8 @@
 export type ChecksFormPayload = {
   request_id: string;
   subject: ISubject;
+  resource: IResource;
+  action: IAction;
   context: IContext | string;
   evaluations: IEvaluation[];
 };

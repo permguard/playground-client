@@ -60,6 +60,16 @@ export const ChecksForm = () => {
         null,
         2
       );
+      checks.resource.properties = JSON.stringify(
+        checks.resource.properties,
+        null,
+        2
+      );
+      checks.action.properties = JSON.stringify(
+        checks.action.properties,
+        null,
+        2
+      );
 
       checks.evaluations.forEach((evaluation) => {
         evaluation.resource.properties = JSON.stringify(
@@ -112,6 +122,12 @@ export const ChecksForm = () => {
 
         checks.subject.properties = JSON.parse(
           checks.subject.properties as string
+        );
+        checks.resource.properties = JSON.parse(
+          checks.resource.properties as string
+        );
+        checks.action.properties = JSON.parse(
+          checks.action.properties as string
         );
 
         checks.context = JSON.parse(checks.context as string);
