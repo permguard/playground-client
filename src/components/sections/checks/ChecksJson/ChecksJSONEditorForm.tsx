@@ -13,7 +13,6 @@ export const ChecksJSONEditorForm = () => {
   const selectedChecksCode = useSelector(
     (state: RootState) => state.checks.jsonCode
   );
-  const responseCode = useSelector((state: RootState) => state.checks.response);
 
   const {
     control,
@@ -24,13 +23,6 @@ export const ChecksJSONEditorForm = () => {
   } = useForm<ChecksJSONEditorFormPayload>({});
 
   const checksCodeValue = watch("code");
-
-  useEffect(() => {
-    if (responseCode) {
-      const responseJSON = JSON.stringify(responseCode, null, 2);
-      setValue("response", responseJSON);
-    }
-  }, [responseCode, setValue]);
 
   useEffect(() => {
     if (!isDirty && selectedChecksCode) {

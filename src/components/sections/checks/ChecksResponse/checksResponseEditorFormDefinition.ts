@@ -2,33 +2,34 @@ import {
   IFormDefinition,
   FlattenKeys,
 } from "@/components/shared/RHFFormBuilder/types";
-import { ChecksJSONEditorFormPayload } from "./ChecksJSONEditorFormPayload";
+import { ChecksResponseEditorFormPayload } from "./ChecksResponseEditorFormPayload";
 
-export const getChecksJSONEditorFormDefinition = (): IFormDefinition<
-  FlattenKeys<ChecksJSONEditorFormPayload>
+export const getChecksResponseEditorFormDefinition = (): IFormDefinition<
+  FlattenKeys<ChecksResponseEditorFormPayload>
 > => {
   const baseDefinition = [
     {
       type: "typography",
-      label: "Request",
+      label: "Response (read-only)",
       className: "col-span-12 mt-11",
       inputProps: {
         className: "text-md font-medium text-white",
       },
       visible: true,
-      id: "request",
-      name: "request",
+      id: "response_title",
+      name: "response_title",
     },
     {
       type: "code",
-      name: "code",
-      id: "code",
+      name: "response",
+      id: "response",
       height: "400px",
       language: "json",
       visible: true,
+      disabled: true,
       className: "col-span-12",
     },
-  ] as IFormDefinition<FlattenKeys<ChecksJSONEditorFormPayload>>;
+  ] as IFormDefinition<FlattenKeys<ChecksResponseEditorFormPayload>>;
 
   return baseDefinition;
 };
