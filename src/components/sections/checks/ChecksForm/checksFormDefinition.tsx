@@ -103,7 +103,7 @@ export const getChecksFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "mdi:database-export",
+      icon: "mdi:database",
       requiredFieldSymbol: true,
       name: "subject.source",
       id: "subject.source",
@@ -344,7 +344,7 @@ export const getChecksFormDefinition = ({
         },
         {
           type: "textfield",
-          icon: "mdi:database-export",
+          icon: "mdi:database",
           requiredFieldSymbol: true,
           name: `evaluations[${index}].subject.source`,
           id: `evaluations[${index}].subject.source`,
