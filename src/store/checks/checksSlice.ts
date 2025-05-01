@@ -3,7 +3,6 @@ import { IChecksState } from "./types/IChecksState";
 import { initChecksState } from "./middleware/initChecksState";
 import { updateChecksState } from "./middleware/updateChecksState";
 import { EXAMPLES } from "@/utils/examples/examples";
-import { reset } from "../ledger/middleware/reset";
 import { setSelectedExample } from "../ledger/middleware/setSelectedExample";
 import { check } from "./middleware/check";
 
@@ -32,11 +31,6 @@ const checksSlice = createSlice({
     builder.addCase(updateChecksState.fulfilled, (state, action) => {
       state.jsonCode = action.meta.arg;
       state.isInitial = false;
-    });
-
-    builder.addCase(reset.fulfilled, (state, action) => {
-      state.jsonCode = action.payload?.checks;
-      state.isInitial = true;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {

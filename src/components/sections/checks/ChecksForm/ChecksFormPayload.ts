@@ -1,21 +1,22 @@
 export type ChecksFormPayload = {
   request_id: string;
-  subject: ISubject | undefined;
-  resource: IResource | undefined;
-  action: IAction | undefined;
-  context: string | undefined;
+  subject: ISubject | null;
+  resource: IResource | null;
+  action: IAction | null;
+  context: string | null;
   evaluations: IEvaluation[];
 };
 
 export interface ISubject {
-  type: string;
-  id: string;
-  source: string;
+  type: string | null;
+  id: string | null;
+  source: string | null;
   properties:
     | {
         isSuperUser: boolean;
       }
-    | string;
+    | string
+    | null;
 }
 
 export interface IResource {

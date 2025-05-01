@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ILedgerState } from "./types/ILedgerState";
 import { initLedgerState } from "./middleware/initLedgerState";
 import { updateLedgerState } from "./middleware/updateLedgerState";
-import { reset } from "./middleware/reset";
 import { setSelectedExample } from "./middleware/setSelectedExample";
 import { EXAMPLES } from "@/utils/examples/examples";
 
@@ -22,10 +21,6 @@ const ledgerSlice = createSlice({
 
     builder.addCase(updateLedgerState.fulfilled, (state, action) => {
       state.jsonCode = action.meta.arg;
-    });
-
-    builder.addCase(reset.fulfilled, (state, action) => {
-      state.jsonCode = action.payload?.ledger;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {

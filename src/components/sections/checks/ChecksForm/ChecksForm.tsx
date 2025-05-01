@@ -11,6 +11,13 @@ import * as _ from "lodash";
 import { classNames } from "@/utils/classNames";
 import { removeNullValues } from "@/utils/removeNullValues";
 
+const OPTIONAL_FIELDS = [
+  "subject",
+  "resource",
+  "action",
+  "context",
+] as (keyof ChecksFormPayload)[];
+
 export const ChecksForm = () => {
   const dispatch = useAppDispatch();
 
@@ -111,8 +118,6 @@ export const ChecksForm = () => {
           evaluation.context = JSON.stringify(evaluation.context, null, 2);
         }
       });
-
-      console.log("checks", checks);
 
       reset(checks);
       setJsonProcessedState({ processed: true, valid: true });
@@ -282,6 +287,22 @@ export const ChecksForm = () => {
     </div>
   );
 
+  const presence: { [key: string]: boolean } = {};
+
+  OPTIONAL_FIELDS.forEach((key) => {
+    const value = watch(key);
+
+    presence[key] = !(value === null || value === undefined);
+
+    evaluations?.forEach((evaluation, index) => {
+      const value = evaluation[key as keyof typeof evaluation];
+
+      presence[`evaluations[${index}].${key}`] = !(
+        value === null || value === undefined
+      );
+    });
+  });
+
   return (
     <>
       <div className="h-5 mb-2">
@@ -301,6 +322,8 @@ export const ChecksForm = () => {
           removeEvaluationBtn,
           evaluationsCount: evaluations?.length ?? 1,
           expandedSectionIndex,
+          presence,
+          setValue,
         })}
         control={control}
         errors={errors}

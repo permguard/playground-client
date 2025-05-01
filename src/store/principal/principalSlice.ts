@@ -3,7 +3,6 @@ import { IPrincipalState } from "./types/IPrincipalState";
 import { initPrincipalState } from "./middleware/initPrincipalState";
 import { updatePrincipalState } from "./middleware/updatePrincipalState";
 import { EXAMPLES } from "@/utils/examples/examples";
-import { reset } from "../ledger/middleware/reset";
 import { setSelectedExample } from "../ledger/middleware/setSelectedExample";
 
 const initialState: IPrincipalState = {
@@ -22,10 +21,6 @@ const principalSlice = createSlice({
 
     builder.addCase(updatePrincipalState.fulfilled, (state, action) => {
       state.jsonCode = action.meta.arg;
-    });
-
-    builder.addCase(reset.fulfilled, (state, action) => {
-      state.jsonCode = action.payload?.principal;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {

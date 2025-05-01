@@ -128,6 +128,7 @@ export const RHFFormBuilder = <
                 options={item.options!}
                 labelId={item.labelId as string}
                 name={item.name}
+                disabled={item.disabled}
                 requiredFieldSymbol={item.requiredFieldSymbol}
                 labelPlaceholder={item.labelPlaceholder}
               />

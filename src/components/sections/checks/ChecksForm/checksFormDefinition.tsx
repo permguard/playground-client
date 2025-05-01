@@ -3,6 +3,7 @@ import {
   IFormDefinition,
 } from "@/components/shared/RHFFormBuilder/types";
 import { ChecksFormPayload } from "./ChecksFormPayload";
+import { UseFormSetValue } from "react-hook-form";
 
 const borderClasses = [
   "border-[#FFA07A]",
@@ -21,11 +22,15 @@ export const getChecksFormDefinition = ({
   removeEvaluationBtn,
   evaluationsCount,
   expandedSectionIndex,
+  presence,
+  setValue,
 }: {
   addEvaluationBtn: React.ReactNode;
   removeEvaluationBtn: (index: number) => React.ReactNode;
   expandedSectionIndex: number | null;
   evaluationsCount: number;
+  presence: { [key: string]: boolean };
+  setValue: UseFormSetValue<ChecksFormPayload>;
 }) => {
   const baseDefinition: IFormDefinition<FlattenKeys<ChecksFormPayload>> = [
     {
@@ -71,6 +76,35 @@ export const getChecksFormDefinition = ({
         className: "text-md font-medium text-white",
       },
       visible: true,
+      additionalContent: (
+        <input
+          id="checkbox-subject"
+          name="checkbox-subject"
+          checked={presence["subject"]}
+          onChange={(e) => {
+            if (e.target.checked) {
+              setValue(
+                "subject",
+                {
+                  type: "",
+                  id: "",
+                  source: "",
+                  properties: "{}",
+                },
+                { shouldValidate: true }
+              );
+            } else {
+              setValue("subject.type", null);
+              setValue("subject.id", null);
+              setValue("subject.source", null);
+              setValue("subject.properties", null);
+              setValue("subject", null, { shouldValidate: false });
+            }
+          }}
+          type="checkbox"
+          className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+        />
+      ),
     },
     {
       type: "select",
@@ -91,6 +125,7 @@ export const getChecksFormDefinition = ({
         { label: "role-actor", value: "role-actor" },
         { label: "twin-actor", value: "twin-actor" },
       ],
+      disabled: !presence["subject"],
     },
     {
       type: "textfield",
@@ -103,6 +138,7 @@ export const getChecksFormDefinition = ({
       visible: true,
       group: "subject_left_column",
       parentGroup: "subject",
+      disabled: !presence["subject"],
     },
     {
       type: "textfield",
@@ -115,6 +151,7 @@ export const getChecksFormDefinition = ({
       visible: true,
       group: "subject_left_column",
       parentGroup: "subject",
+      disabled: !presence["subject"],
     },
     {
       type: "code",
@@ -129,6 +166,7 @@ export const getChecksFormDefinition = ({
       groupClassName: "col-span-12 md:col-span-6",
       group: "subject_right_column",
       parentGroup: "subject",
+      disabled: !presence["subject"],
     },
     {
       type: "typography",
