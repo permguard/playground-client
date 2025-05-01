@@ -9,6 +9,7 @@ import { updateChecksState } from "@/store/checks/middleware/updateChecksState";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import * as _ from "lodash";
 import { classNames } from "@/utils/classNames";
+import { removeNullValues } from "@/utils/removeNullValues";
 
 export const ChecksForm = () => {
   const dispatch = useAppDispatch();
@@ -53,41 +54,62 @@ export const ChecksForm = () => {
 
       const checks = parsedJSON as ChecksFormPayload;
 
-      checks.context = JSON.stringify(checks.context, null, 2);
+      if (checks.context) {
+        checks.context = JSON.stringify(checks.context, null, 2);
+      }
 
-      checks.subject.properties = JSON.stringify(
-        checks.subject.properties,
-        null,
-        2
-      );
-      checks.resource.properties = JSON.stringify(
-        checks.resource.properties,
-        null,
-        2
-      );
-      checks.action.properties = JSON.stringify(
-        checks.action.properties,
-        null,
-        2
-      );
+      if (checks.subject) {
+        checks.subject.properties = JSON.stringify(
+          checks.subject.properties,
+          null,
+          2
+        );
+      }
+
+      if (checks.resource) {
+        checks.resource.properties = JSON.stringify(
+          checks.resource.properties,
+          null,
+          2
+        );
+      }
+
+      if (checks.action) {
+        checks.action.properties = JSON.stringify(
+          checks.action.properties,
+          null,
+          2
+        );
+      }
 
       checks.evaluations.forEach((evaluation) => {
-        evaluation.resource.properties = JSON.stringify(
-          evaluation.resource.properties,
-          null,
-          2
-        );
-        evaluation.action.properties = JSON.stringify(
-          evaluation.action.properties,
-          null,
-          2
-        );
-        evaluation.subject.properties = JSON.stringify(
-          evaluation.subject.properties,
-          null,
-          2
-        );
-        evaluation.context = JSON.stringify(evaluation.context, null, 2);
+        if (evaluation.resource) {
+          evaluation.resource.properties = JSON.stringify(
+            evaluation.resource.properties,
+            null,
+            2
+          );
+        }
+
+        if (evaluation.action) {
+          evaluation.action.properties = JSON.stringify(
+            evaluation.action.properties,
+            null,
+            2
+          );
+        }
+
+        if (evaluation.subject) {
+          evaluation.subject.properties = JSON.stringify(
+            evaluation.subject.properties,
+            null,
+            2
+          );
+        }
+
+        if (evaluation.context) {
+          evaluation.context = JSON.stringify(evaluation.context, null, 2);
+        }
       });
 
       console.log("checks", checks);
@@ -120,34 +142,54 @@ export const ChecksForm = () => {
       try {
         const checks = _.cloneDeep(formValues);
 
-        checks.subject.properties = JSON.parse(
-          checks.subject.properties as string
-        );
-        checks.resource.properties = JSON.parse(
-          checks.resource.properties as string
-        );
-        checks.action.properties = JSON.parse(
-          checks.action.properties as string
-        );
+        if (checks.subject) {
+          checks.subject.properties = JSON.parse(
+            checks.subject.properties as string
+          );
+        }
 
-        checks.context = JSON.parse(checks.context as string);
+        if (checks.resource) {
+          checks.resource.properties = JSON.parse(
+            checks.resource.properties as string
+          );
+        }
+
+        if (checks.action) {
+          checks.action.properties = JSON.parse(
+            checks.action.properties as string
+          );
+        }
+
+        if (checks.context) {
+          checks.context = JSON.parse(checks.context as string);
+        }
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         checks.evaluations.forEach((evaluation) => {
-          evaluation.resource.properties = JSON.parse(
-            evaluation.resource.properties as string
-          );
-          evaluation.action.properties = JSON.parse(
-            evaluation.action.properties as string
-          );
-          evaluation.subject.properties = JSON.parse(
-            evaluation.subject.properties as string
-          );
+          if (evaluation.resource) {
+            evaluation.resource.properties = JSON.parse(
+              evaluation.resource.properties as string
+            );
+          }
+
+          if (evaluation.action) {
+            evaluation.action.properties = JSON.parse(
+              evaluation.action.properties as string
+            );
+          }
+
+          if (evaluation.subject) {
+            evaluation.subject.properties = JSON.parse(
+              evaluation.subject.properties as string
+            );
+          }
           evaluation.context = JSON.parse(evaluation.context as string);
         });
 
-        const formValuesJSON = JSON.stringify(checks, null, 2);
+        const cleanedChecks = removeNullValues(checks);
+
+        const formValuesJSON = JSON.stringify(cleanedChecks, null, 2);
 
         dispatch(updateChecksState(formValuesJSON));
         setErrorInput(false);

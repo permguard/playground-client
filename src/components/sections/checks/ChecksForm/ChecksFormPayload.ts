@@ -1,9 +1,9 @@
 export type ChecksFormPayload = {
   request_id: string;
-  subject: ISubject;
-  resource: IResource;
-  action: IAction;
-  context: IContext | string;
+  subject: ISubject | undefined;
+  resource: IResource | undefined;
+  action: IAction | undefined;
+  context: string | undefined;
   evaluations: IEvaluation[];
 };
 
@@ -16,11 +16,6 @@ export interface ISubject {
         isSuperUser: boolean;
       }
     | string;
-}
-
-export interface IContext {
-  time: string;
-  isSubscriptionActive: boolean;
 }
 
 export interface IResource {
@@ -44,8 +39,8 @@ export interface IAction {
 
 export interface IEvaluation {
   request_id: string;
-  resource: IResource;
-  action: IAction;
-  subject: ISubject;
-  context: IContext | string;
+  resource?: IResource;
+  action?: IAction;
+  subject?: ISubject;
+  context?: string;
 }

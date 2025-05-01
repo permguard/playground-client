@@ -135,6 +135,7 @@ export const RHFFormBuilder = <
             {item.type === "code" ? (
               <RHFCode
                 fullWidth={item.fullWidth}
+                checkboxNullable={item.checkboxNullable}
                 name={item.name}
                 rules={item.rules}
                 height={item.height}
