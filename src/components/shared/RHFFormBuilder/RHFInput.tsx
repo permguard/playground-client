@@ -34,6 +34,7 @@ interface IRHFInputProps<T extends FieldValues> {
   inputVariant?: "standart" | "expanded";
   // Available only in the expanded variant
   suffixText?: string;
+  checkboxNullable?: boolean;
   numericProps?: {
     min?: string;
     max?: string;
@@ -61,6 +62,7 @@ export const RHFInput = <T extends FieldValues>({
   inputVariant = "standart",
   suffixText,
   numericProps,
+  checkboxNullable,
 }: IRHFInputProps<T>) => {
   const error = getFormErrorByPath(errors, name);
 
@@ -93,6 +95,18 @@ export const RHFInput = <T extends FieldValues>({
               {label}
               {labelSymbol}
             </label>
+            {checkboxNullable ? (
+              <input
+                id={`checkbox-${name}`}
+                name={`checkbox-${name}`}
+                checked={!(value === null || value === undefined)}
+                onChange={(e) => {
+                  onChange(e.target.checked ? "" : null);
+                }}
+                type="checkbox"
+                className="h- my-auto sm:-mr-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+              />
+            ) : null}
             {type !== "textarea" ? (
               <div
                 className={classNames(
@@ -115,9 +129,14 @@ export const RHFInput = <T extends FieldValues>({
                     <Icon icon={icon} aria-hidden="true" />
                   </div>
                 ) : null}
+
                 <input
                   {...inputProps}
-                  disabled={disabled}
+                  disabled={
+                    disabled ||
+                    (checkboxNullable &&
+                      (value === null || value === undefined))
+                  }
                   type={type}
                   name={name}
                   id={name}
