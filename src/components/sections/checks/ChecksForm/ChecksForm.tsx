@@ -189,7 +189,10 @@ export const ChecksForm = () => {
               evaluation.subject.properties as string
             );
           }
-          evaluation.context = JSON.parse(evaluation.context as string);
+
+          if (evaluation.context) {
+            evaluation.context = JSON.parse(evaluation.context as string);
+          }
         });
 
         const cleanedChecks = removeNullValues(checks);
@@ -302,6 +305,8 @@ export const ChecksForm = () => {
       );
     });
   });
+
+  console.log(watch());
 
   return (
     <>
