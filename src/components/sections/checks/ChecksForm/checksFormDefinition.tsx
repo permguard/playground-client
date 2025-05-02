@@ -118,13 +118,16 @@ export const getChecksFormDefinition = ({
       groupClassName: "col-span-12 md:col-span-6 flex flex-col gap-8",
       parentGroup: "subject",
       parentGroupClassName:
-        "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8",
+        "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8 relative p-4",
       options: [
         { label: "user", value: "user" },
         { label: "role-actor", value: "role-actor" },
         { label: "twin-actor", value: "twin-actor" },
       ],
       disabled: !presence["subject"],
+      additionalContent: presence["subject"] ? null : (
+        <div className="absolute left-0 right-0 top-0 bottom-0 bg-zinc-600/30 z-20"></div>
+      ),
     },
     {
       type: "textfield",
@@ -183,17 +186,17 @@ export const getChecksFormDefinition = ({
       label: "Resource",
       id: `resource`,
       name: `resource`,
-      className: "col-span-12 md:mt-4",
+      className: "col-span-12 -ml-4 md:-ml-2 md:mt-4",
       inputProps: {
         className: "text-md font-medium text-white",
       },
       visible: true,
       group: `resource`,
       groupClassName:
-        "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 md:border-r border-white/10",
+        "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 md:border-r border-white/10 relative p-4 pt-0",
       parentGroup: "resource_action",
       parentGroupClassName:
-        "grid grid-cols-12 gap-x-2 gap-y-4 gap-x-0 col-span-12",
+        "grid grid-cols-12 gap-x-0 gap-y-4 gap-x-0 col-span-12",
       additionalContent: (
         <SwitchInput
           id="checkbox-resource"
@@ -229,9 +232,13 @@ export const getChecksFormDefinition = ({
       label: "Type",
       labelId: `resource.type`,
       visible: true,
-      group: `resource`,
       parentGroup: "resource_action",
       disabled: !presence["resource"],
+      group: `resource`,
+      className: "col-span-12 md:col-span-6 mt-4 md:mt-0",
+      additionalContent: presence["resource"] ? null : (
+        <div className="absolute left-0 right-0 top-14 md:top-13 bottom-0 bg-zinc-600/30 z-20"></div>
+      ),
     },
     {
       type: "textfield",
@@ -266,14 +273,14 @@ export const getChecksFormDefinition = ({
       label: "Action",
       id: "action",
       name: "action",
-      className: "col-span-12 mt-4",
+      className: "col-span-12 my-4 md:my-0 -ml-4 md:-ml-2",
       inputProps: {
         className: "text-md font-medium text-white",
       },
       visible: true,
       group: `action`,
       groupClassName:
-        "col-span-12 md:col-span-6 flex flex-col mt-4 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none",
+        "col-span-12 mt-4 md:mt-0 md:col-span-6 flex flex-col gap-8 md:pr-4 relative p-4 border-white/10 border-t md:border-none",
       parentGroup: "resource_action",
       additionalContent: (
         <SwitchInput
@@ -311,6 +318,9 @@ export const getChecksFormDefinition = ({
       group: `action`,
       parentGroup: "resource_action",
       disabled: !presence["action"],
+      additionalContent: presence["action"] ? null : (
+        <div className="absolute left-0 right-0 top-22 md:top-13 bottom-0 bg-zinc-600/30 z-20"></div>
+      ),
     },
     {
       type: "code",
@@ -376,6 +386,11 @@ export const getChecksFormDefinition = ({
       height: "200px",
       language: "json",
       disabled: !presence["context"],
+      additionalContent: presence["context"] ? null : (
+        <div className="absolute left-0 right-0 top-0 bottom-0 bg-zinc-600/30 z-20"></div>
+      ),
+      parentGroupClassName:
+        "grid grid-cols-12 gap-x-2 gap-y-4 gap-x-0 col-span-12 relative p-4",
     },
     {
       type: "typography",
