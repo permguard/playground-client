@@ -7,6 +7,7 @@ import { FormBackdrop } from "@/components/shared/RHFFormBuilder/FormBackdrop";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import CheckDialog from "./CheckDialog/CheckDialog";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export const ChecksPage = () => {
   const isLoading = useSelector((state: RootState) => state.checks.isLoading);
@@ -25,15 +26,17 @@ export const ChecksPage = () => {
           <div className="flex gap-1">
             <Tab
               key="request"
-              className="rounded-full px-3 py-1 text-sm/6 font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white  data-selected:text-fuchsia-500 "
+              className="rounded-full flex gap-2 px-3 py-1 text-sm/6 font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white  data-selected:text-fuchsia-500 "
             >
-              Request
+              <Icon icon="hugeicons:mail-send-01" fontSize={24} />
+              <span>Request</span>
             </Tab>
             <Tab
               key="response"
-              className="rounded-full px-3 py-1 text-sm/6 font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white  data-selected:text-fuchsia-500 "
+              className="rounded-full flex gap-2 px-3 py-1 text-sm/6 font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white  data-selected:text-fuchsia-500 "
             >
-              Response
+              <Icon icon="hugeicons:mail-receive-01" fontSize={24} />
+              <span>Response</span>
             </Tab>
           </div>
         </TabList>
