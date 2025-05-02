@@ -82,27 +82,50 @@ export const RHFCode = <T extends FieldValues>({
                 />
               ) : null}
             </div>
-            <Editor
-              theme={"vs-dark"}
-              height={height}
-              defaultLanguage={language}
-              language={language}
-              value={value}
-              onChange={onChange}
-              loading={
-                <div className="w-full h-full bg-[##272626] animate-pulse"></div>
-              }
-              options={{
-                minimap: {
-                  enabled: false,
-                },
-                readOnly: disabled,
-                // editor: {
-                //   // Disable drop shadow
-                //   dropShadow: false,
-                // },
-              }}
-            />
+            {value === null ? (
+              <Editor
+                theme={"vs-dark"}
+                height={height}
+                defaultLanguage={language}
+                language={language}
+                value={""}
+                loading={
+                  <div className="w-full h-full bg-[##272626] animate-pulse"></div>
+                }
+                options={{
+                  minimap: {
+                    enabled: false,
+                  },
+                  readOnly: true,
+                }}
+              />
+            ) : (
+              <Editor
+                theme={"vs-dark"}
+                height={height}
+                defaultLanguage={language}
+                language={language}
+                value={value}
+                onChange={(e, event) => {
+                  if (!event.isFlush) {
+                    onChange(e);
+                  }
+                }}
+                loading={
+                  <div className="w-full h-full bg-[##272626] animate-pulse"></div>
+                }
+                options={{
+                  minimap: {
+                    enabled: false,
+                  },
+                  readOnly: disabled,
+                  // editor: {
+                  //   // Disable drop shadow
+                  //   dropShadow: false,
+                  // },
+                }}
+              />
+            )}
           </div>
         )}
       />

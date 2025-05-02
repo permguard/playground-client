@@ -86,7 +86,7 @@ export const getChecksFormDefinition = ({
               setValue(
                 "subject",
                 {
-                  type: "",
+                  type: "user",
                   id: "",
                   source: "",
                   properties: "{}",
@@ -98,7 +98,7 @@ export const getChecksFormDefinition = ({
               setValue("subject.id", null);
               setValue("subject.source", null);
               setValue("subject.properties", null);
-              setValue("subject", null, { shouldValidate: false });
+              setValue("subject", null, { shouldValidate: true });
             }
           }}
           type="checkbox"
