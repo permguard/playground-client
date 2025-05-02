@@ -195,6 +195,33 @@ export const getChecksFormDefinition = ({
       parentGroup: "resource_action",
       parentGroupClassName:
         "grid grid-cols-12 gap-x-2 gap-y-4 gap-x-0 col-span-12",
+      additionalContent: (
+        <input
+          id="checkbox-resource"
+          name="checkbox-resource"
+          checked={presence["resource"]}
+          onChange={(e) => {
+            if (e.target.checked) {
+              setValue(
+                "resource",
+                {
+                  type: "",
+                  id: "",
+                  properties: "{}",
+                },
+                { shouldValidate: true }
+              );
+            } else {
+              setValue("resource.type", null);
+              setValue("resource.id", null);
+              setValue("resource.properties", null);
+              setValue("resource", null, { shouldValidate: true });
+            }
+          }}
+          type="checkbox"
+          className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+        />
+      ),
     },
     {
       type: "textfield",
@@ -207,6 +234,7 @@ export const getChecksFormDefinition = ({
       visible: true,
       group: `resource`,
       parentGroup: "resource_action",
+      disabled: !presence["resource"],
     },
     {
       type: "textfield",
@@ -219,6 +247,7 @@ export const getChecksFormDefinition = ({
       visible: true,
       group: `resource`,
       parentGroup: "resource_action",
+      disabled: !presence["resource"],
     },
     {
       type: "code",
@@ -233,6 +262,7 @@ export const getChecksFormDefinition = ({
       group: `resource`,
       className: "col-span-12 md:col-span-6 md:mt-auto",
       parentGroup: "resource_action",
+      disabled: !presence["resource"],
     },
     {
       type: "typography",
@@ -248,6 +278,31 @@ export const getChecksFormDefinition = ({
       groupClassName:
         "col-span-12 md:col-span-6 flex flex-col mt-4 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none",
       parentGroup: "resource_action",
+      additionalContent: (
+        <input
+          id="checkbox-action"
+          name="checkbox-action"
+          checked={presence["action"]}
+          onChange={(e) => {
+            if (e.target.checked) {
+              setValue(
+                "action",
+                {
+                  name: "",
+                  properties: "{}",
+                },
+                { shouldValidate: true }
+              );
+            } else {
+              setValue("action.name", null);
+              setValue("action.properties", null);
+              setValue("action", null, { shouldValidate: true });
+            }
+          }}
+          type="checkbox"
+          className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+        />
+      ),
     },
     {
       type: "textfield",
@@ -260,6 +315,7 @@ export const getChecksFormDefinition = ({
       visible: true,
       group: `action`,
       parentGroup: "resource_action",
+      disabled: !presence["action"],
     },
     {
       type: "code",
@@ -274,6 +330,7 @@ export const getChecksFormDefinition = ({
       group: `action`,
       className: "col-span-12 mt-auto",
       parentGroup: "resource_action",
+      disabled: !presence["action"],
     },
     {
       type: "typography",
@@ -296,6 +353,23 @@ export const getChecksFormDefinition = ({
         className: "text-md font-medium text-white",
       },
       visible: true,
+
+      additionalContent: (
+        <input
+          id="checkbox-context"
+          name="checkbox-context"
+          checked={presence["context"]}
+          onChange={(e) => {
+            if (e.target.checked) {
+              setValue("context", "{}", { shouldValidate: true });
+            } else {
+              setValue("context", null, { shouldValidate: true });
+            }
+          }}
+          type="checkbox"
+          className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+        />
+      ),
     },
     {
       type: "code",
@@ -308,6 +382,7 @@ export const getChecksFormDefinition = ({
       parentGroup: "context",
       height: "200px",
       language: "json",
+      disabled: !presence["context"],
     },
     {
       type: "typography",

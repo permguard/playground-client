@@ -20,22 +20,24 @@ export interface ISubject {
 }
 
 export interface IResource {
-  type: string;
-  id: string;
+  type: string | null;
+  id: string | null;
   properties:
     | {
         isEnabled: boolean;
       }
-    | string;
+    | string
+    | null;
 }
 
 export interface IAction {
-  name: string;
+  name: string | null;
   properties:
     | {
         isEnabled: boolean;
       }
-    | string;
+    | string
+    | null;
 }
 
 export interface IEvaluation {
