@@ -4,6 +4,7 @@ import {
 } from "@/components/shared/RHFFormBuilder/types";
 import { ChecksFormPayload } from "./ChecksFormPayload";
 import { UseFormSetValue } from "react-hook-form";
+import { SwitchInput } from "@/components/shared/RHFFormBuilder/Switch";
 
 const borderClasses = [
   "border-[#FFA07A]",
@@ -77,12 +78,12 @@ export const getChecksFormDefinition = ({
       },
       visible: true,
       additionalContent: (
-        <input
+        <SwitchInput
           id="checkbox-subject"
           name="checkbox-subject"
           checked={presence["subject"]}
-          onChange={(e) => {
-            if (e.target.checked) {
+          onChange={(checked) => {
+            if (checked) {
               setValue(
                 "subject",
                 {
@@ -101,8 +102,6 @@ export const getChecksFormDefinition = ({
               setValue("subject", null, { shouldValidate: true });
             }
           }}
-          type="checkbox"
-          className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
         />
       ),
     },
@@ -196,12 +195,12 @@ export const getChecksFormDefinition = ({
       parentGroupClassName:
         "grid grid-cols-12 gap-x-2 gap-y-4 gap-x-0 col-span-12",
       additionalContent: (
-        <input
+        <SwitchInput
           id="checkbox-resource"
           name="checkbox-resource"
           checked={presence["resource"]}
-          onChange={(e) => {
-            if (e.target.checked) {
+          onChange={(checked) => {
+            if (checked) {
               setValue(
                 "resource",
                 {
@@ -218,8 +217,6 @@ export const getChecksFormDefinition = ({
               setValue("resource", null, { shouldValidate: true });
             }
           }}
-          type="checkbox"
-          className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
         />
       ),
     },
@@ -279,12 +276,12 @@ export const getChecksFormDefinition = ({
         "col-span-12 md:col-span-6 flex flex-col mt-4 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none",
       parentGroup: "resource_action",
       additionalContent: (
-        <input
+        <SwitchInput
           id="checkbox-action"
           name="checkbox-action"
           checked={presence["action"]}
-          onChange={(e) => {
-            if (e.target.checked) {
+          onChange={(checked) => {
+            if (checked) {
               setValue(
                 "action",
                 {
@@ -299,8 +296,6 @@ export const getChecksFormDefinition = ({
               setValue("action", null, { shouldValidate: true });
             }
           }}
-          type="checkbox"
-          className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
         />
       ),
     },
@@ -355,19 +350,17 @@ export const getChecksFormDefinition = ({
       visible: true,
 
       additionalContent: (
-        <input
+        <SwitchInput
           id="checkbox-context"
           name="checkbox-context"
           checked={presence["context"]}
-          onChange={(e) => {
-            if (e.target.checked) {
+          onChange={(checked) => {
+            if (checked) {
               setValue("context", "{}", { shouldValidate: true });
             } else {
               setValue("context", null, { shouldValidate: true });
             }
           }}
-          type="checkbox"
-          className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
         />
       ),
     },
@@ -434,12 +427,12 @@ export const getChecksFormDefinition = ({
               visible: true,
               parentGroup: `evaluations[${index}]`,
               additionalContent: (
-                <input
+                <SwitchInput
                   id={`evaluations[${index}]-subject`}
                   name={`evaluations[${index}]-subject`}
                   checked={presence[`evaluations[${index}].subject`]}
-                  onChange={(e) => {
-                    if (e.target.checked) {
+                  onChange={(checked) => {
+                    if (checked) {
                       setValue(
                         `evaluations[${index}].subject` as keyof ChecksFormPayload,
                         {
@@ -476,8 +469,6 @@ export const getChecksFormDefinition = ({
                       );
                     }
                   }}
-                  type="checkbox"
-                  className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
                 />
               ),
             },
@@ -569,11 +560,11 @@ export const getChecksFormDefinition = ({
               groupClassName:
                 "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 md:border-r border-white/10",
               additionalContent: (
-                <input
+                <SwitchInput
                   name={`evaluations[${index}].resource`}
                   checked={presence[`evaluations[${index}].resource`]}
-                  onChange={(e) => {
-                    if (e.target.checked) {
+                  onChange={(checked) => {
+                    if (checked) {
                       setValue(
                         `evaluations[${index}].resource` as keyof ChecksFormPayload,
                         {
@@ -605,8 +596,6 @@ export const getChecksFormDefinition = ({
                       );
                     }
                   }}
-                  type="checkbox"
-                  className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
                 />
               ),
             },
@@ -666,11 +655,11 @@ export const getChecksFormDefinition = ({
               groupClassName:
                 "col-span-12 md:col-span-6 flex flex-col mt-4 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none",
               additionalContent: (
-                <input
+                <SwitchInput
                   name={`evaluations[${index}].action`}
                   checked={presence[`evaluations[${index}].action`]}
-                  onChange={(e) => {
-                    if (e.target.checked) {
+                  onChange={(checked) => {
+                    if (checked) {
                       setValue(
                         `evaluations[${index}].action` as keyof ChecksFormPayload,
                         {
@@ -697,8 +686,6 @@ export const getChecksFormDefinition = ({
                       );
                     }
                   }}
-                  type="checkbox"
-                  className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
                 />
               ),
             },
@@ -742,13 +729,13 @@ export const getChecksFormDefinition = ({
               },
               visible: true,
               additionalContent: (
-                <input
+                <SwitchInput
                   name={
                     `evaluations[${index}].context` as keyof ChecksFormPayload
                   }
                   checked={presence[`evaluations[${index}].context`]}
-                  onChange={(e) => {
-                    if (e.target.checked) {
+                  onChange={(checked) => {
+                    if (checked) {
                       setValue(
                         `evaluations[${index}].context` as keyof ChecksFormPayload,
                         "{}",
@@ -766,8 +753,6 @@ export const getChecksFormDefinition = ({
                       );
                     }
                   }}
-                  type="checkbox"
-                  className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
                 />
               ),
             },
