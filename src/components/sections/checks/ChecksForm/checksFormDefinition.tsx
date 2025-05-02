@@ -433,6 +433,53 @@ export const getChecksFormDefinition = ({
               },
               visible: true,
               parentGroup: `evaluations[${index}]`,
+              additionalContent: (
+                <input
+                  id={`evaluations[${index}]-subject`}
+                  name={`evaluations[${index}]-subject`}
+                  checked={presence[`evaluations[${index}].subject`]}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setValue(
+                        `evaluations[${index}].subject` as keyof ChecksFormPayload,
+                        {
+                          type: "user",
+                          id: "",
+                          source: "",
+                          properties: "{}",
+                        },
+                        { shouldValidate: true }
+                      );
+                    } else {
+                      setValue(
+                        `evaluations[${index}].subject.type` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].subject.id` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].subject.source` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].subject.properties` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].subject` as keyof ChecksFormPayload,
+                        null,
+                        {
+                          shouldValidate: true,
+                        }
+                      );
+                    }
+                  }}
+                  type="checkbox"
+                  className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+                />
+              ),
             },
             {
               type: "select",
@@ -452,6 +499,7 @@ export const getChecksFormDefinition = ({
                 { label: "role-actor", value: "role-actor" },
                 { label: "twin-actor", value: "twin-actor" },
               ],
+              disabled: !presence[`evaluations[${index}].subject`],
             },
             {
               type: "textfield",
@@ -464,6 +512,7 @@ export const getChecksFormDefinition = ({
               visible: true,
               group: `evaluations[${index}].subject_left_column`,
               parentGroup: `evaluations[${index}]`,
+              disabled: !presence[`evaluations[${index}].subject`],
             },
             {
               type: "textfield",
@@ -476,6 +525,7 @@ export const getChecksFormDefinition = ({
               visible: true,
               group: `evaluations[${index}].subject_left_column`,
               parentGroup: `evaluations[${index}]`,
+              disabled: !presence[`evaluations[${index}].subject`],
             },
             {
               type: "code",
@@ -490,6 +540,7 @@ export const getChecksFormDefinition = ({
               groupClassName: "col-span-12 md:col-span-6 md:pl-4",
               group: `evaluations[${index}].subject_right_column`,
               parentGroup: `evaluations[${index}]`,
+              disabled: !presence[`evaluations[${index}].subject`],
             },
             {
               type: "typography",
@@ -517,6 +568,47 @@ export const getChecksFormDefinition = ({
               group: `evaluations[${index}].resource`,
               groupClassName:
                 "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 md:border-r border-white/10",
+              additionalContent: (
+                <input
+                  name={`evaluations[${index}].resource`}
+                  checked={presence[`evaluations[${index}].resource`]}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setValue(
+                        `evaluations[${index}].resource` as keyof ChecksFormPayload,
+                        {
+                          type: "",
+                          id: "",
+                          properties: "{}",
+                        },
+                        { shouldValidate: true }
+                      );
+                    } else {
+                      setValue(
+                        `evaluations[${index}].resource.type` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].resource.id` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].resource.properties` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].resource` as keyof ChecksFormPayload,
+                        null,
+                        {
+                          shouldValidate: true,
+                        }
+                      );
+                    }
+                  }}
+                  type="checkbox"
+                  className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+                />
+              ),
             },
             {
               type: "textfield",
@@ -529,6 +621,7 @@ export const getChecksFormDefinition = ({
               visible: true,
               group: `evaluations[${index}].resource`,
               parentGroup: `evaluations[${index}]`,
+              disabled: !presence[`evaluations[${index}].resource`],
             },
             {
               type: "textfield",
@@ -541,6 +634,7 @@ export const getChecksFormDefinition = ({
               visible: true,
               group: `evaluations[${index}].resource`,
               parentGroup: `evaluations[${index}]`,
+              disabled: !presence[`evaluations[${index}].resource`],
             },
             {
               type: "code",
@@ -555,6 +649,7 @@ export const getChecksFormDefinition = ({
               group: `evaluations[${index}].resource`,
               parentGroup: `evaluations[${index}]`,
               className: "col-span-12 md:col-span-6 md:mt-auto",
+              disabled: !presence[`evaluations[${index}].resource`],
             },
             {
               type: "typography",
@@ -570,6 +665,42 @@ export const getChecksFormDefinition = ({
               group: `evaluations[${index}].action`,
               groupClassName:
                 "col-span-12 md:col-span-6 flex flex-col mt-4 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none",
+              additionalContent: (
+                <input
+                  name={`evaluations[${index}].action`}
+                  checked={presence[`evaluations[${index}].action`]}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setValue(
+                        `evaluations[${index}].action` as keyof ChecksFormPayload,
+                        {
+                          name: "",
+                          properties: "{}",
+                        },
+                        { shouldValidate: true }
+                      );
+                    } else {
+                      setValue(
+                        `evaluations[${index}].action.name` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].action.properties` as keyof ChecksFormPayload,
+                        null
+                      );
+                      setValue(
+                        `evaluations[${index}].action` as keyof ChecksFormPayload,
+                        null,
+                        {
+                          shouldValidate: true,
+                        }
+                      );
+                    }
+                  }}
+                  type="checkbox"
+                  className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+                />
+              ),
             },
             {
               type: "textfield",
@@ -582,6 +713,7 @@ export const getChecksFormDefinition = ({
               visible: true,
               parentGroup: `evaluations[${index}]`,
               group: `evaluations[${index}].action`,
+              disabled: !presence[`evaluations[${index}].action`],
             },
             {
               type: "code",
@@ -596,6 +728,7 @@ export const getChecksFormDefinition = ({
               parentGroup: `evaluations[${index}]`,
               group: `evaluations[${index}].action`,
               className: "col-span-12 mt-auto",
+              disabled: !presence[`evaluations[${index}].action`],
             },
             {
               type: "typography",
@@ -608,6 +741,35 @@ export const getChecksFormDefinition = ({
                 className: "text-md font-medium text-white",
               },
               visible: true,
+              additionalContent: (
+                <input
+                  name={
+                    `evaluations[${index}].context` as keyof ChecksFormPayload
+                  }
+                  checked={presence[`evaluations[${index}].context`]}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setValue(
+                        `evaluations[${index}].context` as keyof ChecksFormPayload,
+                        "{}",
+                        {
+                          shouldValidate: true,
+                        }
+                      );
+                    } else {
+                      setValue(
+                        `evaluations[${index}].context` as keyof ChecksFormPayload,
+                        null,
+                        {
+                          shouldValidate: true,
+                        }
+                      );
+                    }
+                  }}
+                  type="checkbox"
+                  className="my-auto ml-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+                />
+              ),
             },
             {
               type: "code",
@@ -620,6 +782,7 @@ export const getChecksFormDefinition = ({
               parentGroup: `evaluations[${index}]`,
               height: "200px",
               language: "json",
+              disabled: !presence[`evaluations[${index}].context`],
             },
           ] as IFormDefinition<FlattenKeys<ChecksFormPayload>>
       )
