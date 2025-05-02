@@ -22,6 +22,8 @@ interface IRHFSelectProps<T extends FieldValues> {
   labelId: string;
   translateOptions?: boolean;
   requiredFieldSymbol?: boolean | string;
+  checkboxNullable?: boolean;
+  disabled?: boolean;
   onCustomChange?: (data: {
     fieldName: string;
     value: string | string[];
@@ -38,6 +40,8 @@ export const RHFSelect = <T extends FieldValues>({
   labelPlaceholder,
   onCustomChange,
   requiredFieldSymbol,
+  disabled,
+  checkboxNullable,
 }: IRHFSelectProps<T>) => {
   const error = getFormErrorByPath(errors, name);
 
@@ -60,6 +64,10 @@ export const RHFSelect = <T extends FieldValues>({
           return (
             <>
               <Listbox
+                disabled={
+                  disabled ||
+                  (checkboxNullable && (value === null || value === undefined))
+                }
                 value={value ?? null}
                 onChange={
                   onCustomChange
@@ -77,11 +85,23 @@ export const RHFSelect = <T extends FieldValues>({
                       {label}
                       {labelSymbol}
                     </Listbox.Label>
+                    {checkboxNullable ? (
+                      <input
+                        id={`checkbox-${name}`}
+                        name={`checkbox-${name}`}
+                        checked={!(value === null || value === undefined)}
+                        onChange={(e) => {
+                          onChange(e.target.checked ? "" : null);
+                        }}
+                        type="checkbox"
+                        className="h- my-auto sm:-mr-4 w-4 rounded text-fuchsia-500 focus:ring-fuchsia-500 bg-zinc-800 border-gray-900"
+                      />
+                    ) : null}
                     <div className="relative flex-1">
                       <Listbox.Button
-                        className={`min-h-9 relative w-full cursor-default rounded-md py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-fuchsia-500 sm:text-sm sm:leading-6 bg-[#424242]/50 placeholder-gray-400 text-white ${
+                        className={`min-h-9 relative w-full rounded-md py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-fuchsia-500 sm:text-sm sm:leading-6 bg-[#424242]/50 placeholder-gray-400 text-white ${
                           error !== undefined ? "ring-red-500" : "ring-zinc-700"
-                        }`}
+                        } ${disabled ? "!cursor-default" : "!cursor-pointer"}`}
                       >
                         <span
                           className={`block truncate ${

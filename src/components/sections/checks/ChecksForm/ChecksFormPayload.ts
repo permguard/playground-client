@@ -1,51 +1,49 @@
 export type ChecksFormPayload = {
   request_id: string;
-  subject: ISubject;
-  resource: IResource;
-  action: IAction;
-  context: IContext | string;
+  subject: ISubject | null;
+  resource: IResource | null;
+  action: IAction | null;
+  context: string | null;
   evaluations: IEvaluation[];
 };
 
 export interface ISubject {
-  type: string;
-  id: string;
-  source: string;
+  type: string | null;
+  id: string | null;
+  source: string | null;
   properties:
     | {
         isSuperUser: boolean;
       }
-    | string;
-}
-
-export interface IContext {
-  time: string;
-  isSubscriptionActive: boolean;
+    | string
+    | null;
 }
 
 export interface IResource {
-  type: string;
-  id: string;
+  type: string | null;
+  id: string | null;
   properties:
     | {
         isEnabled: boolean;
       }
-    | string;
+    | string
+    | null;
 }
 
 export interface IAction {
-  name: string;
+  name: string | null;
   properties:
     | {
         isEnabled: boolean;
       }
-    | string;
+    | string
+    | null;
 }
 
 export interface IEvaluation {
   request_id: string;
-  resource: IResource;
-  action: IAction;
-  subject: ISubject;
-  context: IContext | string;
+  resource?: IResource;
+  action?: IAction;
+  subject?: ISubject;
+  context?: string;
 }

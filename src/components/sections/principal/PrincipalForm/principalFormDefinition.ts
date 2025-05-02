@@ -45,7 +45,7 @@ export const getPrincipalFormDefinition = ({
     },
     {
       type: "textfield",
-      icon: "mdi:source-branch",
+      icon: "mdi:database",
       requiredFieldSymbol: true,
       name: "source",
       id: "source",

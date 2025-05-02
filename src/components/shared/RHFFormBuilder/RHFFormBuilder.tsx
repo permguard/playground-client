@@ -66,6 +66,7 @@ export const RHFFormBuilder = <
           <>
             {item.type === "textfield" ? (
               <RHFInput
+                checkboxNullable={item.checkboxNullable}
                 inputVariant={item.inputVariant}
                 suffixText={item.suffixText}
                 type={item.inputType ?? "text"}
@@ -120,12 +121,14 @@ export const RHFFormBuilder = <
             {item.type === "select" ? (
               <RHFSelect
                 control={control}
+                checkboxNullable={item.checkboxNullable}
                 errors={errors}
                 id={item.id}
                 label={item.label}
                 options={item.options!}
                 labelId={item.labelId as string}
                 name={item.name}
+                disabled={item.disabled}
                 requiredFieldSymbol={item.requiredFieldSymbol}
                 labelPlaceholder={item.labelPlaceholder}
               />
@@ -133,6 +136,7 @@ export const RHFFormBuilder = <
             {item.type === "code" ? (
               <RHFCode
                 fullWidth={item.fullWidth}
+                checkboxNullable={item.checkboxNullable}
                 name={item.name}
                 rules={item.rules}
                 height={item.height}

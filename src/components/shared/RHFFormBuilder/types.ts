@@ -27,6 +27,7 @@ export interface IFormControl<InputNames extends string> {
   inputType?: string;
   inputVariant?: "standart" | "expanded";
   suffixText?: string;
+  checkboxNullable?: boolean;
   fullWidth?: boolean;
   textContent?: string;
   autoComplete?: boolean;

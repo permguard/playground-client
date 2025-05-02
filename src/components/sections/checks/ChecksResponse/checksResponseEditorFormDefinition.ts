@@ -11,7 +11,7 @@ export const getChecksResponseEditorFormDefinition = (): IFormDefinition<
     {
       type: "typography",
       label: "Response (read-only)",
-      className: "col-span-12 mt-[62px]",
+      className: "col-span-12 mt-4",
       inputProps: {
         className: "text-md font-medium text-white",
       },

@@ -1,15 +1,23 @@
-import { EXAMPLES } from "@/utils/examples/examples";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { initLedgerState } from "./initLedgerState";
+import { initChecksState } from "@/store/checks/middleware/initChecksState";
+import { initEntitiesState } from "@/store/entities/middleware/initEntitiesState";
+import { initPrincipalState } from "@/store/principal/middleware/initPrincipalState";
+import { initServerState } from "@/store/server/middleware/initServerState";
 
-export const reset = createAsyncThunk("ledger/resetStatus", async () => {
-  localStorage.removeItem("ledger:json_code");
+export const reset = createAsyncThunk(
+  "ledger/resetStatus",
+  async (arg: undefined, thunkApi) => {
+    localStorage.removeItem("ledger:json_code");
+    localStorage.removeItem("checks:json_code");
+    localStorage.removeItem("entities:json_code");
+    localStorage.removeItem("principal:json_code");
+    localStorage.removeItem("server:json_code");
 
-  const selectedExampleName =
-    localStorage.getItem("selected_example_name") || EXAMPLES[0].name;
-
-  const selectedExample = EXAMPLES.find(
-    (el) => el.name === selectedExampleName
-  );
-
-  return selectedExample;
-});
+    thunkApi.dispatch(initLedgerState());
+    thunkApi.dispatch(initChecksState());
+    thunkApi.dispatch(initEntitiesState());
+    thunkApi.dispatch(initPrincipalState());
+    thunkApi.dispatch(initServerState());
+  }
+);
