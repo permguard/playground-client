@@ -418,10 +418,10 @@ export const getChecksFormDefinition = ({
               labelId: `evaluations[${index}].request_id`,
               visible: true,
               parentGroup: `evaluations[${index}]`,
-              parentGroupClassName: `p-4 border rounded-md grid transition-[height] duration-150 h-18 grid-cols-12 gap-x-2 gap-y-4 gap-x-0 col-span-12 relative relative overflow-hidden ${
+              parentGroupClassName: `p-4 border rounded-md grid transition-[height] duration-150 h-18 grid-cols-12 gap-x-0 gap-y-4 gap-x-0 col-span-12 relative relative overflow-hidden ${
                 borderClasses[index % 10]
               } ${
-                expandedSectionIndex === index ? "h-[1752px] md:h-[1184px]" : ""
+                expandedSectionIndex === index ? "h-[1856px] md:h-[1229px]" : ""
               } `,
               group: `evaluations[${index}].request_id`,
               groupClassName:
@@ -498,7 +498,7 @@ export const getChecksFormDefinition = ({
               visible: true,
               group: `evaluations[${index}].subject_left_column`,
               groupClassName:
-                "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4",
+                "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 relative p-4",
               parentGroup: `evaluations[${index}]`,
               options: [
                 { label: "user", value: "user" },
@@ -506,6 +506,11 @@ export const getChecksFormDefinition = ({
                 { label: "twin-actor", value: "twin-actor" },
               ],
               disabled: !presence[`evaluations[${index}].subject`],
+              additionalContent: presence[
+                `evaluations[${index}].subject`
+              ] ? null : (
+                <div className="absolute left-0 right-0 top-0 bottom-0 bg-zinc-600/30 z-20"></div>
+              ),
             },
             {
               type: "textfield",
@@ -543,10 +548,16 @@ export const getChecksFormDefinition = ({
               height: "200px",
               language: "json",
               visible: true,
-              groupClassName: "col-span-12 md:col-span-6 md:pl-4",
+              groupClassName:
+                "col-span-12 md:col-span-6 md:pl-4 relative p-4 pt-4 md:pt-0 -mt-4 md:mt-0",
               group: `evaluations[${index}].subject_right_column`,
               parentGroup: `evaluations[${index}]`,
               disabled: !presence[`evaluations[${index}].subject`],
+              additionalContent: presence[
+                `evaluations[${index}].subject`
+              ] ? null : (
+                <div className="absolute left-0 right-0 top-0 bottom-0 bg-zinc-600/30 z-20"></div>
+              ),
             },
             {
               type: "typography",
@@ -565,7 +576,7 @@ export const getChecksFormDefinition = ({
               label: "Resource",
               id: `evaluations[${index}].resource`,
               name: `evaluations[${index}].resource`,
-              className: "col-span-12 md:mt-4",
+              className: "col-span-12 -mt-4 -ml-4 md:mt-0",
               inputProps: {
                 className: "text-md font-medium text-white",
               },
@@ -573,7 +584,7 @@ export const getChecksFormDefinition = ({
               parentGroup: `evaluations[${index}]`,
               group: `evaluations[${index}].resource`,
               groupClassName:
-                "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 md:border-r border-white/10",
+                "col-span-12 md:col-span-6 flex flex-col gap-8 md:pr-4 md:border-r border-white/10 relative p-4",
               additionalContent: (
                 <SwitchInput
                   name={`evaluations[${index}].resource`}
@@ -626,6 +637,11 @@ export const getChecksFormDefinition = ({
               group: `evaluations[${index}].resource`,
               parentGroup: `evaluations[${index}]`,
               disabled: !presence[`evaluations[${index}].resource`],
+              additionalContent: presence[
+                `evaluations[${index}].resource`
+              ] ? null : (
+                <div className="absolute left-0 right-0 top-10 md:top-14 bottom-0 bg-zinc-600/30 z-20"></div>
+              ),
             },
             {
               type: "textfield",
@@ -660,7 +676,7 @@ export const getChecksFormDefinition = ({
               label: "Action",
               id: "action",
               name: "action",
-              className: "col-span-12 mt-4",
+              className: "col-span-12 mt-2 -ml-4 md:-ml-2 md:mt-0",
               inputProps: {
                 className: "text-md font-medium text-white",
               },
@@ -668,7 +684,7 @@ export const getChecksFormDefinition = ({
               parentGroup: `evaluations[${index}]`,
               group: `evaluations[${index}].action`,
               groupClassName:
-                "col-span-12 md:col-span-6 flex flex-col mt-4 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none",
+                "col-span-12 md:col-span-6 flex flex-col mt-2 md:mt-0 gap-8 md:pl-4 border-white/10 border-t md:border-none relative p-4",
               additionalContent: (
                 <SwitchInput
                   name={`evaluations[${index}].action`}
@@ -716,6 +732,11 @@ export const getChecksFormDefinition = ({
               parentGroup: `evaluations[${index}]`,
               group: `evaluations[${index}].action`,
               disabled: !presence[`evaluations[${index}].action`],
+              additionalContent: presence[
+                `evaluations[${index}].action`
+              ] ? null : (
+                <div className="absolute left-0 right-0 top-16 md:top-14 bottom-0 bg-zinc-600/30 z-20"></div>
+              ),
             },
             {
               type: "code",
@@ -778,11 +799,16 @@ export const getChecksFormDefinition = ({
               id: `evaluations[${index}].context`,
               labelId: `evaluations[${index}].context`,
               visible: true,
-              className: "col-span-12",
+              className: "col-span-12 relative p-4",
               parentGroup: `evaluations[${index}]`,
               height: "200px",
               language: "json",
               disabled: !presence[`evaluations[${index}].context`],
+              additionalContent: presence[
+                `evaluations[${index}].context`
+              ] ? null : (
+                <div className="absolute left-0 right-0 top-0 bottom-0 bg-zinc-600/30 z-20"></div>
+              ),
             },
           ] as IFormDefinition<FlattenKeys<ChecksFormPayload>>
       )
