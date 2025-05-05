@@ -1,4 +1,4 @@
-export type ChecksFormPayload = {
+export type EvaluationsFormPayload = {
   request_id: string;
   subject: ISubject | null;
   resource: IResource | null;

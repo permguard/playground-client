@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { ChecksFormPayload } from "./ChecksFormPayload";
-import { getChecksFormDefinition } from "./checksFormDefinition";
+import { EvaluationsFormPayload } from "./EvaluationsFormPayload";
+import { getEvaluationsFormDefinition } from "./evaluationsFormDefinition";
 import { RHFFormBuilder } from "@/components/shared/RHFFormBuilder/RHFFormBuilder";
 import { RootState, useAppDispatch } from "@/store";
-import { updateChecksState } from "@/store/checks/middleware/updateChecksState";
+import { updateEvaluationsState } from "@/store/evaluations/middleware/updateEvaluationsState";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import * as _ from "lodash";
 import { classNames } from "@/utils/classNames";
@@ -16,9 +16,9 @@ const OPTIONAL_FIELDS = [
   "resource",
   "action",
   "context",
-] as (keyof ChecksFormPayload)[];
+] as (keyof EvaluationsFormPayload)[];
 
-export const ChecksForm = () => {
+export const EvaluationsForm = () => {
   const dispatch = useAppDispatch();
 
   const [jsonProcessedState, setJsonProcessedState] = useState({
@@ -30,8 +30,12 @@ export const ChecksForm = () => {
     number | null
   >(null);
 
-  const jsonCode = useSelector((state: RootState) => state.checks.jsonCode);
-  const isInitial = useSelector((state: RootState) => state.checks.isInitial);
+  const jsonCode = useSelector(
+    (state: RootState) => state.evaluations.jsonCode
+  );
+  const isInitial = useSelector(
+    (state: RootState) => state.evaluations.isInitial
+  );
 
   const handleConfirm = useCallback(async () => {}, []);
 
@@ -43,7 +47,7 @@ export const ChecksForm = () => {
     setValue,
     getValues,
     watch,
-  } = useForm<ChecksFormPayload>({
+  } = useForm<EvaluationsFormPayload>({
     defaultValues: {},
     mode: "onChange",
     resolver: (data) => {
@@ -59,7 +63,7 @@ export const ChecksForm = () => {
     try {
       const parsedJSON = JSON.parse(jsonCode!);
 
-      const checks = parsedJSON as ChecksFormPayload;
+      const checks = parsedJSON as EvaluationsFormPayload;
 
       if (checks.context) {
         checks.context = JSON.stringify(checks.context, null, 2);
@@ -142,7 +146,7 @@ export const ChecksForm = () => {
 
   const evaluations = watch("evaluations");
 
-  const handleFormChange = (formValues: ChecksFormPayload) => {
+  const handleFormChange = (formValues: EvaluationsFormPayload) => {
     if (jsonProcessedState.processed && jsonProcessedState.valid) {
       try {
         const checks = _.cloneDeep(formValues);
@@ -199,7 +203,7 @@ export const ChecksForm = () => {
 
         const formValuesJSON = JSON.stringify(cleanedChecks, null, 2);
 
-        dispatch(updateChecksState(formValuesJSON));
+        dispatch(updateEvaluationsState(formValuesJSON));
         setErrorInput(false);
       } catch {
         setErrorInput(true);
@@ -306,14 +310,12 @@ export const ChecksForm = () => {
     });
   });
 
-  console.log(watch());
-
   return (
     <>
-      <div className="h-5 mb-2">
+      <div className="min-h-5 -mt-11 mb-6">
         {(jsonProcessedState.processed && !jsonProcessedState.valid) ||
         errorInput ? (
-          <p className="text-red-500 text-sm mb-4 ">
+          <p className="text-red-500 text-sm max-w-[calc(100%-150px)]">
             {errorInput
               ? "Invalid JSON input detected. Changes won't be saved and applied. Please fix the errors to proceed."
               : "Invalid JSON detected. Please fix the errors to proceed."}
@@ -322,7 +324,7 @@ export const ChecksForm = () => {
       </div>
       <RHFFormBuilder
         handleSubmit={handleSubmit(handleConfirm)}
-        formControls={getChecksFormDefinition({
+        formControls={getEvaluationsFormDefinition({
           addEvaluationBtn,
           removeEvaluationBtn,
           evaluationsCount: evaluations?.length ?? 1,

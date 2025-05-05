@@ -67,13 +67,15 @@ export const EntitiesJSONEditorForm = () => {
           </p>
         ) : null}
       </div>
-      <RHFFormBuilder
-        handleSubmit={handleSubmit(handleConfirm)}
-        formControls={getEntitiesJSONEditorFormDefinition()}
-        control={control}
-        errors={errors}
-        submitButton={<></>}
-      />
+      <div className="mt-5 relative">
+        <RHFFormBuilder
+          handleSubmit={handleSubmit(handleConfirm)}
+          formControls={getEntitiesJSONEditorFormDefinition()}
+          control={control}
+          errors={errors}
+          submitButton={<></>}
+        />
+      </div>
     </>
   );
 };

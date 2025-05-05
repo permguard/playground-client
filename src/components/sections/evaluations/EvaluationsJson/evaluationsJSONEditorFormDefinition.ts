@@ -2,16 +2,16 @@ import {
   IFormDefinition,
   FlattenKeys,
 } from "@/components/shared/RHFFormBuilder/types";
-import { ChecksJSONEditorFormPayload } from "./ChecksJSONEditorFormPayload";
+import { EvaluationsJSONEditorFormPayload } from "./EvaluationsJSONEditorFormPayload";
 
-export const getChecksJSONEditorFormDefinition = (): IFormDefinition<
-  FlattenKeys<ChecksJSONEditorFormPayload>
+export const getEvaluationsJSONEditorFormDefinition = (): IFormDefinition<
+  FlattenKeys<EvaluationsJSONEditorFormPayload>
 > => {
   const baseDefinition = [
     {
       type: "typography",
       label: "Request",
-      className: "col-span-12 mt-11",
+      className: "col-span-12",
       inputProps: {
         className: "text-md font-medium text-white",
       },
@@ -28,7 +28,7 @@ export const getChecksJSONEditorFormDefinition = (): IFormDefinition<
       visible: true,
       className: "col-span-12",
     },
-  ] as IFormDefinition<FlattenKeys<ChecksJSONEditorFormPayload>>;
+  ] as IFormDefinition<FlattenKeys<EvaluationsJSONEditorFormPayload>>;
 
   return baseDefinition;
 };

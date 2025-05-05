@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { initLedgerState } from "./initLedgerState";
-import { initChecksState } from "@/store/checks/middleware/initChecksState";
+import { initEvaluationsState } from "@/store/evaluations/middleware/initEvaluationsState";
 import { initEntitiesState } from "@/store/entities/middleware/initEntitiesState";
 import { initPrincipalState } from "@/store/principal/middleware/initPrincipalState";
 import { initServerState } from "@/store/server/middleware/initServerState";
@@ -15,7 +15,7 @@ export const reset = createAsyncThunk(
     localStorage.removeItem("server:json_code");
 
     thunkApi.dispatch(initLedgerState());
-    thunkApi.dispatch(initChecksState());
+    thunkApi.dispatch(initEvaluationsState());
     thunkApi.dispatch(initEntitiesState());
     thunkApi.dispatch(initPrincipalState());
     thunkApi.dispatch(initServerState());

@@ -9,13 +9,14 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { LedgersPage } from "@/components/sections/ledger";
 import { PrincipalPage } from "@/components/sections/principal";
 import { EntitiesPage } from "@/components/sections/entities";
-import { ChecksPage } from "@/components/sections/checks";
+import { EvaluationsPage } from "@/components/sections/evaluations";
 import { ServerPage } from "@/components/sections/server";
 import { Autocomplete } from "@/components/shared/Autocomplete";
 import { reset } from "@/store/ledger/middleware/reset";
 import { EXAMPLES } from "@/utils/examples/examples";
 import { useSelector } from "react-redux";
 import { Card } from "@/components/shared/Card";
+import { CheckPage } from "@/components/sections/checks";
 
 const tabs = [
   {
@@ -39,11 +40,16 @@ const tabs = [
     page: EntitiesPage,
   },
   {
-    name: "AuthZ Checks",
+    name: "Evaluations",
+    icon: () => <Icon className="mr-2" icon={"ph:exam"} fontSize={24} />,
+    page: EvaluationsPage,
+  },
+  {
+    name: "AuthZ Check",
     icon: () => (
       <Icon className="mr-2" icon={"hugeicons:auction"} fontSize={24} />
     ),
-    page: ChecksPage,
+    page: CheckPage,
   },
   {
     name: "AuthZ Server",
@@ -83,7 +89,7 @@ const Page = () => {
               >
                 <TabList
                   className={
-                    "-mb-px flex space-x-8 w-full xl:w-auto overflow-x-auto no-scrollbar"
+                    "-mb-px flex space-x-8 sm:flex-wrap xl:space-x-4 2xl:space-x-8 w-full xl:w-auto overflow-x-auto no-scrollbar"
                   }
                 >
                   {tabs.map((tab) => (
@@ -102,7 +108,7 @@ const Page = () => {
                   ))}
                 </TabList>
 
-                <div className="flex gap-6 flex-wrap-reverse items-center justify-start w-full xl:w-auto">
+                <div className="flex gap-6 lg:gap-4 2xl:gap-6 flex-wrap-reverse items-center justify-start w-full xl:w-auto">
                   <Autocomplete
                     value={selectedExample}
                     options={EXAMPLES.map((el) => ({

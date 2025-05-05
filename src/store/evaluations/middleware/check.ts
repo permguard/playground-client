@@ -5,7 +5,7 @@ import axios, { AxiosError } from "axios";
 import { ICheckResponse } from "../types/api/ICheckResponse";
 
 export const check = createAsyncThunk(
-  "checks/checkStateStatus",
+  "evaluations/checkStateStatus",
   async (arg: undefined, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState;
@@ -13,7 +13,7 @@ export const check = createAsyncThunk(
       const authorizationModel = JSON.parse(state.ledger.jsonCode!);
       const principal = JSON.parse(state.principal.jsonCode!);
       const entities = JSON.parse(state.entities.jsonCode!);
-      const checks = JSON.parse(state.checks.jsonCode!);
+      const evaluations = JSON.parse(state.evaluations.jsonCode!);
       const server = JSON.parse(state.server.jsonCode!);
 
       const payload = {
@@ -22,7 +22,7 @@ export const check = createAsyncThunk(
           principal,
           entities,
         },
-        ...checks,
+        ...evaluations,
         ...server,
       };
 

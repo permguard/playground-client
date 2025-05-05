@@ -1,40 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IChecksState } from "./types/IChecksState";
-import { initChecksState } from "./middleware/initChecksState";
-import { updateChecksState } from "./middleware/updateChecksState";
+import { IEvaluationsState as IEvaluationsState } from "./types/IEvaluationsState";
+import { initEvaluationsState } from "./middleware/initEvaluationsState";
+import { updateEvaluationsState } from "./middleware/updateEvaluationsState";
 import { EXAMPLES } from "@/utils/examples/examples";
 import { setSelectedExample } from "../ledger/middleware/setSelectedExample";
 import { check } from "./middleware/check";
 
-const initialState: IChecksState = {
+const initialState: IEvaluationsState = {
   selectedExample: EXAMPLES[0].name,
   isLoading: false,
   isModalOpen: false,
   isInitial: true,
+  response: null,
 };
 
-const checksSlice = createSlice({
-  name: "checks",
+const evaluationsSlice = createSlice({
+  name: "evaluations",
   initialState,
   reducers: {
     closeModal: (state) => {
       state.isModalOpen = false;
     },
+    resetResponse: (state) => {
+      state.response = null;
+    },
   },
 
   extraReducers: (builder) => {
-    builder.addCase(initChecksState.fulfilled, (state, action) => {
+    builder.addCase(initEvaluationsState.fulfilled, (state, action) => {
       state.jsonCode = action.payload.jsonCode;
+      state.response = null;
       state.isInitial = true;
     });
 
-    builder.addCase(updateChecksState.fulfilled, (state, action) => {
+    builder.addCase(updateEvaluationsState.fulfilled, (state, action) => {
       state.jsonCode = action.meta.arg;
       state.isInitial = false;
     });
 
     builder.addCase(setSelectedExample.fulfilled, (state, action) => {
-      state.jsonCode = action.payload?.checks;
+      state.jsonCode = action.payload?.evaluations;
       state.selectedExample = action.meta.arg.name;
       state.isInitial = true;
     });
@@ -55,6 +60,6 @@ const checksSlice = createSlice({
   },
 });
 
-export const { closeModal } = checksSlice.actions;
+export const { closeModal, resetResponse } = evaluationsSlice.actions;
 
-export default checksSlice.reducer;
+export default evaluationsSlice.reducer;

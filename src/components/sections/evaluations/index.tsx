@@ -1,20 +1,25 @@
 import "@/utils/hooks/monaco";
-import { ChecksForm } from "@/components/sections/checks/ChecksForm/ChecksForm";
-import { useAppDispatch } from "@/store";
-import { useEffect } from "react";
+import Head from "next/head";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { ChecksJSONEditorForm } from "./ChecksJson/ChecksJSONEditorForm";
-import { initChecksState } from "@/store/checks/middleware/initChecksState";
+import { FormBackdrop } from "@/components/shared/RHFFormBuilder/FormBackdrop";
+import { RootState } from "@/store";
+import { useSelector } from "react-redux";
+import { EvaluationsForm } from "./EvaluationsForm/EvaluationsForm";
+import { EvaluationsJSONEditorForm } from "./EvaluationsJson/EvaluationsJSONEditorForm";
 
-export const ChecksRequest = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(initChecksState());
-  }, [dispatch]);
+export const EvaluationsPage = () => {
+  const isLoading = useSelector(
+    (state: RootState) => state.evaluations.isLoading
+  );
 
   return (
     <>
+      <Head>
+        <title>Permguard Playground | Evaluations</title>
+      </Head>
+
+      <FormBackdrop isLoading={isLoading} />
+
       <TabGroup className={"flex flex-col"}>
         <TabList className="flex gap-4 justify-end items center">
           <div className="flex gap-4">
@@ -36,10 +41,10 @@ export const ChecksRequest = () => {
         </TabList>
         <TabPanels className="mt-3">
           <TabPanel key={"form"}>
-            <ChecksForm />
+            <EvaluationsForm />
           </TabPanel>
           <TabPanel key={"json"}>
-            <ChecksJSONEditorForm />
+            <EvaluationsJSONEditorForm />
           </TabPanel>
         </TabPanels>
       </TabGroup>

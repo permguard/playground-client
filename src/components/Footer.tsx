@@ -165,7 +165,7 @@ export const Footer: React.FC<IFooterProps> = ({ small }) => {
         <p className="text-white text-sm font-medium mb-0">
           © {new Date().getFullYear()}, Nitro Agility Srl. All rights reserved.
         </p>
-        <p className="text-white text-sm font-medium mb-0 mt-4">
+        <p className="text-white text-sm font-medium mb-0 mt-4 md:mt-0">
           Brought to you by{" "}
           <Link
             target="_blank"
