@@ -1,6 +1,6 @@
 import { ICheckResponse } from "./api/ICheckResponse";
 
-export interface IChecksState {
+export interface IEvaluationsState {
   jsonCode?: string;
   selectedExample: string;
   isLoading: boolean;

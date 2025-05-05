@@ -2,16 +2,16 @@ import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RHFFormBuilder } from "@/components/shared/RHFFormBuilder/RHFFormBuilder";
-import { getChecksJSONEditorFormDefinition } from "./checksJSONEditorFormDefinition";
-import { ChecksJSONEditorFormPayload } from "./ChecksJSONEditorFormPayload";
+import { getEvaluationsJSONEditorFormDefinition } from "./evaluationsJSONEditorFormDefinition";
+import { EvaluationsJSONEditorFormPayload } from "./EvaluationsJSONEditorFormPayload";
 import { RootState, useAppDispatch } from "@/store";
-import { updateChecksState } from "@/store/checks/middleware/updateChecksState";
+import { updateEvaluationsState } from "@/store/evaluations/middleware/updateEvaluationsState";
 
-export const ChecksJSONEditorForm = () => {
+export const EvaluationsJSONEditorForm = () => {
   const dispatch = useAppDispatch();
 
   const selectedChecksCode = useSelector(
-    (state: RootState) => state.checks.jsonCode
+    (state: RootState) => state.evaluations.jsonCode
   );
 
   const {
@@ -20,7 +20,7 @@ export const ChecksJSONEditorForm = () => {
     formState: { errors, isDirty },
     setValue,
     watch,
-  } = useForm<ChecksJSONEditorFormPayload>({});
+  } = useForm<EvaluationsJSONEditorFormPayload>({});
 
   const checksCodeValue = watch("code");
 
@@ -40,14 +40,14 @@ export const ChecksJSONEditorForm = () => {
 
   useEffect(() => {
     if (checksCodeValue !== undefined)
-      dispatch(updateChecksState(checksCodeValue));
+      dispatch(updateEvaluationsState(checksCodeValue));
   }, [dispatch, checksCodeValue]);
 
   return (
     <div>
       <RHFFormBuilder
         handleSubmit={handleSubmit(handleConfirm)}
-        formControls={getChecksJSONEditorFormDefinition()}
+        formControls={getEvaluationsJSONEditorFormDefinition()}
         control={control}
         errors={errors}
         submitButton={<></>}

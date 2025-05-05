@@ -9,15 +9,17 @@ import {
 } from "@headlessui/react";
 import { RootState, useAppDispatch } from "@/store";
 import { useSelector } from "react-redux";
-import { closeModal } from "@/store/checks/checksSlice";
+import { closeModal } from "@/store/evaluations/evaluationsSlice";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function CheckDialog() {
   const dispatch = useAppDispatch();
 
-  const response = useSelector((state: RootState) => state.checks.response);
+  const response = useSelector(
+    (state: RootState) => state.evaluations.response
+  );
   const isModalOpen = useSelector(
-    (state: RootState) => state.checks.isModalOpen
+    (state: RootState) => state.evaluations.isModalOpen
   );
 
   const handleClose = useCallback(() => {

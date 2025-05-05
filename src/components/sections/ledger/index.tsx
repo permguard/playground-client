@@ -6,7 +6,7 @@ import { LedgerForm } from "@/components/sections/ledger/LedgerForm/LedgerForm";
 import { useAppDispatch } from "@/store";
 import { initLedgerState } from "@/store/ledger/middleware/initLedgerState";
 import { useEffect } from "react";
-import { initChecksState } from "@/store/checks/middleware/initChecksState";
+import { initEvaluationsState } from "@/store/evaluations/middleware/initEvaluationsState";
 import { initEntitiesState } from "@/store/entities/middleware/initEntitiesState";
 import { initPrincipalState } from "@/store/principal/middleware/initPrincipalState";
 import { initServerState } from "@/store/server/middleware/initServerState";
@@ -16,7 +16,7 @@ export const LedgersPage = () => {
 
   useEffect(() => {
     dispatch(initLedgerState());
-    dispatch(initChecksState());
+    dispatch(initEvaluationsState());
     dispatch(initEntitiesState());
     dispatch(initPrincipalState());
     dispatch(initServerState());

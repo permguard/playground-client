@@ -32,7 +32,7 @@ export const EXAMPLES = [
   "url": "localhost",
   "port": 9094
 }`,
-    checks: `{
+    evaluations: `{
   "request_id": "abc1",
   "subject": {
     "type": "role-actor",

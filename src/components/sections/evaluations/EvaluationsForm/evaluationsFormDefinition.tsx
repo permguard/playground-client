@@ -2,7 +2,7 @@ import {
   FlattenKeys,
   IFormDefinition,
 } from "@/components/shared/RHFFormBuilder/types";
-import { ChecksFormPayload } from "./ChecksFormPayload";
+import { EvaluationsFormPayload } from "./EvaluationsFormPayload";
 import { UseFormSetValue } from "react-hook-form";
 import { SwitchInput } from "@/components/shared/RHFFormBuilder/Switch";
 
@@ -18,7 +18,7 @@ const borderClasses = [
   "border-[#00CDDD]",
   "border-[#D395FF]",
 ];
-export const getChecksFormDefinition = ({
+export const getEvaluationsFormDefinition = ({
   addEvaluationBtn,
   removeEvaluationBtn,
   evaluationsCount,
@@ -31,15 +31,15 @@ export const getChecksFormDefinition = ({
   expandedSectionIndex: number | null;
   evaluationsCount: number;
   presence: { [key: string]: boolean };
-  setValue: UseFormSetValue<ChecksFormPayload>;
+  setValue: UseFormSetValue<EvaluationsFormPayload>;
 }) => {
-  const baseDefinition: IFormDefinition<FlattenKeys<ChecksFormPayload>> = [
+  const baseDefinition: IFormDefinition<FlattenKeys<EvaluationsFormPayload>> = [
     {
       type: "typography",
       label: "Request",
       id: "request",
       name: "request",
-      className: "col-span-12 mt-4",
+      className: "col-span-12",
       inputProps: {
         className: "text-md font-medium text-white",
       },
@@ -449,7 +449,7 @@ export const getChecksFormDefinition = ({
                   onChange={(checked) => {
                     if (checked) {
                       setValue(
-                        `evaluations[${index}].subject` as keyof ChecksFormPayload,
+                        `evaluations[${index}].subject` as keyof EvaluationsFormPayload,
                         {
                           type: "user",
                           id: "",
@@ -460,23 +460,23 @@ export const getChecksFormDefinition = ({
                       );
                     } else {
                       setValue(
-                        `evaluations[${index}].subject.type` as keyof ChecksFormPayload,
+                        `evaluations[${index}].subject.type` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].subject.id` as keyof ChecksFormPayload,
+                        `evaluations[${index}].subject.id` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].subject.source` as keyof ChecksFormPayload,
+                        `evaluations[${index}].subject.source` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].subject.properties` as keyof ChecksFormPayload,
+                        `evaluations[${index}].subject.properties` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].subject` as keyof ChecksFormPayload,
+                        `evaluations[${index}].subject` as keyof EvaluationsFormPayload,
                         null,
                         {
                           shouldValidate: true,
@@ -592,7 +592,7 @@ export const getChecksFormDefinition = ({
                   onChange={(checked) => {
                     if (checked) {
                       setValue(
-                        `evaluations[${index}].resource` as keyof ChecksFormPayload,
+                        `evaluations[${index}].resource` as keyof EvaluationsFormPayload,
                         {
                           type: "",
                           id: "",
@@ -602,19 +602,19 @@ export const getChecksFormDefinition = ({
                       );
                     } else {
                       setValue(
-                        `evaluations[${index}].resource.type` as keyof ChecksFormPayload,
+                        `evaluations[${index}].resource.type` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].resource.id` as keyof ChecksFormPayload,
+                        `evaluations[${index}].resource.id` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].resource.properties` as keyof ChecksFormPayload,
+                        `evaluations[${index}].resource.properties` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].resource` as keyof ChecksFormPayload,
+                        `evaluations[${index}].resource` as keyof EvaluationsFormPayload,
                         null,
                         {
                           shouldValidate: true,
@@ -692,7 +692,7 @@ export const getChecksFormDefinition = ({
                   onChange={(checked) => {
                     if (checked) {
                       setValue(
-                        `evaluations[${index}].action` as keyof ChecksFormPayload,
+                        `evaluations[${index}].action` as keyof EvaluationsFormPayload,
                         {
                           name: "",
                           properties: "{}",
@@ -701,15 +701,15 @@ export const getChecksFormDefinition = ({
                       );
                     } else {
                       setValue(
-                        `evaluations[${index}].action.name` as keyof ChecksFormPayload,
+                        `evaluations[${index}].action.name` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].action.properties` as keyof ChecksFormPayload,
+                        `evaluations[${index}].action.properties` as keyof EvaluationsFormPayload,
                         null
                       );
                       setValue(
-                        `evaluations[${index}].action` as keyof ChecksFormPayload,
+                        `evaluations[${index}].action` as keyof EvaluationsFormPayload,
                         null,
                         {
                           shouldValidate: true,
@@ -767,13 +767,13 @@ export const getChecksFormDefinition = ({
               additionalContent: (
                 <SwitchInput
                   name={
-                    `evaluations[${index}].context` as keyof ChecksFormPayload
+                    `evaluations[${index}].context` as keyof EvaluationsFormPayload
                   }
                   checked={presence[`evaluations[${index}].context`]}
                   onChange={(checked) => {
                     if (checked) {
                       setValue(
-                        `evaluations[${index}].context` as keyof ChecksFormPayload,
+                        `evaluations[${index}].context` as keyof EvaluationsFormPayload,
                         "{}",
                         {
                           shouldValidate: true,
@@ -781,7 +781,7 @@ export const getChecksFormDefinition = ({
                       );
                     } else {
                       setValue(
-                        `evaluations[${index}].context` as keyof ChecksFormPayload,
+                        `evaluations[${index}].context` as keyof EvaluationsFormPayload,
                         null,
                         {
                           shouldValidate: true,
@@ -810,7 +810,7 @@ export const getChecksFormDefinition = ({
                 <div className="absolute left-0 right-0 top-0 bottom-0 bg-zinc-600/30 z-20"></div>
               ),
             },
-          ] as IFormDefinition<FlattenKeys<ChecksFormPayload>>
+          ] as IFormDefinition<FlattenKeys<EvaluationsFormPayload>>
       )
       .flat(2),
   ];
