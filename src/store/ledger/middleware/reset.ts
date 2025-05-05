@@ -9,7 +9,7 @@ export const reset = createAsyncThunk(
   "ledger/resetStatus",
   async (arg: undefined, thunkApi) => {
     localStorage.removeItem("ledger:json_code");
-    localStorage.removeItem("checks:json_code");
+    localStorage.removeItem("evaluations:json_code");
     localStorage.removeItem("entities:json_code");
     localStorage.removeItem("principal:json_code");
     localStorage.removeItem("server:json_code");
