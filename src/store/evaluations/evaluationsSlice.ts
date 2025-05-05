@@ -21,6 +21,9 @@ const evaluationsSlice = createSlice({
     closeModal: (state) => {
       state.isModalOpen = false;
     },
+    resetResponse: (state) => {
+      state.response = null;
+    },
   },
 
   extraReducers: (builder) => {
@@ -57,6 +60,6 @@ const evaluationsSlice = createSlice({
   },
 });
 
-export const { closeModal } = evaluationsSlice.actions;
+export const { closeModal, resetResponse } = evaluationsSlice.actions;
 
 export default evaluationsSlice.reducer;

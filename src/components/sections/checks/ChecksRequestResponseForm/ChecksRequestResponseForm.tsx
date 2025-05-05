@@ -84,9 +84,9 @@ export const ChecksRequestResponseForm = () => {
 
   return (
     <div>
-      <div className="h-5 mb-2">
+      <div className="min-h-5 -mt-11 mb-4.5">
         {jsonProcessedState.processed && !jsonProcessedState.valid ? (
-          <p className="text-red-500 text-sm mb-4 ">
+          <p className="text-red-500 text-sm max-w-[calc(100%-150px)]">
             {
               "Invalid JSON detected. Please verify the syntax and completion of previous tabs."
             }

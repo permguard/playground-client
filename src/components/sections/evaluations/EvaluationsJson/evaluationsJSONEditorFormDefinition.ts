@@ -11,7 +11,7 @@ export const getEvaluationsJSONEditorFormDefinition = (): IFormDefinition<
     {
       type: "typography",
       label: "Request",
-      className: "col-span-12 mt-7",
+      className: "col-span-12",
       inputProps: {
         className: "text-md font-medium text-white",
       },

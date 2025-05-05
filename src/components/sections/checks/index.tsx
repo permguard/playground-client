@@ -7,7 +7,8 @@ import { ChecksRequestResponseForm } from "./ChecksRequestResponseForm/ChecksReq
 import CheckDialog from "./CheckDialog/CheckDialog";
 import { check } from "@/store/evaluations/middleware/check";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { resetResponse } from "@/store/evaluations/evaluationsSlice";
 
 export const CheckPage = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,10 @@ export const CheckPage = () => {
 
   const handleCheck = useCallback(async () => {
     dispatch(check());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(resetResponse());
   }, [dispatch]);
 
   return (
