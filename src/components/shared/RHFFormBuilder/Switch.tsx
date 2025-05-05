@@ -18,7 +18,7 @@ export const SwitchInput: React.FC<ISwitchInputProps> = ({
     <Switch
       id={id}
       name={name}
-      checked={checked}
+      checked={checked ?? false}
       onChange={onChange}
       className={classNames(
         checked ? "bg-fuchsia-500" : "bg-gray-600",

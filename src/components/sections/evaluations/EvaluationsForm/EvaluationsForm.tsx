@@ -310,14 +310,12 @@ export const EvaluationsForm = () => {
     });
   });
 
-  console.log(watch());
-
   return (
     <>
-      <div className="h-5 mb-2">
+      <div className="min-h-5 -mt-11 mb-6">
         {(jsonProcessedState.processed && !jsonProcessedState.valid) ||
         errorInput ? (
-          <p className="text-red-500 text-sm mb-4 ">
+          <p className="text-red-500 text-sm max-w-[calc(100%-150px)]">
             {errorInput
               ? "Invalid JSON input detected. Changes won't be saved and applied. Please fix the errors to proceed."
               : "Invalid JSON detected. Please fix the errors to proceed."}

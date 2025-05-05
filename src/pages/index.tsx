@@ -89,7 +89,7 @@ const Page = () => {
               >
                 <TabList
                   className={
-                    "-mb-px flex space-x-8 w-full xl:w-auto overflow-x-auto no-scrollbar"
+                    "-mb-px flex space-x-8 sm:flex-wrap xl:space-x-4 2xl:space-x-8 w-full xl:w-auto overflow-x-auto no-scrollbar"
                   }
                 >
                   {tabs.map((tab) => (
@@ -108,7 +108,7 @@ const Page = () => {
                   ))}
                 </TabList>
 
-                <div className="flex gap-6 flex-wrap-reverse items-center justify-start w-full xl:w-auto">
+                <div className="flex gap-6 lg:gap-4 2xl:gap-6 flex-wrap-reverse items-center justify-start w-full xl:w-auto">
                   <Autocomplete
                     value={selectedExample}
                     options={EXAMPLES.map((el) => ({

@@ -87,7 +87,9 @@ export const ChecksRequestResponseForm = () => {
       <div className="h-5 mb-2">
         {jsonProcessedState.processed && !jsonProcessedState.valid ? (
           <p className="text-red-500 text-sm mb-4 ">
-            {"Invalid JSON detected. Please fix the errors to proceed."}
+            {
+              "Invalid JSON detected. Please verify the syntax and completion of previous tabs."
+            }
           </p>
         ) : null}
       </div>

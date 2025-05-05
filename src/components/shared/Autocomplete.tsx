@@ -29,7 +29,11 @@ export const Autocomplete = ({
         });
 
   return (
-    <div className={"sm:w-[300px] xl:w-[290px] min-w-[175px]"}>
+    <div
+      className={
+        "sm:w-[300px] xl:w-[250px] min-[1320px]:w-[290px] min-w-[175px]"
+      }
+    >
       <Combobox
         as={"div"}
         value={value || ""}
