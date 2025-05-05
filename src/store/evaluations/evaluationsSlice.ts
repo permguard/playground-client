@@ -11,6 +11,7 @@ const initialState: IEvaluationsState = {
   isLoading: false,
   isModalOpen: false,
   isInitial: true,
+  response: null,
 };
 
 const evaluationsSlice = createSlice({
@@ -25,6 +26,7 @@ const evaluationsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(initEvaluationsState.fulfilled, (state, action) => {
       state.jsonCode = action.payload.jsonCode;
+      state.response = null;
       state.isInitial = true;
     });
 

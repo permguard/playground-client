@@ -9,6 +9,17 @@ export const getChecksRequestResponseFormDefinition = (): IFormDefinition<
 > => {
   const baseDefinition = [
     {
+      type: "typography",
+      label: "Check",
+      id: "check",
+      name: "check",
+      className: "col-span-12",
+      inputProps: {
+        className: "text-md font-medium text-white",
+      },
+      visible: true,
+    },
+    {
       type: "code",
       name: "request",
       id: "request",

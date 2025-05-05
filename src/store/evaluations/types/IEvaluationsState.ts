@@ -4,7 +4,7 @@ export interface IEvaluationsState {
   jsonCode?: string;
   selectedExample: string;
   isLoading: boolean;
-  response?: ICheckResponse;
+  response: ICheckResponse | null;
   isModalOpen: boolean;
   isInitial: boolean;
 }
