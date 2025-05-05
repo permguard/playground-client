@@ -69,7 +69,7 @@ export const EvaluationsForm = () => {
         checks.context = JSON.stringify(checks.context, null, 2);
       }
 
-      if (checks.subject) {
+      if (checks.subject?.properties) {
         checks.subject.properties = JSON.stringify(
           checks.subject.properties,
           null,
@@ -77,7 +77,7 @@ export const EvaluationsForm = () => {
         );
       }
 
-      if (checks.resource) {
+      if (checks.resource?.properties) {
         checks.resource.properties = JSON.stringify(
           checks.resource.properties,
           null,
@@ -85,7 +85,7 @@ export const EvaluationsForm = () => {
         );
       }
 
-      if (checks.action) {
+      if (checks.action?.properties) {
         checks.action.properties = JSON.stringify(
           checks.action.properties,
           null,
@@ -94,7 +94,7 @@ export const EvaluationsForm = () => {
       }
 
       checks.evaluations.forEach((evaluation) => {
-        if (evaluation.resource) {
+        if (evaluation.resource?.properties) {
           evaluation.resource.properties = JSON.stringify(
             evaluation.resource.properties,
             null,
@@ -102,7 +102,7 @@ export const EvaluationsForm = () => {
           );
         }
 
-        if (evaluation.action) {
+        if (evaluation.action?.properties) {
           evaluation.action.properties = JSON.stringify(
             evaluation.action.properties,
             null,
@@ -110,7 +110,7 @@ export const EvaluationsForm = () => {
           );
         }
 
-        if (evaluation.subject) {
+        if (evaluation.subject?.properties) {
           evaluation.subject.properties = JSON.stringify(
             evaluation.subject.properties,
             null,
@@ -176,19 +176,19 @@ export const EvaluationsForm = () => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         checks.evaluations.forEach((evaluation) => {
-          if (evaluation.resource) {
+          if (evaluation.resource?.properties) {
             evaluation.resource.properties = JSON.parse(
               evaluation.resource.properties as string
             );
           }
 
-          if (evaluation.action) {
+          if (evaluation.action?.properties) {
             evaluation.action.properties = JSON.parse(
               evaluation.action.properties as string
             );
           }
 
-          if (evaluation.subject) {
+          if (evaluation.subject?.properties) {
             evaluation.subject.properties = JSON.parse(
               evaluation.subject.properties as string
             );
@@ -205,7 +205,8 @@ export const EvaluationsForm = () => {
 
         dispatch(updateEvaluationsState(formValuesJSON));
         setErrorInput(false);
-      } catch {
+      } catch (e) {
+        console.log(e);
         setErrorInput(true);
       }
     }
@@ -214,27 +215,29 @@ export const EvaluationsForm = () => {
   const handleAddEvaluation = useCallback(() => {
     const values = getValues();
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    setValue(`evaluations[${values.evaluations.length}]`, {
-      request_id: "",
-      subject: {
-        type: "",
-        id: "",
-        source: "",
-        properties: "{}",
+    setValue(
+      `evaluations[${values.evaluations.length}]` as `evaluations.${number}`,
+      {
+        request_id: "",
+        subject: {
+          type: "",
+          id: "",
+          source: "",
+          properties: "{}",
+        },
+        context: "{}",
+        resource: {
+          type: "",
+          id: "",
+          properties: "{}",
+        },
+        action: {
+          name: "",
+          properties: "{}",
+        },
       },
-      context: "{}",
-      resource: {
-        type: "",
-        id: "",
-        properties: "{}",
-      },
-      action: {
-        name: "",
-        properties: "{}",
-      },
-    });
+      { shouldValidate: true }
+    );
   }, [getValues, setValue]);
 
   const handleRemoveEvaluation = useCallback(
@@ -243,7 +246,7 @@ export const EvaluationsForm = () => {
 
       values.evaluations.splice(index, 1);
 
-      setValue(`evaluations`, values.evaluations);
+      setValue(`evaluations`, values.evaluations, { shouldValidate: true });
 
       if (index === expandedSectionIndex) {
         setExpandedSectionIndex(null);
@@ -304,9 +307,12 @@ export const EvaluationsForm = () => {
     evaluations?.forEach((evaluation, index) => {
       const value = evaluation[key as keyof typeof evaluation];
 
-      presence[`evaluations[${index}].${key}`] = !(
-        value === null || value === undefined
-      );
+      const isValueAbsent =
+        typeof value === "object"
+          ? value?.properties === null || value?.properties === undefined
+          : value === null || value === undefined;
+
+      presence[`evaluations[${index}].${key}`] = !isValueAbsent;
     });
   });
 
