@@ -16,6 +16,10 @@ export const check = createAsyncThunk(
       const evaluations = JSON.parse(state.evaluations.jsonCode!);
       const server = JSON.parse(state.server.jsonCode!);
 
+      if (!evaluations?.evaluations) {
+        evaluations.evaluations = [];
+      }
+
       const payload = {
         authorization_model: {
           ...authorizationModel,
