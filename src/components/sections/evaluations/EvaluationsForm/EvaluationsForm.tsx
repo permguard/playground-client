@@ -65,6 +65,10 @@ export const EvaluationsForm = () => {
 
       const checks = parsedJSON as EvaluationsFormPayload;
 
+      if (!checks.evaluations) {
+        checks.evaluations = [];
+      }
+
       if (checks.context) {
         checks.context = JSON.stringify(checks.context, null, 2);
       }
@@ -146,71 +150,78 @@ export const EvaluationsForm = () => {
 
   const evaluations = watch("evaluations");
 
-  const handleFormChange = (formValues: EvaluationsFormPayload) => {
-    if (jsonProcessedState.processed && jsonProcessedState.valid) {
-      try {
-        const checks = _.cloneDeep(formValues);
+  const handleFormChange = useCallback(
+    (formValues: EvaluationsFormPayload) => {
+      if (jsonProcessedState.processed && jsonProcessedState.valid) {
+        try {
+          const checks = _.cloneDeep(formValues);
 
-        if (checks.subject) {
-          checks.subject.properties = JSON.parse(
-            checks.subject.properties as string
-          );
-        }
+          if (!checks.evaluations) {
+            checks.evaluations = [];
+          }
 
-        if (checks.resource) {
-          checks.resource.properties = JSON.parse(
-            checks.resource.properties as string
-          );
-        }
-
-        if (checks.action) {
-          checks.action.properties = JSON.parse(
-            checks.action.properties as string
-          );
-        }
-
-        if (checks.context) {
-          checks.context = JSON.parse(checks.context as string);
-        }
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        checks.evaluations.forEach((evaluation) => {
-          if (evaluation.resource?.properties) {
-            evaluation.resource.properties = JSON.parse(
-              evaluation.resource.properties as string
+          if (checks.subject) {
+            checks.subject.properties = JSON.parse(
+              checks.subject.properties as string
             );
           }
 
-          if (evaluation.action?.properties) {
-            evaluation.action.properties = JSON.parse(
-              evaluation.action.properties as string
+          if (checks.resource) {
+            checks.resource.properties = JSON.parse(
+              checks.resource.properties as string
             );
           }
 
-          if (evaluation.subject?.properties) {
-            evaluation.subject.properties = JSON.parse(
-              evaluation.subject.properties as string
+          if (checks.action) {
+            checks.action.properties = JSON.parse(
+              checks.action.properties as string
             );
           }
 
-          if (evaluation.context) {
-            evaluation.context = JSON.parse(evaluation.context as string);
+          if (checks.context) {
+            checks.context = JSON.parse(checks.context as string);
           }
-        });
 
-        const cleanedChecks = removeNullValues(checks);
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          checks.evaluations.forEach((evaluation) => {
+            if (evaluation.resource?.properties) {
+              evaluation.resource.properties = JSON.parse(
+                evaluation.resource.properties as string
+              );
+            }
 
-        const formValuesJSON = JSON.stringify(cleanedChecks, null, 2);
+            if (evaluation.action?.properties) {
+              evaluation.action.properties = JSON.parse(
+                evaluation.action.properties as string
+              );
+            }
 
-        dispatch(updateEvaluationsState(formValuesJSON));
-        setErrorInput(false);
-      } catch (e) {
-        console.log(e);
-        setErrorInput(true);
+            if (evaluation.subject?.properties) {
+              evaluation.subject.properties = JSON.parse(
+                evaluation.subject.properties as string
+              );
+            }
+
+            if (evaluation.context) {
+              evaluation.context = JSON.parse(evaluation.context as string);
+            }
+          });
+
+          const cleanedChecks = removeNullValues(checks);
+
+          const formValuesJSON = JSON.stringify(cleanedChecks, null, 2);
+
+          dispatch(updateEvaluationsState(formValuesJSON));
+          setErrorInput(false);
+        } catch (e) {
+          console.log(e);
+          setErrorInput(true);
+        }
       }
-    }
-  };
+    },
+    [dispatch, jsonProcessedState.processed, jsonProcessedState.valid]
+  );
 
   const handleAddEvaluation = useCallback(() => {
     const values = getValues();
@@ -246,7 +257,9 @@ export const EvaluationsForm = () => {
 
       values.evaluations.splice(index, 1);
 
-      setValue(`evaluations`, values.evaluations, { shouldValidate: true });
+      setValue(`evaluations`, values.evaluations, { shouldValidate: false });
+
+      handleFormChange(values);
 
       if (index === expandedSectionIndex) {
         setExpandedSectionIndex(null);
@@ -254,7 +267,7 @@ export const EvaluationsForm = () => {
         setExpandedSectionIndex((prevIndex) => prevIndex! - 1);
       }
     },
-    [expandedSectionIndex, getValues, setValue]
+    [expandedSectionIndex, getValues, handleFormChange, setValue]
   );
 
   const handleExpandSection = useCallback(

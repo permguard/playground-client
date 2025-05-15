@@ -45,6 +45,10 @@ export const ChecksRequestResponseForm = () => {
       const evaluations = JSON.parse(evaluationsJSON!);
       const server = JSON.parse(serverJSON!);
 
+      if (!evaluations?.evaluations) {
+        evaluations.evaluations = [];
+      }
+
       const payload = {
         authorization_model: {
           ...authorizationModel,
