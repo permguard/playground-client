@@ -64,15 +64,15 @@ export const Footer: React.FC<IFooterProps> = ({ small }) => {
                 <li>
                   <Link
                     className="text-sm text-[#A1A1AA] font-medium"
-                    href="/docs/0.0.x/core-elements/authn-authz/authn-vs-authz/"
+                    href="/docs/0.0.x/concepts/authn-authz/authn-vs-authz/"
                   >
-                    Core Elements
+                    concepts
                   </Link>
                 </li>
                 <li>
                   <Link
                     className="text-sm text-[#A1A1AA] font-medium"
-                    href="/docs/0.0.x/core-elements/patterns/cloud-native-patterns/"
+                    href="/docs/0.0.x/concepts/patterns/cloud-native-patterns/"
                   >
                     Cloud Native Patterns
                   </Link>
