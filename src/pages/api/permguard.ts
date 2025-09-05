@@ -15,7 +15,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { NextApiRequest, NextApiResponse } from "next";
-import { AZClient, withEndpoint } from "permguard";
+import { AZClient, withEndpoint } from "@permguard/permguard";
 
 /**
  * API handler for Permguard authorization checks.
