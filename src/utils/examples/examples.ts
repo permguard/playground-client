@@ -1,6 +1,6 @@
 export const EXAMPLES = [
   {
-    name: "magicfarmacia",
+    name: "ztmedflow",
     ledger: `{
   "zone_id": 200365974321,
   "policy_store": {
@@ -18,7 +18,7 @@ export const EXAMPLES = [
   "items": [
     {
       "uid": {
-        "type": "MagicFarmacia::Platform::BranchInfo",
+        "type": "ZTMedFlow::Platform::BranchInfo",
         "id": "subscription"
       },
       "attrs": {
@@ -43,14 +43,14 @@ export const EXAMPLES = [
     }
   },
   "resource": {
-    "type": "MagicFarmacia::Platform::Subscription",
+    "type": "ZTMedFlow::Platform::Subscription",
     "id": "e3a786fd07e24bfa95ba4341d3695ae8",
     "properties": {
       "isEnabled": true
     }
   },
   "action": {
-    "name": "MagicFarmacia::Platform::Action::create",
+    "name": "ZTMedFlow::Platform::Action::create",
     "properties": {
       "isEnabled": false
     }
@@ -75,14 +75,14 @@ export const EXAMPLES = [
         "isSubscriptionActive": true
       },
       "resource": {
-        "type": "MagicFarmacia::Platform::Subscription",
+        "type": "ZTMedFlow::Platform::Subscription",
         "id": "e3a786fd07e24bfa95ba4341d3695ae8",
         "properties": {
           "isEnabled": true
         }
       },
       "action": {
-        "name": "MagicFarmacia::Platform::Action::create",
+        "name": "ZTMedFlow::Platform::Action::create",
         "properties": {
           "isEnabled": true
         }
@@ -102,14 +102,14 @@ export const EXAMPLES = [
         "time": "2025-01-23T16:17:46+00:00"
       },
       "resource": {
-        "type": "MagicFarmacia::Platform::Subscription",
+        "type": "ZTMedFlow::Platform::Subscription",
         "id": "e3a786fd07e24bfa95ba4341d3695ae8",
         "properties": {
           "isEnabled": true
         }
       },
       "action": {
-        "name": "MagicFarmacia::Platform::Action::create",
+        "name": "ZTMedFlow::Platform::Action::create",
         "properties": {
           "isEnabled": false
         }
