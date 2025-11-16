@@ -52,7 +52,7 @@ const tabs = [
     page: CheckPage,
   },
   {
-    name: "AuthZ Server",
+    name: "AuthZServer",
     icon: () => <Icon className="mr-2" icon={"ri:server-fill"} fontSize={24} />,
     page: ServerPage,
   },
