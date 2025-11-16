@@ -121,8 +121,7 @@ export const getEvaluationsFormDefinition = ({
         "col-span-12 grid grid-cols-12 gap-x-2 gap-y-8 sm:gap-8 relative p-4",
       options: [
         { label: "user", value: "user" },
-        { label: "role-actor", value: "role-actor" },
-        { label: "twin-actor", value: "twin-actor" },
+        { label: "workload", value: "workload" }
       ],
       disabled: !presence["subject"],
       additionalContent: presence["subject"] ? null : (
@@ -502,8 +501,7 @@ export const getEvaluationsFormDefinition = ({
               parentGroup: `evaluations[${index}]`,
               options: [
                 { label: "user", value: "user" },
-                { label: "role-actor", value: "role-actor" },
-                { label: "twin-actor", value: "twin-actor" },
+                { label: "workload", value: "workload" },
               ],
               disabled: !presence[`evaluations[${index}].subject`],
               additionalContent: presence[

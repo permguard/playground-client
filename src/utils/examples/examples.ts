@@ -35,7 +35,7 @@ export const EXAMPLES = [
     evaluations: `{
   "request_id": "abc1",
   "subject": {
-    "type": "role-actor",
+    "type": "workload",
     "id": "platform-creator",
     "source": "keycloak",
     "properties": {
@@ -63,7 +63,7 @@ export const EXAMPLES = [
     {
       "request_id": "exz1",
       "subject": {
-        "type": "role-actor",
+        "type": "workload",
         "id": "platform-creator",
         "source": "keycloak",
         "properties": {
@@ -91,7 +91,7 @@ export const EXAMPLES = [
     {
       "request_id": "exz2",
       "subject": {
-        "type": "role-actor",
+        "type": "workload",
         "id": "platform-creator",
         "source": "keycloak",
         "properties": {
