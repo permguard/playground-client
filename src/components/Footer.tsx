@@ -128,7 +128,7 @@ export const Footer: React.FC<IFooterProps> = ({ small }) => {
                     className="text-sm text-[#A1A1AA] font-medium"
                     href="/docs/0.0.x/devops/authz-server/authorization-server/"
                   >
-                    AuthZServer
+                    Permguard Server
                   </Link>
                 </li>
               </ul>

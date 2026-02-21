@@ -65,7 +65,7 @@ export default async function handler(
     if (!response.response) {
       return res
         .status(503)
-        .json({ error: "Permguard AuthZServer does not exist or is unreachable" });
+        .json({ error: "Permguard Permguard Server does not exist or is unreachable" });
     }
 
     return res.status(200).json(response);
